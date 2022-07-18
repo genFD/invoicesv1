@@ -1,0 +1,34 @@
+{
+  "name": "invoice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install": "npm install-server && npm install-client",
+    "server": "npm run watch --prefix server ",
+    "client": "npm run start --prefix frontend",
+    "conc": "concurrently \"npm run server\" \"npm run client\"",
+    "format": "prettier --write \"frontend/src/**/*.{js,jsx}\"",
+    "format:check": "prettier --check \"frontend/src/**/*.{js,jsx}\"",
+    "lint": "eslint \"frontend/src/**/*.{js,jsx}\" --quiet"
+  },
+  "keywords": [],
+  "author": "hermkan",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  }
+}
