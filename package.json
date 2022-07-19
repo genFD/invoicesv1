@@ -8,7 +8,7 @@
     "install-client": "npm install --prefix client",
     "install": "npm install-server && npm install-client",
     "server": "npm run watch --prefix server ",
-    "client": "npm run start --prefix frontend",
+    "client": "npm run start --prefix client",
     "conc": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "npm run build --prefix client && npm start --prefix server",
     "format": "prettier --write \"frontend/src/**/*.{js,jsx}\"",

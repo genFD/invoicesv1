@@ -1,16 +1,11 @@
 const http = require('http');
-const app = require('./app');
-const dotenv = require('dotenv');
+require('dotenv').config();
 
-dotenv.config();
+const app = require('./app');
+
 const server = http.createServer(app);
-const { loadInvoices } = require('./db/config');
 const PORT = process.env.PORT || 8000;
 
-async function startServer() {
-  await loadInvoices();
-  server.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`);
-  });
-}
-startServer();
+server.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
+});
