@@ -8,10 +8,11 @@ const createInvoice = async () => {
 };
 
 //read invoices
-const getAllInvoices = async () => {
+const getAllInvoices = async (req, res) => {
   const { rows } = await db.query('SELECT * FROM invoices');
-  console.log(`${rows.length} invoices found!!!`);
-  return rows;
+  // console.log(`${rows.length} invoices found!!!`);
+  // return rows;
+  return res.status(200).json(rows);
 };
 
 //read invoice by id
