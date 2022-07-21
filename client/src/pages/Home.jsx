@@ -1,6 +1,8 @@
+import { useGlobalContext } from '../context/context';
 import useInvoices from '../hooks/useInvoices';
 
 function Home() {
+  // const { invoices } = useGlobalContext();
   const invoices = useInvoices();
   return (
     <div>
