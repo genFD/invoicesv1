@@ -1,6 +1,7 @@
 const express = require('express');
-const { httpGetAllInvoices } = require('./invoices.controller');
-const { getAllInvoices } = require('../../services/queries');
+
+const { getAllInvoices } = require('./invoices.controller');
+
 const invoicesRouter = express.Router();
 
 invoicesRouter.get('/', getAllInvoices);

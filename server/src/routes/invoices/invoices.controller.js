@@ -1,6 +1,37 @@
-const { getAllInvoices } = require('../../services/queries');
+const db = require('../../services/node.postgres');
 
-async function httpGetAllInvoices(req, res) {
-  return res.status(200).json(await getAllInvoices());
-}
-module.exports = { httpGetAllInvoices };
+//create invoice
+const createInvoice = async () => {
+  // const { rows } = await db.query('SELECT * FROM invoices');
+  // console.log(`${rows.length} invoices found!!!`);
+  // return rows;
+};
+
+//read invoices
+const getAllInvoices = async (req, res) => {
+  const { rows } = await db.query('SELECT * FROM invoices');
+  console.log(`${rows.length} invoices found!!!`);
+  return res.status(200).json(rows);
+};
+
+//read invoice by id
+const getInvoiceById = async () => {
+  // const { rows } = await db.query('SELECT * FROM invoices');
+  // console.log(`${rows.length} invoices found!!!`);
+  // return rows;
+};
+
+//edit/update invoice
+const editInvoices = async () => {
+  // const { rows } = await db.query('SELECT * FROM invoices');
+  // console.log(`${rows.length} invoices found!!!`);
+  // return rows;
+};
+
+//delete invoice
+const deleteInvoices = async () => {
+  // const { rows } = await db.query('SELECT * FROM invoices');
+  // console.log(`${rows.length} invoices found!!!`);
+  // return rows;
+};
+module.exports = { getAllInvoices };

@@ -1,30 +1,25 @@
-// const http = require('http');
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
-const server = express();
-const { getAllInvoices } = require('./services/queries');
+const app = express();
 const invoicesRouter = require('./routes/invoices/invoices.routes');
-// const app = require('./app');
+const api = require('./routes/api');
 
-// const server = http.createServer(app);
+app.use(morgan('combined'));
 
-server.use(morgan('combined'));
-
-server.use(express.json());
-server.use(
-  cors({
-    origin: '*',
-  })
-);
-server.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.json());
+app.use(cors());
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const PORT = process.env.PORT || 8000;
 
-server.use('/v1/invoices', invoicesRouter);
+app.use('/v1', api);
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });

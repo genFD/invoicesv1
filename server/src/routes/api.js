@@ -3,6 +3,6 @@ const invoicesRouter = require('./invoices/invoices.routes');
 
 const api = express.Router();
 
-api.use('/', invoicesRouter);
+api.use('/invoices', invoicesRouter);
 
 module.exports = api;
