@@ -7,6 +7,8 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   /* APP STATE VARIABLES */
+  const [loading, setLoading] = useState(false);
+
   // const [invoices, updateInvoices] = useState([]);
 
   /* CORE FILTER FUNCTIONNALITIES */
@@ -29,7 +31,9 @@ const AppProvider = ({ children }) => {
     // eslint-disable-next-line
   }, []);
 
-  return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ loading }}>{children}</AppContext.Provider>
+  );
 };
 
 export const useGlobalContext = () => {
