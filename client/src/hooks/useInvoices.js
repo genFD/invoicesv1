@@ -1,20 +1,27 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-import { httpGetInvoices } from "../api/requests";
+import { httpGetInvoices } from '../api/requests';
 
 function useInvoices() {
   const [invoices, updateInvoices] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getInvoices = useCallback(async () => {
+    setLoading(true);
     const fetchedInvoices = await httpGetInvoices();
-    updateInvoices(fetchedInvoices);
+    if (fetchedInvoices) {
+      updateInvoices(fetchedInvoices);
+    } else {
+      updateInvoices([]);
+    }
+    setLoading(false);
   }, []);
 
   useEffect(() => {
     getInvoices();
   }, [getInvoices]);
 
-  return invoices;
+  return { invoices, loading };
 }
 
 export default useInvoices;

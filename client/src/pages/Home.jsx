@@ -1,6 +1,4 @@
-import { Toggle, Navbar, Header, Cards } from '../components';
-
-import useInvoices from '../hooks/useInvoices';
+import { Navbar, Header, Cards } from '../components';
 
 function Home() {
   return (

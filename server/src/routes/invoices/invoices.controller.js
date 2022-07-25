@@ -15,10 +15,14 @@ const getAllInvoices = async (req, res) => {
 };
 
 //read invoice by id
-const getInvoiceById = async () => {
-  // const { rows } = await db.query('SELECT * FROM invoices');
-  // console.log(`${rows.length} invoices found!!!`);
-  // return rows;
+const getInvoiceById = async (req, res) => {
+  const { id } = req.params;
+  const query = {
+    text: 'SELECT * FROM invoices WHERE id = $1',
+    values: [id],
+  };
+  const { rows } = await db.query(query);
+  res.status(200).json(rows);
 };
 
 //edit/update invoice
@@ -34,4 +38,10 @@ const deleteInvoices = async () => {
   // console.log(`${rows.length} invoices found!!!`);
   // return rows;
 };
-module.exports = { getAllInvoices };
+module.exports = {
+  getAllInvoices,
+  getInvoiceById,
+  deleteInvoices,
+  editInvoices,
+  createInvoice,
+};

@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Loading, NoResults, Card } from '../components';
 import { Transition } from '@headlessui/react';
-import { useGlobalContext } from '../context/context';
 import useInvoices from '../hooks/useInvoices';
+
 const Cards = () => {
-  const { results, loading } = useGlobalContext();
-  const invoices = useInvoices();
-  console.log(invoices);
+  const { invoices, loading } = useInvoices();
 
   if (loading) {
     return <Loading />;
@@ -15,7 +13,7 @@ const Cards = () => {
     return <NoResults />;
   }
   return (
-    <div className="mt-8">
+    <>
       <Transition
         appear
         show={invoices.length > 0}
@@ -27,13 +25,13 @@ const Cards = () => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <ul className="min-w-[375px] h-full grid grid-rows-[1fr] gap-y-2 place-content-center pb-16">
+        <ul className="min-w-[375px] grid grid-rows-[1fr] gap-y-2 place-content-center pb-16 mt-8 main-content">
           {invoices.map((invoice) => (
-            <Card key={invoice.id} {...invoice.content} />
+            <Card key={invoice.id} {...invoice.content} id={invoice.id} />
           ))}
         </ul>
       </Transition>
-    </div>
+    </>
   );
 };
 

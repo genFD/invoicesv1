@@ -33,7 +33,7 @@ body {
   min-width: 375px;
   display: flex;
   flex-direction: column;
-  font-family: League Spartan, 'Baloo 2', sans-serif;
+  font-family: 'Baloo 2', League Spartan, sans-serif;
   transition: colors ease-in-out 0.5s;
   color: #fff;
 }
@@ -47,6 +47,7 @@ body {
 /* set min width and make sure footer stays at the bottom */
 .main-content {
   min-width: 375px;
+  min-height: calc(100vh - 99px);
 }
 .main-footer {
   margin-top: auto;
@@ -99,4 +100,12 @@ ul {
   mix-blend-mode: normal;
   opacity: 0.06;
   /* opacity: 5.71%; */
+}
+
+.header-detail {
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+  border-radius: 8px;
+}
+.box-shadow-footer-invoice {
+  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
 }
