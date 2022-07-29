@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const GoBack = () => {
   return (
     <Link to="/">
-      <div className="flex justify-center mt-8 cursor-pointer">
-        <div className="w-327">
+      <div className="flex mt-8 justify-center">
+        <div className="flex cursor-pointer w-327 tablet:w-[688px]">
           <button className="flex items-center justify-between w-20  text-0C0E16 dark:text-FFFF font-bold text-heading-4">
             <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
               <path

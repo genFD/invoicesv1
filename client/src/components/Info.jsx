@@ -1,5 +1,5 @@
-import React from 'react';
-import { Item } from '../components';
+import React, { useState } from 'react';
+import { Item, DeletePrompt } from '../components';
 import { convertPrice, convertTime } from '../utils/convert';
 
 const Info = ({
@@ -16,7 +16,7 @@ const Info = ({
 }) => {
   return (
     <div className=" flex justify-center">
-      <article className="mt-4 w-327 p-6 bg-FFFF dark:bg-1E2139 text-7E88C3 font-medium text-body-1">
+      <article className="mt-4 w-327 tablet:w-[688px] p-6 bg-FFFF dark:bg-1E2139 text-7E88C3 font-medium text-body-1">
         <div className="flex justify-start address">
           <div className="p-4 flex flex-col gap-y-7 bg-F9FAFE dark:bg-252945">
             <div className="flex flex-col gap-y-1">
@@ -114,6 +114,7 @@ const Info = ({
           </div>
         </div>
       </article>
+      <DeletePrompt />
     </div>
   );
 };

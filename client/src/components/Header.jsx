@@ -3,12 +3,12 @@ import { HeaderTitle, AddNewButton, FilterButton } from '../components';
 
 const Header = () => {
   return (
-    <header className="h-11 mt-8 flex justify-center px-6">
-      <div className="flex items-center justify-between basis-3/4 pr-4">
+    <header className="mt-8 flex justify-center">
+      <div className="w-327 tablet:w-672 desktop:w-730 border-7C5DFA flex items-center">
         <HeaderTitle />
         <FilterButton />
+        <AddNewButton />
       </div>
-      <AddNewButton />
     </header>
   );
 };

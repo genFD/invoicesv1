@@ -56,6 +56,7 @@ body {
 .full-height {
   min-height: 100vh;
 }
+
 /* make images easier to work with */
 img,
 picture {
@@ -91,6 +92,26 @@ ul {
   }
 }
 
+input[type='date']::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  background-image: url('../public/calendar.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 25px;
+  cursor: pointer;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url('../public/down-arrow-v2.svg');
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center;
+}
+
 /* navbar */
 
 .card-shadow {
@@ -108,4 +129,17 @@ ul {
 }
 .box-shadow-footer-invoice {
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+}
+.divider {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.0001) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+.card-tb {
+  /* display: grid;
+  grid-template-columns: repeat (5, 1fr); */
+
+  /* grid-template-columns: 1fr; */
 }

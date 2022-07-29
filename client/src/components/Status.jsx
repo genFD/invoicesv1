@@ -1,9 +1,10 @@
 import React from 'react';
+import { Edit, Delete, MarkAsPaid } from '../components';
 
 const Status = ({ status }) => {
   return (
     <article className="mt-8 flex justify-center">
-      <div className="w-327 h-91 bg-FFFF dark:bg-1E2139 header-detail flex items-center justify-between px-6">
+      <div className="w-327 tablet:w-[688px] h-91 bg-FFFF dark:bg-1E2139 header-detail flex items-center justify-between px-6">
         <p className="text-7E88C3 font-medium dark:text-DFE3FA">Status</p>
         <div
           className={`${
@@ -36,6 +37,11 @@ const Status = ({ status }) => {
               {status ? status.toUpperCase() : 'status'}
             </p>
           </div>
+        </div>
+        <div className="hidden tablet:flex gap-x-2">
+          <Edit />
+          <Delete />
+          <MarkAsPaid />
         </div>
       </div>
     </article>

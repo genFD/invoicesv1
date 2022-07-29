@@ -3,8 +3,11 @@ import { Logo, Toggle, Avatar } from '../components';
 
 const Navbar = () => {
   return (
-    <nav id="nav" className="h-72 bg-373B53 dark:bg-1E2139 flex">
-      <div className="flex items-center justify-between basis-3/4 border-r border-r-494E6E pr-6">
+    <nav
+      id="nav"
+      className="h-72 desktop:h-full desktop:justify-between bg-373B53 dark:bg-1E2139 flex desktop:flex-col"
+    >
+      <div className="flex items-center w-[95%] desktop:w-full justify-between border-r border-r-494E6E pr-6 desktop:pr-0 desktop:pb-8 desktop:flex-col desktop:h-[90%] desktop:border-none ">
         <Logo />
         <Toggle />
       </div>

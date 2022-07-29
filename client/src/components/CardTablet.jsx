@@ -2,10 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { convertTime, convertPrice } from '../utils/convert';
 
-const Card = ({ id, invoiceId, clientName, paymentDue, items, status }) => {
+const CardTablet = ({
+  id,
+  invoiceId,
+  clientName,
+  paymentDue,
+  items,
+  status,
+}) => {
   return (
     <Link to={`/detail/${id}`}>
-      <article className="w-327 tablet:w-672 desktop:w-730 h-134 rounded-lg text-0C0E16 dark:text-FFFF bg-FFFF dark:bg-1E2139 card-shadow">
+      <article className="w-327 tablet:w-672 h-134 rounded-lg text-0C0E16 dark:text-FFFF bg-FFFF dark:bg-1E2139 card-shadow">
         <div className="hidden tablet:grid tablet:grid-cols-5 tablet:grid-rows-1 h-full place-items-center">
           {/* invoice id */}
           <div className="invoice-id">
@@ -118,4 +125,4 @@ const Card = ({ id, invoiceId, clientName, paymentDue, items, status }) => {
   );
 };
 
-export default Card;
+export default CardTablet;

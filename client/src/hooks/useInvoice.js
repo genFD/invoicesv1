@@ -6,12 +6,12 @@ function useInvoice() {
   const [invoice, updateInvoice] = useState([]);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
+
   const getInvoice = useCallback(async (id) => {
     setLoading(true);
     const fetchedInvoice = await httpGetInvoice(id);
     if (fetchedInvoice) {
       const { content } = fetchedInvoice[0];
-
       updateInvoice(content);
     } else {
       updateInvoice([]);

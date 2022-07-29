@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Detail } from './pages';
-import { Loading } from './components';
+import { Home, Detail, EditInvoice, NewInvoice } from './pages';
 
 function App() {
   return (
@@ -8,7 +7,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/loading" element={<Loading />} />
+        <Route path="/editinvoice/:id" element={<EditInvoice />} />
+        <Route path="/newinvoice" element={<NewInvoice />} />
       </Routes>
     </BrowserRouter>
   );

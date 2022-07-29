@@ -2,7 +2,7 @@ import React from 'react';
 
 const Avatar = () => {
   return (
-    <div className="basis-1/4 grid place-content-center">
+    <div className="w-96 grid place-content-center desktop:h-[86px]">
       <img
         src="/assets/image-avatar.jpg"
         alt=""

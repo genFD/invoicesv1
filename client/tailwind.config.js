@@ -25,6 +25,7 @@ module.exports = {
       FFFF: '#FFFF',
       '33D69F': '#33D69F',
       '858BB2': '#858BB2',
+      '777F98': '#777F98',
     },
     fontSize: {
       'heading-1': [
@@ -59,6 +60,14 @@ module.exports = {
           fontWeight: 'bold',
         },
       ],
+      'heading-7': [
+        '18px',
+        {
+          lineHeight: '32px',
+          letterSpacing: '-0.38px',
+          fontWeight: 'bold',
+        },
+      ],
       'body-1': ['12px', { lineHeight: '15px', letterSpacing: '-0.25px' }],
       'body-2': ['11px', { lineHeight: '18px', letterSpacing: '-0.23px' }],
     },
@@ -66,12 +75,24 @@ module.exports = {
     extend: {
       width: {
         73: '73px',
+        84: '84px',
         89: '89px',
         90: '90px',
         94: '94px',
         96: '96px',
+        100: '100px',
+        103: '103px',
+        112: '112px',
+        117: '117px',
+        118: '118px',
         '1px': '1px',
+        138: '138px',
+        155: '155px',
+        627: '627px',
+        672: '672px',
+        150: '150px',
         141: '141px',
+        730: '730px',
         149: '149px',
         72: '72px',
         327: '327px',
@@ -100,7 +121,15 @@ module.exports = {
         '20px': '20px',
       },
       margin: {
+        '10px': '10px',
+        '18px': '18px',
         '30px': '30px',
+        157: '157px',
+        202: '202px',
+      },
+      flexBasis: {
+        100: '100px',
+        127: '127.5px',
       },
     },
     screens: {

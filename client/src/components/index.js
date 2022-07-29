@@ -23,8 +23,48 @@ import Edit from './Edit';
 import Delete from './Delete';
 import MarkAsPaid from './MarkAsPaid';
 import Item from './Item';
+import EditTitle from './EditTitle';
+import BillFrom from './BillFrom';
+import BillTo from './BillTo';
+import BillInformation from './BillInformation';
+import ItemList from './ItemList';
+import AddItem from './AddItem';
+import EditForm from './EditForm';
+import FooterEdit from './FooterEdit';
+import FooterNewInvoice from './FooterNewInvoice';
+import NewForm from './Form';
+import NewTitle from './NewTitle';
+import Divider from './Divider';
+import Discard from './Discard';
+import SaveAsDraft from './SaveAsDraft';
+import SaveAndSend from './SaveAndSend';
+import Form from './Form';
+import Cancel from './Cancel';
+import SaveChanges from './SaveChanges';
+import FooterEditInvoice from './FooterEditInvoice';
+import DeletePrompt from './DeletePrompt';
 
 export {
+  EditForm,
+  DeletePrompt,
+  SaveChanges,
+  FooterEditInvoice,
+  Cancel,
+  Form,
+  SaveAsDraft,
+  SaveAndSend,
+  Discard,
+  Divider,
+  NewTitle,
+  NewForm,
+  FooterEdit,
+  FooterNewInvoice,
+  EditTitle,
+  AddItem,
+  ItemList,
+  BillTo,
+  BillFrom,
+  BillInformation,
   Delete,
   MarkAsPaid,
   Edit,
