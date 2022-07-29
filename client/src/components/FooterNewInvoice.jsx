@@ -3,10 +3,14 @@ import { Discard, SaveAsDraft, SaveAndSend } from '../components';
 
 const FooterNewInvoice = () => {
   return (
-    <footer className="bg-FFFF dark:bg-1E2139 flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-center w-full">
-      <Discard />
-      <SaveAsDraft />
-      <SaveAndSend />
+    <footer className="tablet:mt-12 flex items-center gap-x-2 h-91 tablet:h-fit mb-8 box-shadow-footer-invoice justify-center tablet:justify-start tablet:gap-x-32 w-full">
+      <div>
+        <Discard />
+      </div>
+      <div className="flex gap-x-2">
+        <SaveAsDraft />
+        <SaveAndSend />
+      </div>
     </footer>
   );
 };

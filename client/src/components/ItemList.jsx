@@ -2,8 +2,8 @@ import React from 'react';
 
 const ItemList = () => {
   return (
-    <div className="mt-6">
-      <div className="flex flex-col mb-6">
+    <div className="mt-6 tablet:flex tablet:gap-x-4">
+      <div className="flex flex-col mb-6 w-[214px]">
         <label
           htmlFor="itemName"
           className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
@@ -19,7 +19,7 @@ const ItemList = () => {
         />
       </div>
       <div className="flex gap-x-4 mb-6">
-        <div className="flex flex-col w-16">
+        <div className="flex flex-col w-16 tablet:w-[46px]">
           <label
             htmlFor="quantity"
             className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"

@@ -4,11 +4,11 @@ import { useGlobalContext } from '../context/context';
 import { Cancel, Delete } from '../components';
 
 const DeletePrompt = () => {
-  const { isOpen, closeModal } = useGlobalContext();
+  const { isModalOpen, closeModal } = useGlobalContext();
 
   return (
     <>
-      <Transition appear show={isOpen} as="div">
+      <Transition appear show={isModalOpen} as="div">
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as="div"

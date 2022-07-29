@@ -1,4 +1,12 @@
-import { Navbar, Header, Cards, Logo, Toggle } from '../components';
+import {
+  Navbar,
+  Header,
+  Cards,
+  Logo,
+  Toggle,
+  DeletePrompt,
+  NewInvoice,
+} from '../components';
 
 function Home() {
   return (
@@ -15,6 +23,7 @@ function Home() {
 
       <main className="desktop:hidden">
         <Navbar />
+        <NewInvoice />
         <Header />
         <Cards />
       </main>

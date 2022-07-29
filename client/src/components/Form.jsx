@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import {
   ItemList,
   AddItem,
@@ -8,8 +10,12 @@ import {
   FooterEditInvoice,
 } from '../components';
 
+const paymentTerms = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
+
 const Form = () => {
   const { id } = useParams();
+  const [selected, setSelected] = useState(paymentTerms[0]);
+
   return (
     <div className="mt-6">
       <form action="" className="w-full flex flex-col items-center">
@@ -195,7 +201,7 @@ const Form = () => {
                 name="InvoiceDate"
                 required
                 id="InvoiceDate"
-                className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF"
+                className="border shadow-md border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF"
               />
             </div>
 
@@ -206,18 +212,61 @@ const Form = () => {
               >
                 Payment Terms
               </label>
-              <select
-                type="text"
-                name="paymentTerms"
-                required
-                id="paymentTerms"
-                className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
-              >
-                <option value="Net1Day">Net 1 Day</option>
-                <option value="Net7Days">Net 7 Days</option>
-                <option value="Net14Days">Net 14 Days</option>
-                <option value="Net30Days">Net 30 Days</option>
-              </select>
+              <Listbox value={selected} onChange={setSelected}>
+                <div className="relative mt-1 ">
+                  <Listbox.Button className="relative dark:bg-252945 dark:text-FFFF text-0C0E16  w-full cursor-default rounded-lg py-4 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-7C5DFA focus-visible:ring-2 focus-visible:ring-FFFF focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-7C5DFA text-body-1">
+                    <span className="block truncate">{selected}</span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <SelectorIcon
+                        className="h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Listbox.Button>
+                  <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="absolute bg-FFFF dark:bg-252945 mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-7C5DFA ring-opacity-5 focus:outline-none text-body-1">
+                      {paymentTerms.map((term, termIdx) => (
+                        <Listbox.Option
+                          key={termIdx}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                              active
+                                ? 'bg-9277FF dark:text-9277FF text-0C0E16'
+                                : 'dark:text-FFFF text-0C0E16'
+                            }`
+                          }
+                          value={term}
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span
+                                className={`block truncate ${
+                                  selected ? 'font-medium' : 'font-normal'
+                                }`}
+                              >
+                                {term}
+                              </span>
+                              {selected ? (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-FFFF text-0C0E16">
+                                  <CheckIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                </span>
+                              ) : null}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
             </div>
 
             <div className="flex flex-col mb-6">

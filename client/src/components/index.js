@@ -43,8 +43,12 @@ import Cancel from './Cancel';
 import SaveChanges from './SaveChanges';
 import FooterEditInvoice from './FooterEditInvoice';
 import DeletePrompt from './DeletePrompt';
+import NewInvoice from './NewInvoice';
+import EditInvoice from './EditInvoice';
 
 export {
+  NewInvoice,
+  EditInvoice,
   EditForm,
   DeletePrompt,
   SaveChanges,

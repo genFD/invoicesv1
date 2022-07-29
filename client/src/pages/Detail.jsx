@@ -1,5 +1,11 @@
 import { Transition } from '@headlessui/react';
-import { InvoiceInfo, Navbar, Loading, NoResults } from '../components';
+import {
+  InvoiceInfo,
+  Navbar,
+  Loading,
+  NoResults,
+  EditInvoice,
+} from '../components';
 import useInvoice from '../hooks/useInvoice';
 
 function Detail() {
@@ -16,6 +22,7 @@ function Detail() {
       <div className="hidden desktop:flex">
         <div className="h-full w-[103px] flex flex-col justify-between fixed z-10 bg-373B53">
           <Navbar />
+          <EditInvoice />
         </div>
         <div className="w-[100%]">
           <Transition

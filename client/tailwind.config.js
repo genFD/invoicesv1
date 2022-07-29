@@ -32,6 +32,10 @@ module.exports = {
         '32px',
         { lineHeight: '35px', letterSpacing: '-1px', fontWeight: 'bold' },
       ],
+      'heading-tablet': [
+        '24px',
+        { lineHeight: '32px', letterSpacing: '-0.5px', fontWeight: 'bold' },
+      ],
       'heading-2': [
         '20px',
         { lineHeight: '22px', letterSpacing: '-0.63px', fontWeight: 'bold' },
