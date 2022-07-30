@@ -101,7 +101,16 @@ input[type='date']::-webkit-calendar-picker-indicator {
   background-size: 25px;
   cursor: pointer;
 }
-
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -137,9 +146,8 @@ select {
     rgba(0, 0, 0, 0.1) 100%
   );
 }
-.card-tb {
-  /* display: grid;
-  grid-template-columns: repeat (5, 1fr); */
 
-  /* grid-template-columns: 1fr; */
+.logo::before {
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  border-radius: 0px 20px 20px 0px;
 }

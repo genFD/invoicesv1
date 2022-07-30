@@ -38,7 +38,7 @@ const Form = () => {
           </div>
 
           <div className="flex gap-x-3 mb-6">
-            <div className="flex flex-col basis-127">
+            <div className="flex flex-col w-[152px]">
               <label
                 htmlFor="city"
                 className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
@@ -54,7 +54,7 @@ const Form = () => {
               />
             </div>
 
-            <div className="flex flex-col basis-127">
+            <div className="flex flex-col w-[152px]">
               <label
                 htmlFor="postCode"
                 className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
@@ -138,7 +138,7 @@ const Form = () => {
             </div>
 
             <div className="flex gap-x-3 mb-6 ">
-              <div className="flex flex-col basis-127">
+              <div className="flex flex-col w-[152px]">
                 <label
                   htmlFor="city"
                   className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
@@ -154,7 +154,7 @@ const Form = () => {
                 />
               </div>
 
-              <div className="flex flex-col basis-127">
+              <div className="flex flex-col w-[152px]">
                 <label
                   htmlFor="postCode"
                   className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
@@ -214,7 +214,7 @@ const Form = () => {
               </label>
               <Listbox value={selected} onChange={setSelected}>
                 <div className="relative mt-1 ">
-                  <Listbox.Button className="relative dark:bg-252945 dark:text-FFFF text-0C0E16  w-full cursor-default rounded-lg py-4 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-7C5DFA focus-visible:ring-2 focus-visible:ring-FFFF focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-7C5DFA text-body-1">
+                  <Listbox.Button className="relative bg-FFFF dark:bg-252945 dark:text-FFFF text-0C0E16  w-full cursor-default rounded-lg py-4 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-7C5DFA focus-visible:ring-2 focus-visible:ring-FFFF focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-7C5DFA text-body-1">
                     <span className="block truncate">{selected}</span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                       <SelectorIcon
@@ -236,7 +236,7 @@ const Form = () => {
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
                               active
-                                ? 'bg-9277FF dark:text-9277FF text-0C0E16'
+                                ? 'bg-9277FF dark:text-FFFF text-0C0E16'
                                 : 'dark:text-FFFF text-0C0E16'
                             }`
                           }

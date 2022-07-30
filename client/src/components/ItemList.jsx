@@ -3,7 +3,7 @@ import React from 'react';
 const ItemList = () => {
   return (
     <div className="mt-6 tablet:flex tablet:gap-x-4">
-      <div className="flex flex-col mb-6 w-[214px]">
+      <div className="flex flex-col mb-6 w-[327px] tablet:w-[214px]">
         <label
           htmlFor="itemName"
           className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
@@ -27,7 +27,7 @@ const ItemList = () => {
             Qty.
           </label>
           <input
-            type="text"
+            type="number"
             name="quantity"
             required
             id="quantity"
@@ -44,7 +44,7 @@ const ItemList = () => {
           </label>
           <input
             type="text"
-            name="price"
+            name="number"
             required
             id="price"
             className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"

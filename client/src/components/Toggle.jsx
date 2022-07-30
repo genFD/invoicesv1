@@ -11,7 +11,7 @@ const Toggle = () => {
       }}
       className="desktop:w-full desktop:flex desktop:justify-center"
     >
-      {colorTheme === 'light' ? <Dark /> : <Light />}
+      {colorTheme === 'light' ? <Light /> : <Dark />}
     </button>
   );
 };
