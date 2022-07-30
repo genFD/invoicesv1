@@ -2,10 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 
 const AppContext = React.createContext();
 
-// const API_URL = 'https://invoicev1.herokuapp.com/v1/invoices';
-
 const AppProvider = ({ children }) => {
-  /* APP STATE VARIABLES */
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewInvoiceOpen, setIsNewInvoiceOpen] = useState(false);
   const [isEditInvoiceOpen, setIsEditInvoiceOpen] = useState(false);
