@@ -1,6 +1,7 @@
 import React from 'react';
 import { Item, DeletePrompt } from '../components';
 import { convertPrice, convertTime } from '../utils/convert';
+import DeletePromptV2 from './DeletePromptV2';
 
 const Info = ({
   invoiceId,
@@ -117,7 +118,6 @@ const Info = ({
             </div>
           </div>
         </article>
-        <DeletePrompt />
       </div>
       <div className=" hidden tablet:flex justify-center">
         <article className="flex flex-col justify-between mt-4 w-327 tablet:w-[688px] tablet:h-[602px] desktop:w-[730px] desktop:h-[631px]  p-6 bg-FFFF dark:bg-1E2139 text-7E88C3 font-medium text-body-1">
@@ -221,7 +221,6 @@ const Info = ({
             </div>
           </div>
         </article>
-        <DeletePrompt />
       </div>
     </>
   );

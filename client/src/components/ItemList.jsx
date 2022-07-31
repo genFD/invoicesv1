@@ -1,6 +1,14 @@
 import React from 'react';
 
-const ItemList = () => {
+const ItemList = ({
+  name,
+  price,
+  total,
+  quantity,
+  updateFormData,
+  formdata,
+}) => {
+  console.log(name, price);
   return (
     <div className="mt-6 tablet:flex tablet:gap-x-4">
       <div className="flex flex-col mb-6 w-[327px] tablet:w-[214px]">
@@ -11,6 +19,18 @@ const ItemList = () => {
           Item Name
         </label>
         <input
+          value={name}
+          onChange={(e) =>
+            updateFormData((prevState) => ({
+              ...prevState,
+              items: [
+                {
+                  ...formdata.items[0],
+                  name: e.target.value,
+                },
+              ],
+            }))
+          }
           type="text"
           name="itemName"
           required
@@ -43,8 +63,8 @@ const ItemList = () => {
             Price
           </label>
           <input
-            type="text"
-            name="number"
+            type="number"
+            name="price"
             required
             id="price"
             className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -59,7 +79,9 @@ const ItemList = () => {
             Total
           </label>
 
-          <div className=" w-24 h-full border border-33D69F px-3 py-4  text-body-1 text-0C0E16 font-bold dark:text-FFFF"></div>
+          <div className=" w-24 h-full border border-33D69F px-3 py-4  text-body-1 text-0C0E16 font-bold dark:text-FFFF">
+            {}
+          </div>
         </div>
 
         <div className="flex">

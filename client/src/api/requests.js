@@ -1,7 +1,7 @@
 import axios from 'axios';
-const API_URL = 'https://invoicev1.herokuapp.com/v1/invoices';
+// const API_URL = 'https://invoicev1.herokuapp.com/v1/invoices';
 //dev
-// const API_URL = 'http://localhost:8000/v1/invoices';
+const API_URL = 'http://localhost:8000/v1/invoices';
 //prod
 // const API_URL = 'v1/invoices';
 

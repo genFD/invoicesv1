@@ -24,13 +24,8 @@ import Delete from './Delete';
 import MarkAsPaid from './MarkAsPaid';
 import Item from './Item';
 import EditTitle from './EditTitle';
-import BillFrom from './BillFrom';
-import BillTo from './BillTo';
-import BillInformation from './BillInformation';
 import ItemList from './ItemList';
 import AddItem from './AddItem';
-import EditForm from './EditForm';
-import FooterEdit from './FooterEdit';
 import FooterNewInvoice from './FooterNewInvoice';
 import NewForm from './Form';
 import NewTitle from './NewTitle';
@@ -45,12 +40,17 @@ import FooterEditInvoice from './FooterEditInvoice';
 import DeletePrompt from './DeletePrompt';
 import NewInvoice from './NewInvoice';
 import EditInvoice from './EditInvoice';
+import Content from './Content';
+import EditForm from './EditForm';
+import EditFormMobile from './EditFormMobile';
 
 export {
   NewInvoice,
-  EditInvoice,
+  EditFormMobile,
   EditForm,
+  EditInvoice,
   DeletePrompt,
+  Content,
   SaveChanges,
   FooterEditInvoice,
   Cancel,
@@ -61,14 +61,10 @@ export {
   Divider,
   NewTitle,
   NewForm,
-  FooterEdit,
   FooterNewInvoice,
   EditTitle,
   AddItem,
   ItemList,
-  BillTo,
-  BillFrom,
-  BillInformation,
   Delete,
   MarkAsPaid,
   Edit,

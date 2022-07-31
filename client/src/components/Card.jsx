@@ -5,24 +5,23 @@ import { convertTime, convertPrice } from '../utils/convert';
 const Card = ({ id, invoiceId, clientName, paymentDue, items, status }) => {
   return (
     <Link to={`/detail/${id}`}>
-      <article className="w-327 tablet:w-672 desktop:w-730 h-134 rounded-lg text-0C0E16 dark:text-FFFF bg-FFFF dark:bg-1E2139 card-shadow">
+      <article className="w-327  h-134 tablet:w-672 tablet:h-[73px] desktop:w-730 rounded-lg text-0C0E16 dark:text-FFFF bg-FFFF dark:bg-1E2139 card-shadow">
         <div className="hidden tablet:grid tablet:grid-cols-5 tablet:grid-rows-1 h-full place-items-center">
-          {/* invoice id */}
           <div className="invoice-id">
             <span className="text-7E88C3">#</span>
             <span className="font-bold">{invoiceId}</span>
           </div>
-          {/* due date */}
+
           <p className="date text-7E88C3 font-medium dark:text-DFE3FA">
             Due {convertTime(paymentDue)}
           </p>
-          {/* name */}
+
           <p className="text-858BB2 dark:text-FFFF font-medium">{clientName}</p>
-          {/* price */}
+
           <p className="price font-bold tablet:text-heading-2">
             {convertPrice(items[0].price)}
           </p>
-          {/* paid */}
+
           <div
             className={`${
               status === 'paid'

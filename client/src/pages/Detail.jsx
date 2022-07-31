@@ -6,6 +6,7 @@ import {
   NoResults,
   EditInvoice,
 } from '../components';
+import { useGlobalContext } from '../context/context';
 import useInvoice from '../hooks/useInvoice';
 
 function Detail() {
@@ -17,14 +18,13 @@ function Detail() {
   if (Object.keys(invoice).length < 1) {
     return <NoResults />;
   }
+
   return (
     <>
-      <div className="hidden desktop:flex">
-        <div className="h-full w-[103px] flex flex-col justify-between fixed z-10 bg-373B53">
-          <Navbar />
-          <EditInvoice />
-        </div>
-        <div className="w-[100%]">
+      <div className=" flex flex-col desktop:flex-row">
+        <Navbar />
+        <EditInvoice />
+        <div className="desktop:my-0 desktop:mx-auto tablet:pb-10">
           <Transition
             appear
             show={Object.keys(invoice).length > 0}
@@ -39,22 +39,6 @@ function Detail() {
             <InvoiceInfo {...invoice} />
           </Transition>
         </div>
-      </div>
-      <div className="desktop:hidden">
-        <Navbar />
-        <Transition
-          appear
-          show={Object.keys(invoice).length > 0}
-          as="div"
-          enter="ease-out duration-300"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <InvoiceInfo {...invoice} />
-        </Transition>
       </div>
     </>
   );

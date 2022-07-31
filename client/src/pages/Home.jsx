@@ -1,33 +1,11 @@
-import {
-  Navbar,
-  Header,
-  Cards,
-  Logo,
-  Toggle,
-  DeletePrompt,
-  NewInvoice,
-} from '../components';
+import { Navbar, Content } from '../components';
 
 function Home() {
   return (
-    <>
-      <main className="hidden desktop:flex">
-        <div className="h-full w-[103px] flex flex-col justify-between fixed z-10 bg-373B53">
-          <Navbar />
-        </div>
-        <div className="w-[100%]">
-          <Header />
-          <Cards />
-        </div>
-      </main>
-
-      <main className="desktop:hidden">
-        <Navbar />
-        <NewInvoice />
-        <Header />
-        <Cards />
-      </main>
-    </>
+    <main className="flex flex-col desktop:flex-row">
+      <Navbar />
+      <Content />
+    </main>
   );
 }
 

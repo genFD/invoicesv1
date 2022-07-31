@@ -1,11 +1,49 @@
-import React, { useState, useContext, useEffect } from 'react';
-
+import React, { useState, useContext, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import { httpGetInvoices, httpGetInvoice } from '../api/requests';
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewInvoiceOpen, setIsNewInvoiceOpen] = useState(false);
+  const [isList, setIsList] = useState(false);
   const [isEditInvoiceOpen, setIsEditInvoiceOpen] = useState(false);
+  const [invoices, updateInvoices] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [invoice, updateInvoice] = useState([]);
+
+  // const { id } = useParams();
+
+  // const getInvoices = useCallback(async () => {
+  //   setLoading(true);
+  //   const fetchedInvoices = await httpGetInvoices();
+  //   if (fetchedInvoices) {
+  //     updateInvoices(fetchedInvoices);
+  //   } else {
+  //     updateInvoices([]);
+  //   }
+  //   setLoading(false);
+  // }, []);
+
+  // const getInvoice = useCallback(async (id) => {
+  //   setLoading(true);
+  //   const fetchedInvoice = await httpGetInvoice(id);
+  //   if (fetchedInvoice) {
+  //     const { content } = fetchedInvoice[0];
+  //     updateInvoice(content);
+  //   } else {
+  //     updateInvoice([]);
+  //   }
+  //   setLoading(false);
+  // }, []);
+
+  // useEffect(() => {
+  //   getInvoices();
+  // }, [getInvoices]);
+
+  // useEffect(() => {
+  //   getInvoice(id);
+  // }, [getInvoice, id]);
 
   function closeModal() {
     setIsModalOpen(false);
@@ -14,7 +52,6 @@ const AppProvider = ({ children }) => {
   function openModal() {
     setIsModalOpen(true);
   }
-
   function closeNewInvoice() {
     setIsNewInvoiceOpen(false);
   }
@@ -47,7 +84,11 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        invoices,
+        invoice,
+        loading,
         isModalOpen,
+        setIsModalOpen,
         closeModal,
         openModal,
         closeNewInvoice,
@@ -56,6 +97,8 @@ const AppProvider = ({ children }) => {
         openEditInvoice,
         closeEditInvoice,
         isEditInvoiceOpen,
+        isList,
+        setIsList,
       }}
     >
       {children}

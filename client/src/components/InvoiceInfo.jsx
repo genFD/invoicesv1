@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  GoBack,
-  Status,
-  Info,
-  FooterInvoice,
-  DeletePrompt,
-} from '../components';
+import { GoBack, Status, Info, FooterInvoice } from '../components';
 
 const InvoiceInfo = ({
   status,
@@ -37,7 +31,6 @@ const InvoiceInfo = ({
         total={total}
         description={description}
       />
-
       <FooterInvoice />
     </>
   );
