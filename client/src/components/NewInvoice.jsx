@@ -3,10 +3,12 @@ import React, { useRef, Fragment, useState } from 'react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { useGlobalContext } from '../context/context';
 import { ItemList, AddItem, FooterNewInvoice } from '../components';
-const paymentTerms = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
+import { terms, formData } from '../data/data';
+import { Discard, SaveAsDraft, SaveAndSend } from '../components';
 
 const NewInvoice = () => {
-  const [selected, setSelected] = useState(paymentTerms[0]);
+  const [selected, setSelected] = useState(terms[0]);
+  const [formInput, updateFormInput] = useState(formData);
 
   const { isNewInvoiceOpen, closeNewInvoice } = useGlobalContext();
   const backdrop = useRef(null);
@@ -78,6 +80,16 @@ const NewInvoice = () => {
                     <input
                       type="text"
                       name="StreetAddress"
+                      value={formInput.clientAddress.street}
+                      onChange={(e) =>
+                        updateFormInput((prev) => ({
+                          ...prev,
+                          clientAddress: {
+                            ...prev.clientAddress,
+                            street: e.target.value,
+                          },
+                        }))
+                      }
                       required
                       id="StreetAddress"
                       className="border border-7E88C3 dark:border-252945 py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -95,6 +107,15 @@ const NewInvoice = () => {
                       <input
                         type="text"
                         name="city"
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            clientAddress: {
+                              ...prev.clientAddress,
+                              city: e.target.value,
+                            },
+                          }))
+                        }
                         required
                         id="city"
                         className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -111,6 +132,15 @@ const NewInvoice = () => {
                       <input
                         type="text"
                         name="postCode"
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            clientAddress: {
+                              ...prev.clientAddress,
+                              postCode: e.target.value,
+                            },
+                          }))
+                        }
                         required
                         id="postCode"
                         className="border border-7E88C3 dark:border-252945 px-3 py-4 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none  dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -127,6 +157,16 @@ const NewInvoice = () => {
                       <input
                         type="text"
                         name="country"
+                        value={formInput.clientAddress.country}
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            clientAddress: {
+                              ...prev.clientAddress,
+                              country: e.target.value,
+                            },
+                          }))
+                        }
                         required
                         id="country"
                         className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -147,6 +187,13 @@ const NewInvoice = () => {
                     <input
                       type="text"
                       name="clientName"
+                      value={formInput.clientName}
+                      onChange={(e) =>
+                        updateFormInput((prev) => ({
+                          ...prev,
+                          clientName: e.target.value,
+                        }))
+                      }
                       required
                       id="clientName"
                       className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -163,8 +210,16 @@ const NewInvoice = () => {
                     <input
                       type="text"
                       name="clientName"
+                      value={formInput.clientEmail}
+                      onChange={(e) =>
+                        updateFormInput((prev) => ({
+                          ...prev,
+                          clientEmail: e.target.value,
+                        }))
+                      }
                       required
                       id="clientName"
+                      placeholder="e.g. email@example.com"
                       className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
                     />
                   </div>
@@ -179,6 +234,16 @@ const NewInvoice = () => {
                     <input
                       type="text"
                       name="StreetAddress"
+                      value={formInput.senderAddress.street}
+                      onChange={(e) =>
+                        updateFormInput((prev) => ({
+                          ...prev,
+                          senderAddress: {
+                            ...prev.senderAddress,
+                            street: e.target.value,
+                          },
+                        }))
+                      }
                       required
                       id="StreetAddress"
                       className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -196,6 +261,16 @@ const NewInvoice = () => {
                       <input
                         type="text"
                         name="city"
+                        value={formInput.senderAddress.city}
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            senderAddress: {
+                              ...prev.senderAddress,
+                              city: e.target.value,
+                            },
+                          }))
+                        }
                         required
                         id="city"
                         className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -212,6 +287,16 @@ const NewInvoice = () => {
                       <input
                         type="text"
                         name="postCode"
+                        value={formInput.senderAddress.postCode}
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            senderAddress: {
+                              ...prev.senderAddress,
+                              postCode: e.target.value,
+                            },
+                          }))
+                        }
                         required
                         id="postCode"
                         className="border border-7E88C3 dark:border-252945 px-3 py-4 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none  dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -228,6 +313,16 @@ const NewInvoice = () => {
                       <input
                         type="text"
                         name="country"
+                        value={formInput.senderAddress.country}
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            senderAddress: {
+                              ...prev.senderAddress,
+                              country: e.target.value,
+                            },
+                          }))
+                        }
                         required
                         id="country"
                         className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
@@ -246,6 +341,13 @@ const NewInvoice = () => {
                       <input
                         type="date"
                         name="InvoiceDate"
+                        value={formInput.createdAt}
+                        onChange={(e) =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            createdAt: e.target.value,
+                          }))
+                        }
                         required
                         id="InvoiceDate"
                         className="border shadow-md border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF"
@@ -259,13 +361,22 @@ const NewInvoice = () => {
                       >
                         Payment Terms
                       </label>
-                      <Listbox value={selected} onChange={setSelected}>
+                      <Listbox
+                        value={selected}
+                        onChange={setSelected}
+                        onBlur={() =>
+                          updateFormInput((prev) => ({
+                            ...prev,
+                            paymentTerms: selected,
+                          }))
+                        }
+                      >
                         <div className="relative mt-1 ">
                           <Listbox.Button className="relative dark:bg-252945 dark:text-FFFF text-0C0E16  w-full cursor-default rounded-lg py-4 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-7C5DFA focus-visible:ring-2 focus-visible:ring-FFFF focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-7C5DFA text-body-1">
                             <span className="block truncate">{selected}</span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                               <SelectorIcon
-                                className="h-5 w-5 text-gray-400"
+                                className="h-5 w-5 text-7C5DFA"
                                 aria-hidden="true"
                               />
                             </span>
@@ -277,7 +388,7 @@ const NewInvoice = () => {
                             leaveTo="opacity-0"
                           >
                             <Listbox.Options className="absolute bg-FFFF dark:bg-252945 mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-7C5DFA ring-opacity-5 focus:outline-none text-body-1">
-                              {paymentTerms.map((term, termIdx) => (
+                              {terms.map((term, termIdx) => (
                                 <Listbox.Option
                                   key={termIdx}
                                   className={({ active }) =>
@@ -328,17 +439,169 @@ const NewInvoice = () => {
                     <input
                       type="text"
                       name="projectDescription"
+                      value={formInput.description}
+                      onChange={(e) =>
+                        updateFormInput((prev) => ({
+                          ...prev,
+                          description: e.target.value,
+                        }))
+                      }
                       required
                       id="projectDescription"
+                      placeholder="e.g. Graphic Design Service"
                       className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
                     />
                   </div>
                   <h4 className="text-777F98 text-heading-7 font-bold mt-6">
                     Item List
                   </h4>
-                  <ItemList />
+                  <div className="mt-6 tablet:flex tablet:gap-x-4">
+                    <div className="flex flex-col mb-6 w-[327px] tablet:w-[214px]">
+                      <label
+                        htmlFor="itemName"
+                        className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                      >
+                        Item Name
+                      </label>
+                      <input
+                        type="text"
+                        name="itemName"
+                        value={formInput.items[0].name}
+                        onChange={(e) =>
+                          updateFormInput((prevState) => ({
+                            ...prevState,
+                            items: [
+                              {
+                                ...prevState.items[0],
+                                name: e.target.value,
+                              },
+                            ],
+                          }))
+                        }
+                        required
+                        id="itemName"
+                        className="border border-7E88C3 dark:border-252945 py-4 px-3  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
+                      />
+                    </div>
+                    <div className="flex gap-x-4 mb-6">
+                      <div className="flex flex-col w-16 tablet:w-[46px]">
+                        <label
+                          htmlFor="quantity"
+                          className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                        >
+                          Qty.
+                        </label>
+                        <input
+                          type="number"
+                          name="quantity"
+                          value={formInput.items[0].quantity}
+                          onChange={(e) =>
+                            updateFormInput((prevState) => ({
+                              ...prevState,
+                              items: [
+                                {
+                                  ...prevState.items[0],
+                                  quantity: e.target.value,
+                                },
+                              ],
+                            }))
+                          }
+                          required
+                          id="quantity"
+                          className="border border-7E88C3 dark:border-252945 flex justify center px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
+                        />
+                      </div>
+
+                      <div className="flex flex-col w-100">
+                        <label
+                          htmlFor="price"
+                          className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                        >
+                          Price
+                        </label>
+                        <input
+                          type="number"
+                          name="price"
+                          value={formInput.items[0].price}
+                          onChange={(e) =>
+                            updateFormInput((prevState) => ({
+                              ...prevState,
+                              items: [
+                                {
+                                  ...prevState.items[0],
+                                  price: e.target.value,
+                                },
+                              ],
+                            }))
+                          }
+                          required
+                          id="price"
+                          className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="total"
+                          className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                        >
+                          Total
+                        </label>
+
+                        <input
+                          value={formInput.items[0].total}
+                          onChange={(e) =>
+                            updateFormInput((prevState) => ({
+                              ...prevState,
+                              items: [
+                                {
+                                  ...prevState.items[0],
+                                  total: e.target.value,
+                                },
+                              ],
+                            }))
+                          }
+                          type="number"
+                          className=" w-24 h-full dark:bg-252945   border bg border-33D69F px-3 py-4  text-body-1 text-0C0E16 font-bold dark:text-FFFF"
+                        />
+                      </div>
+
+                      <div className="flex">
+                        <svg
+                          className="mt-10"
+                          width="13"
+                          height="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11.583 3.556v10.666c0 .982-.795 1.778-1.777 1.778H2.694a1.777 1.777 0 01-1.777-1.778V3.556h10.666zM8.473 0l.888.889h3.111v1.778H.028V.889h3.11L4.029 0h4.444z"
+                            fill="#888EB0"
+                            fillRule="nonzero"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  {/* <ItemList /> */}
                   <AddItem />
-                  <FooterNewInvoice />
+                  <footer className="tablet:mt-12 flex items-center gap-x-2 h-91 tablet:h-fit tablet:pb-8 box-shadow-footer-invoice justify-center tablet:justify-start tablet:gap-x-32 w-full">
+                    <div>
+                      <div
+                        onClick={closeNewInvoice}
+                        className="w-84 h-48 bg-F9FAFE dark:bg-252945  rounded-3xl grid place-content-center text-body-1 text-7E88C3 font-bold cursor-pointer"
+                      >
+                        Discard
+                      </div>
+                    </div>
+                    <div className="flex gap-x-2">
+                      <button className="w-117 h-48 bg-373B53 rounded-3xl grid place-content-center text-body-1 text-DFE3FA font-bold">
+                        Save As Draft
+                      </button>
+                      <button className="w-112 h-48 bg-7C5DFA rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold">
+                        Save &amp; send
+                      </button>
+                    </div>
+                  </footer>
                 </form>
               </div>
             </Transition.Child>

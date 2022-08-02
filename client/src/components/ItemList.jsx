@@ -8,7 +8,6 @@ const ItemList = ({
   updateFormData,
   formdata,
 }) => {
-  console.log(name, price);
   return (
     <div className="mt-6 tablet:flex tablet:gap-x-4">
       <div className="flex flex-col mb-6 w-[327px] tablet:w-[214px]">

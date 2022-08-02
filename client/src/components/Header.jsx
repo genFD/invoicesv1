@@ -8,7 +8,6 @@ const Header = () => {
       <div className="w-327 tablet:w-672 desktop:w-730 flex items-center">
         <HeaderTitle />
         <FilterItems />
-        {/* <FilterButton /> */}
         <AddNewButton />
       </div>
     </header>

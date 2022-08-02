@@ -9,7 +9,7 @@ const AddNewButton = () => {
     <>
       <button
         onClick={openNewInvoice}
-        className="hidden w-90 tablet:w-150 h-11 tablet:h-12 rounded-3xl tablet:flex gap-x-2 tablet:gap-x-4 items-center bg-7C5DFA pl-6px tablet:pl-2 shadow-lg"
+        className="hidden w-90 tablet:w-150 h-11 tablet:h-12 rounded-3xl tablet:flex gap-x-2 tablet:gap-x-4 items-center bg-7C5DFA hover:bg-9277FF transition-all duration-300 pl-6px tablet:pl-2 shadow-lg"
       >
         <span>
           <span className="flex justify-center items-center rounded-full bg-FFFF h-8 w-8">

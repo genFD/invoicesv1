@@ -14,7 +14,7 @@ const Item = ({ item }) => {
         </p>
       </div>
       <div className="text-0C0E16  dark:text-FFFF text-body-1 ">
-        {item ? convertPrice(item.price) : 'item price'}
+        {item ? convertPrice(item.quantity * item.price) : 'item price'}
       </div>
     </li>
   );

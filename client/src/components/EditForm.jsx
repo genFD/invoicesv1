@@ -1,47 +1,17 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { Transition, Listbox } from '@headlessui/react';
-import { ItemList, AddItem, FooterEditInvoice } from '../components';
+import { AddItem } from '../components';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { useGlobalContext } from '../context/context';
-import { useParams } from 'react-router-dom';
-const terms = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
+import { terms, formData } from '../data/data';
 
 const EditForm = ({ invoice }) => {
   const [selected, setSelected] = useState(terms[0]);
-  const [formdata, updateFormData] = useState({
-    clientAddress: {
-      city: '',
-      country: '',
-      postCode: '',
-      street: '',
-    },
-    senderAddress: {
-      city: '',
-      country: '',
-      postCode: '',
-      street: '',
-    },
-    clientEmail: '',
-    clientName: '',
-    createdAt: '',
-    description: '',
-    invoiceId: '',
-    items: [
-      {
-        name: '',
-        price: '',
-        quantity: '',
-        total: '',
-      },
-    ],
-    paymentDue: '',
-    paymentTerms: '',
-    total: '',
-  });
-  const { id } = useParams();
+  const [formInput, updateFormInput] = useState(formData);
+  console.log(formData.emptyFieldErrorMessage);
 
   const populate = () => {
-    updateFormData({ ...invoice });
+    updateFormInput({ ...invoice });
   };
   useEffect(() => {
     populate();
@@ -75,16 +45,19 @@ const EditForm = ({ invoice }) => {
         <div className="flex flex-col mb-6">
           <label
             htmlFor="StreetAddress"
-            className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+            className="text-body-1 border text-7E88C3 dark:text-888EB0 pb-2 font-bold mb-1 flex items-center justify-between"
           >
             Street Address
+            <span className="text-body-1 text-EC5757">
+              {formData.emptyFieldErrorMessage}
+            </span>
           </label>
           <input
             type="text"
             name="StreetAddress"
-            value={formdata.clientAddress.street}
+            value={formInput.clientAddress.street}
             onChange={(e) =>
-              updateFormData((prevState) => ({
+              updateFormInput((prevState) => ({
                 ...prevState,
                 clientAddress: {
                   ...prevState.clientAddress,
@@ -94,7 +67,7 @@ const EditForm = ({ invoice }) => {
             }
             required
             id="StreetAddress"
-            className="border border-7E88C3 dark:border-252945 py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF"
+            className="border border-7E88C3 dark:border-252945 py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF dark:bg-252945 focus:outline-none focus:border-9277FF dark:focus:border-9277FF caret-9277FF"
           />
         </div>
 
@@ -109,9 +82,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="city"
-              value={formdata.clientAddress.city}
+              value={formInput.clientAddress.city}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   clientAddress: {
                     ...prevState.clientAddress,
@@ -135,9 +108,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="postCode"
-              value={formdata.clientAddress.postCode}
+              value={formInput.clientAddress.postCode}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   clientAddress: {
                     ...prevState.clientAddress,
@@ -161,9 +134,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="country"
-              value={formdata.clientAddress.country}
+              value={formInput.clientAddress.country}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   clientAddress: {
                     ...prevState.clientAddress,
@@ -191,9 +164,9 @@ const EditForm = ({ invoice }) => {
           <input
             type="text"
             name="clientName"
-            value={formdata.clientName}
+            value={formInput.clientName}
             onChange={(e) =>
-              updateFormData((prevState) => ({
+              updateFormInput((prevState) => ({
                 ...prevState,
                 clientName: e.target.value,
               }))
@@ -214,9 +187,9 @@ const EditForm = ({ invoice }) => {
           <input
             type="text"
             name="clientName"
-            value={formdata.clientEmail}
+            value={formInput.clientEmail}
             onChange={(e) =>
-              updateFormData((prevState) => ({
+              updateFormInput((prevState) => ({
                 ...prevState,
                 clientEmail: e.target.value,
               }))
@@ -237,9 +210,9 @@ const EditForm = ({ invoice }) => {
           <input
             type="text"
             name="StreetAddress"
-            value={formdata.senderAddress.street}
+            value={formInput.senderAddress.street}
             onChange={(e) =>
-              updateFormData((prevState) => ({
+              updateFormInput((prevState) => ({
                 ...prevState,
                 senderAddress: {
                   ...prevState.senderAddress,
@@ -264,9 +237,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="city"
-              value={formdata.senderAddress.city}
+              value={formInput.senderAddress.city}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   senderAddress: {
                     ...prevState.senderAddress,
@@ -290,9 +263,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="postCode"
-              value={formdata.senderAddress.postCode}
+              value={formInput.senderAddress.postCode}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   senderAddress: {
                     ...prevState.senderAddress,
@@ -316,9 +289,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="country"
-              value={formdata.senderAddress.country}
+              value={formInput.senderAddress.country}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   senderAddress: {
                     ...prevState.senderAddress,
@@ -344,9 +317,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="date"
               name="InvoiceDate"
-              value={formdata.createdAt}
+              value={formInput.createdAt}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   createdAt: e.target.value,
                 }))
@@ -364,13 +337,22 @@ const EditForm = ({ invoice }) => {
             >
               Payment Terms
             </label>
-            <Listbox value={selected} onChange={setSelected}>
+            <Listbox
+              value={selected}
+              onChange={setSelected}
+              onBlur={() =>
+                updateFormInput((prev) => ({
+                  ...prev,
+                  paymentTerms: selected,
+                }))
+              }
+            >
               <div className="relative mt-1 ">
                 <Listbox.Button className="relative dark:bg-252945 dark:text-FFFF text-0C0E16  w-full cursor-default rounded-lg py-4 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-7C5DFA focus-visible:ring-2 focus-visible:ring-FFFF focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-7C5DFA text-body-1">
                   <span className="block truncate">{selected}</span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <SelectorIcon
-                      className="h-5 w-5 text-gray-400"
+                      className="h-5 w-5 text-7C5DFA"
                       aria-hidden="true"
                     />
                   </span>
@@ -431,9 +413,9 @@ const EditForm = ({ invoice }) => {
           <input
             type="text"
             name="projectDescription"
-            value={formdata.description}
+            value={formInput.description}
             onChange={(e) =>
-              updateFormData((prevState) => ({
+              updateFormInput((prevState) => ({
                 ...prevState,
                 description: e.target.value,
               }))
@@ -455,9 +437,9 @@ const EditForm = ({ invoice }) => {
             <input
               type="text"
               name="itemName"
-              value={formdata.items[0].name}
+              value={formInput.items[0].name}
               onChange={(e) =>
-                updateFormData((prevState) => ({
+                updateFormInput((prevState) => ({
                   ...prevState,
                   items: [
                     {
@@ -483,9 +465,9 @@ const EditForm = ({ invoice }) => {
               <input
                 type="number"
                 name="quantity"
-                value={formdata.items[0].quantity}
+                value={formInput.items[0].quantity}
                 onChange={(e) =>
-                  updateFormData((prevState) => ({
+                  updateFormInput((prevState) => ({
                     ...prevState,
                     items: [
                       {
@@ -511,9 +493,9 @@ const EditForm = ({ invoice }) => {
               <input
                 type="number"
                 name="price"
-                value={formdata.items[0].price}
+                value={formInput.items[0].price}
                 onChange={(e) =>
-                  updateFormData((prevState) => ({
+                  updateFormInput((prevState) => ({
                     ...prevState,
                     items: [
                       {
@@ -538,7 +520,7 @@ const EditForm = ({ invoice }) => {
               </label>
 
               <div className=" w-24 h-full border border-33D69F px-3 py-4  text-body-1 text-0C0E16 font-bold dark:text-FFFF">
-                {formdata.items[0].total}
+                {formInput.items[0].total}
               </div>
             </div>
 
@@ -559,7 +541,17 @@ const EditForm = ({ invoice }) => {
           </div>
         </div>
         <AddItem />
-        <FooterEditInvoice />
+        <footer className=" flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-center w-full">
+          <div
+            onClick={closeEditInvoice}
+            className="w-96 h-48 bg-F9FAFE dark:bg-252945 rounded-3xl grid place-content-center text-body-1 text-7E88C3 font-bold"
+          >
+            Cancel
+          </div>
+          <div className="w-138 h-48 bg-7C5DFA rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold">
+            Save Changes
+          </div>
+        </footer>
       </form>
     </div>
   );

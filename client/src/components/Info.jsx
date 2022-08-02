@@ -213,7 +213,7 @@ const Info = ({
                 </ul>
               </div>
               <div className="bg-373B53 dark:bg-0C0E16 rounded-b-lg p-4 flex justify-between items-center">
-                <span className="inline-block">Grand Total</span>
+                <span className="inline-block">Amount Due</span>
                 <span className="inline-block text-FFFF text-heading-6 tablet:text-heading-tablet">
                   {convertPrice(total)}
                 </span>

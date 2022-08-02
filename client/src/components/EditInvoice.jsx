@@ -6,7 +6,7 @@ import useInvoice from '../hooks/useInvoice';
 
 const EditInvoice = () => {
   const { isEditInvoiceOpen, closeEditInvoice } = useGlobalContext();
-  const { invoice, loading } = useInvoice();
+  const { invoice } = useInvoice();
 
   const backdrop = useRef(null);
   return (

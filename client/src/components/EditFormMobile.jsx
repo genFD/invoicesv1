@@ -2,13 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import {
-  ItemList,
-  AddItem,
-  Divider,
-  FooterNewInvoice,
-  FooterEditInvoice,
-} from '../components';
+import { AddItem, Divider, Cancel, SaveChanges } from '../components';
 const terms = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
 
 const EditFormMobile = ({ invoice }) => {
@@ -43,7 +37,6 @@ const EditFormMobile = ({ invoice }) => {
     paymentTerms: '',
     total: '',
   });
-  const { id } = useParams();
 
   const populate = () => {
     updateFormData({ ...invoice });
@@ -548,7 +541,10 @@ const EditFormMobile = ({ invoice }) => {
           <AddItem />
         </div>
         <Divider />
-        {!id ? <FooterNewInvoice /> : <FooterEditInvoice />}
+        <footer className="flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-end px-6 w-full">
+          <Cancel />
+          <SaveChanges />
+        </footer>
       </form>
     </div>
   );

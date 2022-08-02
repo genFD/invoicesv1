@@ -24,7 +24,7 @@ function Detail() {
       <div className=" flex flex-col desktop:flex-row">
         <Navbar />
         <EditInvoice />
-        <div className="desktop:my-0 desktop:mx-auto tablet:pb-10">
+        <div className="desktop:my-0 desktop:mx-auto tablet:pb-2">
           <Transition
             appear
             show={Object.keys(invoice).length > 0}

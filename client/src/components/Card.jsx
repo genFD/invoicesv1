@@ -5,7 +5,7 @@ import { convertTime, convertPrice } from '../utils/convert';
 const Card = ({ id, invoiceId, clientName, paymentDue, items, status }) => {
   return (
     <Link to={`/detail/${id}`}>
-      <article className="w-327  h-134 tablet:w-672 tablet:h-[73px] desktop:w-730 rounded-lg text-0C0E16 dark:text-FFFF bg-FFFF dark:bg-1E2139 card-shadow">
+      <article className="w-327  h-134 tablet:w-672 tablet:h-[73px] desktop:w-730 rounded-lg text-0C0E16 dark:text-FFFF bg-FFFF dark:bg-1E2139 card-shadow hover:border-7C5DFA hover:border">
         <div className="hidden tablet:grid tablet:grid-cols-5 tablet:grid-rows-1 h-full place-items-center">
           <div className="invoice-id">
             <span className="text-7E88C3">#</span>
