@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { convertTime, convertPrice } from '../utils/convert';
+import { convertTime, convertPrice } from '../utils/utils';
 
 const Card = ({ id, invoiceId, clientName, paymentDue, items, status }) => {
   return (

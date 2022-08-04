@@ -1,7 +1,14 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
-import { httpGetInvoices, httpGetInvoice } from '../api/requests';
-const AppContext = React.createContext();
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  createContext,
+} from "react";
+
+import { formData } from "../data/data";
+
+const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +18,11 @@ const AppProvider = ({ children }) => {
   const [invoices, updateInvoices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [invoice, updateInvoice] = useState([]);
-
+  const [client, updateClient] = useState(formData[0].client);
+  const [sender, updateSender] = useState(formData[0].sender);
+  const [invoiceInfo, updateInvoiceInfo] = useState(formData[0].invoiceInfo);
+  const [items, updateItems] = useState(formData[0].items);
+  console.log(items);
   // const { id } = useParams();
 
   // const getInvoices = useCallback(async () => {
@@ -72,11 +83,11 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       sideFixer();
     });
     return () =>
-      window.removeEventListener('resize', () => {
+      window.removeEventListener("resize", () => {
         sideFixer();
       });
   }, []);
@@ -99,6 +110,14 @@ const AppProvider = ({ children }) => {
         isEditInvoiceOpen,
         isList,
         setIsList,
+        client,
+        updateClient,
+        sender,
+        updateSender,
+        invoiceInfo,
+        updateInvoiceInfo,
+        items,
+        updateItems,
       }}
     >
       {children}

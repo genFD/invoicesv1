@@ -1,38 +1,45 @@
-import React from 'react';
-import { GoBack, Status, Info, FooterInvoice } from '../components';
-
-const InvoiceInfo = ({
-  status,
-  invoiceId,
-  description,
-  items,
-  createdAt,
-  senderAddress,
-  paymentDue,
-  clientName,
-  clientAddress,
-  clientEmail,
-  total,
-}) => {
+import React from "react";
+import { Input, Terms } from "../components";
+import { useGlobalContext } from "../context/context";
+const inputfields = [
+  {
+    id: 1,
+    name: "date",
+    type: "date",
+    required: true,
+    label: "Invoice Date",
+  },
+  {
+    id: 2,
+    name: "description",
+    type: "text",
+    required: true,
+    label: "Project Description",
+  },
+];
+const InvoiceInfo = () => {
+  const { invoiceInfo, updateInvoiceInfo } = useGlobalContext();
+  const handleChange = (e) => {
+    updateInvoiceInfo({ ...invoiceInfo, [e.target.name]: e.target.value });
+  };
   return (
-    <>
-      <GoBack />
-      <Status status={status} />
-      <Info
-        status={status}
-        invoiceId={invoiceId}
-        items={items}
-        createdAt={createdAt}
-        senderAddress={senderAddress}
-        paymentDue={paymentDue}
-        clientName={clientName}
-        clientAddress={clientAddress}
-        clientEmail={clientEmail}
-        total={total}
-        description={description}
-      />
-      <FooterInvoice />
-    </>
+    <section className="mt-10">
+      <div className="flex flex-col mb-6">
+        <div className="invoice-info-input-container grid grid-cols-4 grid-rows-2 gap-6">
+          {inputfields.map((field) => {
+            return (
+              <Input
+                key={field.id}
+                {...field}
+                value={invoiceInfo[field.name]}
+                handleChange={handleChange}
+              />
+            );
+          })}
+          <Terms />
+        </div>
+      </div>
+    </section>
   );
 };
 

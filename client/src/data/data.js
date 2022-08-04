@@ -1,34 +1,48 @@
-export const terms = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
-export const formData = {
-  clientAddress: {
-    city: '',
-    country: '',
-    postCode: '',
-    street: '',
-  },
-  emptyFieldErrorMessage: "can't be empty",
-
-  senderAddress: {
-    city: '',
-    country: '',
-    postCode: '',
-    street: '',
-  },
-  clientEmail: '',
-  clientName: '',
-  createdAt: '',
-  description: '',
-  invoiceId: '',
-  items: [
-    {
-      name: '',
-      price: '',
-      quantity: '',
-      total: '',
-      errorMessage: 'An item must be added',
+export const terms = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
+export const formData = [
+  {
+    client: {
+      city: "",
+      country: "",
+      postCode: "",
+      street: "",
+      email: "",
+      name: "",
     },
-  ],
-  paymentDue: '',
-  paymentTerms: '',
-  total: '',
+
+    sender: {
+      city: "",
+      country: "",
+      postCode: "",
+      street: "",
+    },
+    items: [
+      {
+        name: "",
+        price: "",
+        quantity: "",
+        total: "",
+      },
+    ],
+    invoiceInfo: {
+      createdAt: "",
+      description: "",
+    },
+    paymentTerms: "",
+    total: "",
+  },
+];
+export const alertData = {
+  show: false,
+  message: "",
+  type: "",
+};
+export const errorData = {
+  error: false,
+  clientAddress: {
+    city: false,
+    country: false,
+    postCode: false,
+    street: false,
+  },
 };

@@ -1,17 +1,61 @@
-import { Dialog, Transition, Listbox } from '@headlessui/react';
-import React, { useRef, Fragment, useState } from 'react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { useGlobalContext } from '../context/context';
-import { ItemList, AddItem, FooterNewInvoice } from '../components';
-import { terms, formData } from '../data/data';
-import { Discard, SaveAsDraft, SaveAndSend } from '../components';
+import { Dialog, Transition, Listbox } from "@headlessui/react";
+import React, { useRef, Fragment, useState } from "react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { useGlobalContext } from "../context/context";
+import {
+  BillFrom,
+  BillTo,
+  CloseIcon,
+  InvoiceDate,
+  PaymentTerms,
+  ProjectDescription,
+  ItemsList,
+  NewFormFooter,
+  InvoiceInfo,
+} from "../components";
+import { terms, formData, errorData } from "../data/data";
 
 const NewInvoice = () => {
   const [selected, setSelected] = useState(terms[0]);
-  const [formInput, updateFormInput] = useState(formData);
+  const [error, updateError] = useState(errorData);
 
   const { isNewInvoiceOpen, closeNewInvoice } = useGlobalContext();
   const backdrop = useRef(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // if (!formInput.clientAddress.street) {
+    //   updateError((prev) => ({
+    //     ...prev,
+    //     error: true,
+    //     clientAddress: {
+    //       ...prev.clientAddress,
+    //       street: true,
+    //     },
+    //   }));
+    // }
+    // if (formInput.clientAddress.street) return;
+    // updateError((prev) => ({
+    //   ...prev,
+    //   error: true,
+    //   clientAddress: {
+    //     ...prev.clientAddress,
+    //     street: true,
+    //   },
+    // }));
+    // if (!formInput.clientAddress.city) {
+    //   updateError((prev) => ({
+    //     ...prev,
+    //     error: true,
+    //     clientAddress: {
+    //       ...prev.clientAddress,
+    //       city: true,
+    //     },
+    //   }));
+    // }
+    // console.log('submitted');
+  };
+
   return (
     <Transition appear show={isNewInvoiceOpen} as="div">
       <Dialog
@@ -31,12 +75,12 @@ const NewInvoice = () => {
         >
           <div
             onClick={closeNewInvoice}
-            className="fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(103px+715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70 "
+            className="fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(103px+715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70 ref={backdrop}"
           />
         </Transition.Child>
 
-        <div className="fixed inset-0 top-[72px] desktop:top-0 desktop:left-[103px] overflow-y-auto ref={backdrop}">
-          <div className=" bg-FFFF dark:bg-141625  min-h-screen tablet:w-[616px] desktop:w-[719px] tablet:rounded-tr-20px tablet:rounded-br-20px items-center justify-center ">
+        <div className="fixed inset-0 top-[72px] desktop:top-0 desktop:left-[103px] overflow-y-auto ">
+          <div className=" bg-FFFF dark:bg-141625  min-h-screen tablet:w-[616px] desktop:w-[719px] tablet:rounded-tr-20px tablet:rounded-br-20px items-center justify-center formContainer">
             <Transition.Child
               as="div"
               enter="ease-out duration-300"
@@ -52,30 +96,52 @@ const NewInvoice = () => {
                     New Invoice
                   </h2>
                   <button onClick={closeNewInvoice}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 cursor-pointer"
-                      viewBox="0 0 20 20"
-                      fill="#7C5DFA"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <CloseIcon />
                   </button>
                 </div>
-                <form action="" className="tablet:w-[504px]">
+
+                <form
+                  action=""
+                  noValidate
+                  onSubmit={handleSubmit}
+                  className="tablet:w-[504px]"
+                >
+                  <BillFrom />
+                  <BillTo />
+                  <InvoiceInfo />
+                  <ItemsList />
+                  <NewFormFooter />
+                </form>
+
+                {/* <form
+                  action=""
+                  noValidate
+                  onSubmit={handleSubmit}
+                  className="tablet:w-[504px]"
+                >
                   <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">
                     Bill from
                   </h4>
                   <div className="flex flex-col mb-6">
                     <label
                       htmlFor="StreetAddress"
-                      className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                      className={`text-body-1 pb-2 font-bold flex items-center justify-between
+                      ${
+                        error.clientAddress.street &&
+                        !formInput.clientAddress.street
+                          ? 'errorLabel'
+                          : 'text-7E88C3 dark:text-888EB0'
+                      }
+                      `}
                     >
                       Street Address
+                      {error.clientAddress.street && (
+                        <Error
+                          street={formInput.clientAddress.street}
+                          errorStreet={error.clientAddress.street}
+                          error={error.error}
+                        />
+                      )}
                     </label>
                     <input
                       type="text"
@@ -92,7 +158,14 @@ const NewInvoice = () => {
                       }
                       required
                       id="StreetAddress"
-                      className="border border-7E88C3 dark:border-252945 py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF"
+                      className={` py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF
+                      ${
+                        error.clientAddress.street &&
+                        !formInput.clientAddress.street
+                          ? 'error'
+                          : 'border border-7E88C3 dark:border-252945'
+                      }
+                      `}
                     />
                   </div>
 
@@ -100,9 +173,22 @@ const NewInvoice = () => {
                     <div className="flex flex-col w-[152px] ">
                       <label
                         htmlFor="city"
-                        className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                        className={`text-body-1 pb-2 font-bold flex items-center justify-between
+                      ${
+                        error.clientAddress.city &&
+                        !formInput.clientAddress.city
+                          ? 'errorLabel'
+                          : 'text-7E88C3 dark:text-888EB0'
+                      }
+                      `}
                       >
                         City
+                        {error.clientAddress.street && (
+                          <Error
+                            city={formInput.clientAddress.city}
+                            errorCity={error.clientAddress.city}
+                          />
+                        )}
                       </label>
                       <input
                         type="text"
@@ -118,16 +204,36 @@ const NewInvoice = () => {
                         }
                         required
                         id="city"
-                        className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
+                        className={`py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF
+                      ${
+                        error.clientAddress.city &&
+                        !formInput.clientAddress.city
+                          ? 'error'
+                          : 'border border-7E88C3 dark:border-252945'
+                      }
+                      `}
                       />
                     </div>
 
                     <div className="flex flex-col w-[152px]">
                       <label
                         htmlFor="postCode"
-                        className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+                        className={`text-body-1 pb-2 font-bold flex items-center justify-between
+                      ${
+                        error.clientAddress.postCode &&
+                        !formInput.clientAddress.postCode
+                          ? 'errorLabel'
+                          : 'text-7E88C3 dark:text-888EB0'
+                      }
+                      `}
                       >
                         Post Code
+                        {error.clientAddress.street && (
+                          <Error
+                            city={formInput.clientAddress.city}
+                            errorCity={error.clientAddress.city}
+                          />
+                        )}
                       </label>
                       <input
                         type="text"
@@ -582,7 +688,7 @@ const NewInvoice = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <ItemList /> */}
+
                   <AddItem />
                   <footer className="tablet:mt-12 flex items-center gap-x-2 h-91 tablet:h-fit tablet:pb-8 box-shadow-footer-invoice justify-center tablet:justify-start tablet:gap-x-32 w-full">
                     <div>
@@ -597,12 +703,40 @@ const NewInvoice = () => {
                       <button className="w-117 h-48 bg-373B53 rounded-3xl grid place-content-center text-body-1 text-DFE3FA font-bold">
                         Save As Draft
                       </button>
-                      <button className="w-112 h-48 bg-7C5DFA rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold">
-                        Save &amp; send
+                      <button
+                        type="submit"
+                        className={`w-112 h-48 rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold
+                        
+                        ${
+                          !formInput.clientAddress.street &&
+                          error.clientAddress.street
+                            ? 'border border-EC5757 bg-EC5757 ring ring-FFFF '
+                            : 'bg-7C5DFA'
+                        }
+                        `}
+                      >
+                        {!formInput.clientAddress.street &&
+                        error.clientAddress.street ? (
+                          <span className="flex gap-1 items-center">
+                            Error
+                            <svg
+                              width="24px"
+                              height="24px"
+                              viewBox="0 0 24 24"
+                              fill="#FFFF"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M11 7h2v7h-2zm0 8h2v2h-2z" />
+                              <path d="m21.707 7.293-5-5A.996.996 0 0 0 16 2H8a.996.996 0 0 0-.707.293l-5 5A.996.996 0 0 0 2 8v8c0 .266.105.52.293.707l5 5A.996.996 0 0 0 8 22h8c.266 0 .52-.105.707-.293l5-5A.996.996 0 0 0 22 16V8a.996.996 0 0 0-.293-.707zM20 15.586 15.586 20H8.414L4 15.586V8.414L8.414 4h7.172L20 8.414v7.172z" />
+                            </svg>
+                          </span>
+                        ) : (
+                          'Save & send'
+                        )}
                       </button>
                     </div>
                   </footer>
-                </form>
+                </form> */}
               </div>
             </Transition.Child>
           </div>

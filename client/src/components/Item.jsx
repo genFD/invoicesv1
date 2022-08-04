@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertPrice } from '../utils/convert';
+import { convertPrice } from '../utils/utils';
 
 const Item = ({ item }) => {
   return (

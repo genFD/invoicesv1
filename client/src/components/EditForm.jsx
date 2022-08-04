@@ -1,18 +1,61 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { Transition, Listbox } from '@headlessui/react';
-import { AddItem } from '../components';
+import { AddItem, Error } from '../components';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { useGlobalContext } from '../context/context';
-import { terms, formData } from '../data/data';
+import { terms, formData, alertData, errorData } from '../data/data';
 
 const EditForm = ({ invoice }) => {
   const [selected, setSelected] = useState(terms[0]);
   const [formInput, updateFormInput] = useState(formData);
-  console.log(formData.emptyFieldErrorMessage);
+  const [alert, updateAlert] = useState(alertData);
+  const [error, updateError] = useState(errorData);
 
   const populate = () => {
     updateFormInput({ ...invoice });
   };
+  const handleAlert = (show = false, type = '', message = '') => {
+    updateAlert({ show, type, message });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formInput.clientAddress.street) {
+      updateError((prev) => ({
+        ...prev,
+        clientAddress: {
+          ...prev.clientAddress,
+          street: true,
+        },
+      }));
+    }
+    if (!formInput.clientAddress.city) {
+      updateError((prev) => ({
+        ...prev,
+        clientAddress: {
+          ...prev.clientAddress,
+          city: true,
+        },
+      }));
+    }
+    console.log('submitted');
+    // if (title && description) {
+    //   updateErrorTitle(false);
+    //   updateErrorDescription(false);
+
+    //   const data = {
+    //     title,
+    //     description,
+    //     category,
+    //   };
+    //   await axios.post('/api/feedbacks', data);
+    //   fetchRequests();
+    //   handleAlert(true, 'success', 'Thanks for your feedback!');
+    //   updateTitle('');
+    //   updateDescription('');
+    // }
+  };
+  console.log(error.clientAddress.street);
   useEffect(() => {
     populate();
   }, []);
@@ -40,17 +83,29 @@ const EditForm = ({ invoice }) => {
           </svg>
         </button>
       </div>
-      <form action="" className="tablet:w-[504px]">
+      <form action="" className="tablet:w-[504px]" onSubmit={handleSubmit}>
         <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">Bill from</h4>
         <div className="flex flex-col mb-6">
           <label
             htmlFor="StreetAddress"
-            className="text-body-1 border text-7E88C3 dark:text-888EB0 pb-2 font-bold mb-1 flex items-center justify-between"
+            className={`text-body-1 border text-7E88C3 dark:text-888EB0 pb-2 font-bold mb-1 flex items-center justify-between
+            ${
+              error.clientAddress.street &&
+              !formInput.clientAddress.street &&
+              'errorLabel'
+            }
+            `}
           >
             Street Address
-            <span className="text-body-1 text-EC5757">
+            {error.clientAddress.street && (
+              <Error
+              // street={formInput.clientAddress.street}
+              // errorStreet={error.clientAddress.street}
+              />
+            )}
+            {/* <span className="hidden text-body-1 text-EC5757">
               {formData.emptyFieldErrorMessage}
-            </span>
+            </span> */}
           </label>
           <input
             type="text"
@@ -67,7 +122,11 @@ const EditForm = ({ invoice }) => {
             }
             required
             id="StreetAddress"
-            className="border border-7E88C3 dark:border-252945 py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF dark:bg-252945 focus:outline-none focus:border-9277FF dark:focus:border-9277FF caret-9277FF"
+            className={`border border-7E88C3 dark:border-252945 py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF dark:bg-252945 focus:outline-none focus:border-9277FF dark:focus:border-9277FF caret-9277FF ${
+              error.clientAddress.street &&
+              !formInput.clientAddress.street &&
+              'error'
+            }`}
           />
         </div>
 
@@ -75,9 +134,21 @@ const EditForm = ({ invoice }) => {
           <div className="flex flex-col w-[152px] ">
             <label
               htmlFor="city"
-              className="text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1"
+              className={`text-body-1 text-7E88C3 dark:text-888EB0 pb-2 text-sm font-bold text-gray-800 dark:text-gray-100 mb-1 flex items-center justify-between
+               ${
+                 error.clientAddress.city &&
+                 !formInput.clientAddress.city &&
+                 'errorLabel'
+               }
+              `}
             >
               City
+              {error.clientAddress.street && (
+                <Error
+                // city={formInput.clientAddress.city}
+                // errorCity={error.clientAddress.city}
+                />
+              )}
             </label>
             <input
               type="text"
@@ -94,7 +165,13 @@ const EditForm = ({ invoice }) => {
               }
               required
               id="city"
-              className="border border-7E88C3 dark:border-252945 px-3 py-4  rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF"
+              className={`border border-7E88C3 dark:border-252945 px-3 py-4 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none bg-transparent dark:bg-252945  focus:border-9277FF caret-9277FF
+              ${
+                error.clientAddress.city &&
+                !formInput.clientAddress.city &&
+                'error'
+              }
+              `}
             />
           </div>
 
@@ -548,9 +625,12 @@ const EditForm = ({ invoice }) => {
           >
             Cancel
           </div>
-          <div className="w-138 h-48 bg-7C5DFA rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold">
+          <button
+            type="submit"
+            className="w-138 h-48 bg-7C5DFA rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold"
+          >
             Save Changes
-          </div>
+          </button>
         </footer>
       </form>
     </div>

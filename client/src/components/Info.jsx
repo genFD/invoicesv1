@@ -1,6 +1,6 @@
 import React from 'react';
 import { Item, DeletePrompt } from '../components';
-import { convertPrice, convertTime } from '../utils/convert';
+import { convertPrice, convertTime } from '../utils/utils';
 import DeletePromptV2 from './DeletePromptV2';
 
 const Info = ({

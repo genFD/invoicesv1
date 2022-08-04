@@ -12,3 +12,10 @@ export const convertPrice = (price) => {
   }).format(price);
   // expected output: "123.456,79 €";
 };
+export function scrollTop() {
+  let formContainer = document.querySelector('formContainer');
+  formContainer.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+  });
+}

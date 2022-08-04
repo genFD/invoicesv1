@@ -33,7 +33,7 @@ body {
   min-width: 375px;
   display: flex;
   flex-direction: column;
-  font-family: 'Baloo 2', League Spartan, sans-serif;
+  font-family: "Baloo 2", League Spartan, sans-serif;
   transition: colors ease-in-out 0.5s;
   color: #fff;
 }
@@ -92,30 +92,30 @@ ul {
   }
 }
 
-input[type='date']::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
   opacity: 1;
-  background-image: url('../public/calendar.svg');
+  background-image: url("../public/calendar.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 25px;
   cursor: pointer;
 }
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   margin: 0;
 }
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   background: transparent;
-  background-image: url('../public/down-arrow-v2.svg');
+  background-image: url("../public/down-arrow-v2.svg");
   background-repeat: no-repeat;
   background-position-x: 95%;
   background-position-y: center;
@@ -152,7 +152,10 @@ select {
   border-radius: 0px 20px 20px 0px;
 }
 .error {
-  border: 2px solid #d73737;
+  border: 2px solid #ec5757;
+}
+.errorLabel {
+  color: #ec5757;
 }
 
 .alert-success {
@@ -162,4 +165,67 @@ select {
 .alert-error {
   color: #d73737;
   background: #f7bdbd;
+}
+input:invalid ~ span {
+  display: block;
+}
+.bill-from-input-container {
+  grid-template-areas:
+    "street street street"
+    "city postCode country";
+}
+.bill-to-input-container {
+  grid-template-areas:
+    "name name name"
+    "email email email"
+    "street street street"
+    "city postCode country";
+}
+.invoice-info-input-container {
+  grid-template-areas:
+    "date date term term"
+    "description description description description";
+}
+.itemsList-input-container {
+  grid-template-areas: "itemName itemName itemName quantity price price total total deleteIcon";
+}
+.date {
+  grid-area: date;
+}
+.term {
+  grid-area: term;
+}
+.description {
+  grid-area: description;
+}
+.name {
+  grid-area: name;
+}
+.email {
+  grid-area: email;
+}
+.street {
+  grid-area: street;
+}
+.city {
+  grid-area: city;
+}
+.postCode {
+  grid-area: postCode;
+}
+.country {
+  grid-area: country;
+}
+
+.itemName {
+  width: 214px;
+}
+.quantity {
+  width: 46px;
+}
+.price {
+  width: 100px;
+}
+.total {
+  width: 80px;
 }
