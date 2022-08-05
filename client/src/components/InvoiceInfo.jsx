@@ -26,7 +26,7 @@ const InvoiceInfo = () => {
     <section className="mt-10">
       <div className="flex flex-col mb-6">
         <div className="invoice-info-input-container grid grid-cols-4 grid-rows-2 gap-6">
-          {inputfields.map((field) => {
+          {/* {inputfields.map((field) => {
             return (
               <Input
                 key={field.id}
@@ -35,7 +35,7 @@ const InvoiceInfo = () => {
                 handleChange={handleChange}
               />
             );
-          })}
+          })} */}
           <Terms />
         </div>
       </div>

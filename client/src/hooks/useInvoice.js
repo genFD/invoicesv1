@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { httpGetInvoice } from '../api/requests';
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { httpGetInvoice } from "../api/requests";
 
 function useInvoice() {
-  const [invoice, updateInvoice] = useState([]);
+  const [invoice, updateInvoice] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -11,10 +11,10 @@ function useInvoice() {
     setLoading(true);
     const fetchedInvoice = await httpGetInvoice(id);
     if (fetchedInvoice) {
-      const { content } = fetchedInvoice[0];
-      updateInvoice(content);
+      // const { content } = fetchedInvoice[0];
+      updateInvoice(fetchedInvoice);
     } else {
-      updateInvoice([]);
+      updateInvoice({});
     }
     setLoading(false);
   }, []);

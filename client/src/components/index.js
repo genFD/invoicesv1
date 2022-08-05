@@ -16,7 +16,7 @@ import Card from "./Card";
 import Empty from "./Empty";
 import GoBack from "./GoBack";
 import Status from "./Status";
-import Detail from "./Detail";
+import Invoice from "./Invoice";
 import FooterInvoice from "./FooterInvoice";
 import Info from "./Info";
 import Edit from "./Edit";
@@ -97,7 +97,7 @@ export {
   Item,
   Info,
   FooterInvoice,
-  Detail,
+  Invoice,
   Status,
   GoBack,
   ArrowDown,

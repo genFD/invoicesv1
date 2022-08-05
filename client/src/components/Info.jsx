@@ -1,20 +1,21 @@
-import React from 'react';
-import { Item, DeletePrompt } from '../components';
-import { convertPrice, convertTime } from '../utils/utils';
-import DeletePromptV2 from './DeletePromptV2';
+import React from "react";
+import { Item } from "../components";
+import { convertPrice, convertTime } from "../utils/utils";
 
-const Info = ({
-  invoiceId,
-  items,
-  createdAt,
-  senderAddress,
-  paymentDue,
-  clientName,
-  clientAddress,
-  clientEmail,
-  description,
-  total,
-}) => {
+const Info = (props) => {
+  const { id } = props.invoice;
+  const {
+    description,
+    senderAddress,
+    createdAt,
+    paymentDue,
+    clientName,
+    clientAddress,
+    clientEmail,
+    items,
+    total,
+  } = props.invoice.content;
+
   return (
     <>
       <div className=" flex tablet:hidden justify-center">
@@ -25,7 +26,7 @@ const Info = ({
                 <div>
                   <span className="text-7E88C3">#</span>
                   <span className="font-bold text-0C0E16 dark:text-FFFF">
-                    {invoiceId}
+                    {id}
                   </span>
                 </div>
                 <span className="inline-block dark:text-DFE3FA">
@@ -127,7 +128,7 @@ const Info = ({
                 <div>
                   <span className="text-7E88C3">#</span>
                   <span className="font-bold text-0C0E16 dark:text-FFFF">
-                    {invoiceId}
+                    {id}
                   </span>
                 </div>
                 <span className="inline-block dark:text-DFE3FA">

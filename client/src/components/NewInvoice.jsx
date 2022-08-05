@@ -19,42 +19,43 @@ const NewInvoice = () => {
   const [selected, setSelected] = useState(terms[0]);
   const [error, updateError] = useState(errorData);
 
-  const { isNewInvoiceOpen, closeNewInvoice } = useGlobalContext();
+  const { isNewInvoiceOpen, closeNewInvoice, handleSubmit } =
+    useGlobalContext();
   const backdrop = useRef(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // if (!formInput.clientAddress.street) {
-    //   updateError((prev) => ({
-    //     ...prev,
-    //     error: true,
-    //     clientAddress: {
-    //       ...prev.clientAddress,
-    //       street: true,
-    //     },
-    //   }));
-    // }
-    // if (formInput.clientAddress.street) return;
-    // updateError((prev) => ({
-    //   ...prev,
-    //   error: true,
-    //   clientAddress: {
-    //     ...prev.clientAddress,
-    //     street: true,
-    //   },
-    // }));
-    // if (!formInput.clientAddress.city) {
-    //   updateError((prev) => ({
-    //     ...prev,
-    //     error: true,
-    //     clientAddress: {
-    //       ...prev.clientAddress,
-    //       city: true,
-    //     },
-    //   }));
-    // }
-    // console.log('submitted');
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!formInput.clientAddress.street) {
+  //     updateError((prev) => ({
+  //       ...prev,
+  //       error: true,
+  //       clientAddress: {
+  //         ...prev.clientAddress,
+  //         street: true,
+  //       },
+  //     }));
+  //   }
+  //   if (formInput.clientAddress.street) return;
+  //   updateError((prev) => ({
+  //     ...prev,
+  //     error: true,
+  //     clientAddress: {
+  //       ...prev.clientAddress,
+  //       street: true,
+  //     },
+  //   }));
+  //   if (!formInput.clientAddress.city) {
+  //     updateError((prev) => ({
+  //       ...prev,
+  //       error: true,
+  //       clientAddress: {
+  //         ...prev.clientAddress,
+  //         city: true,
+  //       },
+  //     }));
+  //   }
+  //   console.log('submitted');
+  // };
 
   return (
     <Transition appear show={isNewInvoiceOpen} as="div">

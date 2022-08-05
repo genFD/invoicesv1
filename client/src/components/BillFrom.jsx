@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "../components";
+
 import { useGlobalContext } from "../context/context";
+import { addDays } from "../utils/utils";
 
 const inputfields = [
   {
@@ -34,17 +36,39 @@ const inputfields = [
 ];
 
 const BillFrom = () => {
-  const { sender, updateSender } = useGlobalContext();
+  // const { sender, updateSender } = useGlobalContext();
+  const { test, setTest } = useGlobalContext();
+  // const [test, setTest] = useState({
+  //   date: "",
+  //   country: "",
+  // });
+  // const testdue = addDays(test.date, 1);
 
+  // console.log(sender);
   const handleChange = (e) => {
-    updateSender({ ...sender, [e.target.name]: e.target.value });
+    // updateSender({ ...sender, [e.target.name]: e.target.value });
+    // updateSender({ ...sender, [e.target.name]: e.target.value });
+    setTest({ ...test, [e.target.name]: e.target.value });
   };
-
   return (
-    <section>
+    <div>
       <h4 className="text-7C5DFA text-body-1 font-bold mb-6">Bill from</h4>
       <div className="bill-from-input-container grid grid-cols-3 grid-rows-2 gap-6">
-        {inputfields.map((field) => {
+        <input
+          className="text-0C0E16"
+          type="date"
+          name="date"
+          value={test.date}
+          onChange={handleChange}
+        />
+        <input
+          className="text-0C0E16"
+          type="text"
+          name="country"
+          value={test.country}
+          onChange={handleChange}
+        />
+        {/* {inputfields.map((field) => {
           return (
             <Input
               key={field.id}
@@ -53,9 +77,9 @@ const BillFrom = () => {
               handleChange={handleChange}
             />
           );
-        })}
+        })} */}
       </div>
-    </section>
+    </div>
   );
 };
 

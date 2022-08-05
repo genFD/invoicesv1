@@ -12,7 +12,7 @@ const Input = (props) => {
       <input
         onChange={handleChange}
         {...inputProps}
-        className="py-4 px-3 rounded text-body-1 text-0C0E16 font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF"
+        className="py-4 px-3 rounded text-body-1 text-FFFF font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF"
       />
     </div>
     // <div className="flex flex-col mb-6">
