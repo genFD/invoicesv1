@@ -52,7 +52,6 @@ const BillTo = () => {
   const handleChange = (e) => {
     updateClient({ ...client, [e.target.name]: e.target.value });
   };
-
   return (
     <section className="mt-10">
       <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">Bill to</h4>

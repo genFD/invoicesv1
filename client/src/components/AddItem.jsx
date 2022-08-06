@@ -1,8 +1,13 @@
-import React from 'react';
-
+import React from "react";
+import { useGlobalContext } from "../context/context";
 const AddItem = () => {
+  const { addItem } = useGlobalContext();
+
   return (
-    <button className="mt-12 tablet:mt-4 flex justify-center gap-x-1 items-center w-full text-7E88C3 text-body-1 text-center rounded-3xl h-12 bg-F9FAFE dark:bg-252945">
+    <div
+      onClick={addItem}
+      className="mt-12 tablet:mt-4 flex justify-center gap-x-1 items-center w-full text-7E88C3 text-body-1 text-center rounded-3xl h-12 bg-F9FAFE dark:bg-252945 cursor-pointer"
+    >
       <svg
         className="fill-7C5DFA  dark:fill-888EB0"
         width="11"
@@ -15,7 +20,7 @@ const AddItem = () => {
         />
       </svg>
       Add New Item
-    </button>
+    </div>
   );
 };
 

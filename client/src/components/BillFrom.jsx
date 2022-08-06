@@ -37,7 +37,7 @@ const inputfields = [
 
 const BillFrom = () => {
   // const { sender, updateSender } = useGlobalContext();
-  const { test, setTest } = useGlobalContext();
+  const { sender, updateSender } = useGlobalContext();
   // const [test, setTest] = useState({
   //   date: "",
   //   country: "",
@@ -48,27 +48,27 @@ const BillFrom = () => {
   const handleChange = (e) => {
     // updateSender({ ...sender, [e.target.name]: e.target.value });
     // updateSender({ ...sender, [e.target.name]: e.target.value });
-    setTest({ ...test, [e.target.name]: e.target.value });
+    updateSender({ ...sender, [e.target.name]: e.target.value });
   };
   return (
     <div>
       <h4 className="text-7C5DFA text-body-1 font-bold mb-6">Bill from</h4>
       <div className="bill-from-input-container grid grid-cols-3 grid-rows-2 gap-6">
-        <input
+        {/* <input
           className="text-0C0E16"
-          type="date"
-          name="date"
-          value={test.date}
+          type="text"
+          name="street"
+          value={sender.street}
           onChange={handleChange}
         />
         <input
           className="text-0C0E16"
           type="text"
-          name="country"
-          value={test.country}
+          name="city"
+          value={sender.city}
           onChange={handleChange}
-        />
-        {/* {inputfields.map((field) => {
+        /> */}
+        {inputfields.map((field) => {
           return (
             <Input
               key={field.id}
@@ -77,7 +77,7 @@ const BillFrom = () => {
               handleChange={handleChange}
             />
           );
-        })} */}
+        })}
       </div>
     </div>
   );

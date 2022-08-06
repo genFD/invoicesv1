@@ -9,11 +9,7 @@ const Input = (props) => {
       <label className="text-body-1 pb-2 font-bold flex items-center justify-between text-7E88C3 dark:text-888EB0">
         {label}
       </label>
-      <input
-        onChange={handleChange}
-        {...inputProps}
-        className="py-4 px-3 rounded text-body-1 text-FFFF font-bold dark:text-FFFF focus:outline-none dark:bg-252945  focus:border-9277FF caret-9277FF"
-      />
+      <input onChange={handleChange} name={name} {...inputProps} />
     </div>
     // <div className="flex flex-col mb-6">
     //   <label

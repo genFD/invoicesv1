@@ -23,3 +23,14 @@ export const format = (date) => {
   var y = date.getFullYear();
   return "" + y + "-" + (m <= 9 ? "0" + m : m) + "-" + (d <= 9 ? "0" + d : d);
 };
+export const getNum = (value) => {
+  return parseInt(value.slice(3, 6).replace(/\s/g, ""));
+};
+export const getId = () => {
+  let ID = "";
+  let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  for (var i = 0; i < 12; i++) {
+    ID += characters.charAt(Math.floor(Math.random() * 36));
+  }
+  return ID;
+};

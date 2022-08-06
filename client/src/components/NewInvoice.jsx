@@ -14,6 +14,70 @@ import {
   InvoiceInfo,
 } from "../components";
 import { terms, formData, errorData } from "../data/data";
+const backdroptransitionChildProps = {
+  as: "div",
+  enter: "ease-out duration-300",
+  enterFrom: "opacity-0",
+  enterTo: "opacity-100",
+  leave: "ease-in duration-200",
+  leaveFrom: "opacity-100",
+  leaveTo: "opacity-0",
+};
+const drawerTransitionProps = {
+  as: "div",
+  enter: "ease-out duration-300",
+  enterFrom: "opacity-0 scale-95",
+  enterTo: "opacity-100 scale-100",
+  leave: "ease-in duration-200",
+  leaveFrom: "opacity-100 scale-100",
+  leaveTo: "opacity-0 scale-95",
+};
+
+const backdropClasses = [
+  "fixed",
+  "desktop:z-10",
+  "inset-0",
+  "top-[72px]",
+  "desktop:top-0",
+  "desktop:left-[calc(103px+715px)]",
+  "bg-7C5DFA",
+  "bg-opacity-50",
+  "dark:bg-0C0E16",
+  "dark:bg-opacity-70",
+];
+const drawerContainerClasses = [
+  "fixed",
+  "inset-0",
+  "top-[72px]",
+  "desktop:top-0",
+  "desktop:left-[103px]",
+  "overflow-y-auto",
+];
+const titleClasses = [
+  "NewTitle",
+  "mt-6",
+  "tablet:w-[504px]",
+  "tablet:mt-14",
+  "tablet:mb-12",
+  "flex",
+  "items-center",
+  "justify-between",
+];
+const drawerClasses = [
+  "bg-FFFF",
+  "dark:bg-141625",
+  "min-h-screen",
+  "tablet:w-[616px]",
+  "desktop:w-[719px]",
+  "tablet:rounded-tr-20px",
+  "tablet:rounded-br-20px",
+  "items-center justify-center",
+  "formContainer",
+];
+let backdropstyles = backdropClasses.join(" ");
+let drawerContainerStyles = drawerContainerClasses.join(" ");
+let drawerStyles = drawerClasses.join(" ");
+let titleStyles = titleClasses.join(" ");
 
 const NewInvoice = () => {
   const [selected, setSelected] = useState(terms[0]);
@@ -65,34 +129,15 @@ const NewInvoice = () => {
         className="relative z-10"
         onClose={closeNewInvoice}
       >
-        <Transition.Child
-          as="div"
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div
-            onClick={closeNewInvoice}
-            className="fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(103px+715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70 ref={backdrop}"
-          />
+        <Transition.Child {...backdroptransitionChildProps}>
+          <div onClick={closeNewInvoice} className={backdropstyles} />
         </Transition.Child>
 
-        <div className="fixed inset-0 top-[72px] desktop:top-0 desktop:left-[103px] overflow-y-auto ">
-          <div className=" bg-FFFF dark:bg-141625  min-h-screen tablet:w-[616px] desktop:w-[719px] tablet:rounded-tr-20px tablet:rounded-br-20px items-center justify-center formContainer">
-            <Transition.Child
-              as="div"
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
+        <div className={drawerContainerStyles}>
+          <div className={drawerStyles}>
+            <Transition.Child {...drawerTransitionProps}>
               <div className="h-full flex flex-col items-center">
-                <div className="NewTitle mt-6 tablet:w-[504px] tablet:mt-14 tablet:mb-12 flex items-center justify-between">
+                <div className={titleStyles}>
                   <h2 className="text-0C0E16 dark:text-FFFF text-heading-2">
                     New Invoice
                   </h2>

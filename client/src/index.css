@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="url"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="time"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    @apply py-4 px-3 rounded text-body-1 text-FFFF font-bold dark:text-FFFF focus:outline-none dark:bg-252945 dark:border-252945  focus:dark:border-9277FF focus:dark:ring-9277FF caret-9277FF cursor-pointer;
+  }
+}
+
 /* ------------------- */
 /* Reset starts             */
 /* ------------------- */
@@ -111,7 +131,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-select {
+/* select {
   -webkit-appearance: none;
   -moz-appearance: none;
   background: transparent;
@@ -119,7 +139,7 @@ select {
   background-repeat: no-repeat;
   background-position-x: 95%;
   background-position-y: center;
-}
+} */
 
 /* navbar */
 
@@ -189,7 +209,7 @@ input:invalid ~ span {
 .itemsList-input-container {
   grid-template-areas: "itemName itemName itemName quantity price price total total deleteIcon";
 }
-.date {
+.createdAt {
   grid-area: date;
 }
 .term {

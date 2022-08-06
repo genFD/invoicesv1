@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, createContext } from "react";
 
 import { formData } from "../data/data";
-import { addDays, format } from "../utils/utils";
+import { addDays, format, getId } from "../utils/utils";
 
 const AppContext = createContext();
 
@@ -15,16 +15,12 @@ const AppProvider = ({ children }) => {
   /* Form State Variables */
   // const [client, updateClient] = useState(formData.client);
   const [client, updateClient] = useState({
-    where: {
-      city: "",
-      country: "",
-      postCode: "",
-      street: "",
-    },
-    who: {
-      email: "",
-      name: "",
-    },
+    city: "",
+    country: "",
+    postCode: "",
+    street: "",
+    email: "",
+    name: "",
   });
   // const [sender, updateSender] = useState(formData.sender);
   const [sender, updateSender] = useState({
@@ -36,22 +32,11 @@ const AppProvider = ({ children }) => {
   // const [items, updateItems] = useState(formData.items);
   const [items, updateItems] = useState([
     {
+      id: getId(),
       name: "",
       quantity: "",
       price: "",
-      total: 100,
-    },
-    {
-      name: "",
-      quantity: "",
-      price: "",
-      total: 200,
-    },
-    {
-      name: "",
-      quantity: "",
-      price: "",
-      total: 300,
+      total: "",
     },
   ]);
 
@@ -61,7 +46,7 @@ const AppProvider = ({ children }) => {
     description: "",
   });
   // const [paymentTerms, updatePaymentTerms] = useState(formData.paymentTerms);
-  const [paymentTerms, updatePaymentTerms] = useState(1);
+  const [paymentTerms, updatePaymentTerms] = useState("");
 
   // const [total, updateTotal] = useState(formData.total);
   const [total, updateTotal] = useState(556.0);
@@ -76,11 +61,10 @@ const AppProvider = ({ children }) => {
     return total;
   }, 0);
   // console.log(paymentDue);
-  console.log(totalItems);
-  console.log([...items]);
+  // console.log(totalItems);
+  // console.log([...items]);
 
-  const handleSaveAsDraft = async (e) => {};
-  const handleSaveAndSend = async (e) => {
+  const handleSaveAsDraft = async (e) => {
     const data = {
       ...invoiceInfo,
       paymentDue,
@@ -94,6 +78,7 @@ const AppProvider = ({ children }) => {
       },
       items: [...items],
       total: totalItems,
+      status: "draft",
     };
 
     // await axios.post("/api/feedbacks", data);
@@ -101,6 +86,76 @@ const AppProvider = ({ children }) => {
     // updateSender(formData.client);
     // updateInvoiceInfo(formData.invoiceInfo);
     // updateItems(formData.items);
+  };
+  const handleSaveAndSend = async (e) => {
+    const who = {
+      clientName: client.name,
+      clientEmail: client.email,
+    };
+    const where = {
+      street: client.street,
+      city: client.city,
+      country: client.country,
+      postCode: client.postCode,
+    };
+    const data = {
+      ...invoiceInfo,
+      paymentDue,
+      ...who,
+
+      senderAddress: {
+        ...sender,
+      },
+      clientAddress: {
+        ...where,
+      },
+      items: [...items],
+      total: totalItems,
+      status: "pending",
+    };
+
+    // await axios.post("/api/feedbacks", data);
+    // updateClient(formData.client);
+    // updateSender(formData.client);
+    // updateInvoiceInfo(formData.invoiceInfo);
+    // updateItems(formData.items);
+  };
+  const handleEditInvoice = async (e) => {
+    const data = {
+      ...invoiceInfo,
+      paymentDue,
+      ...client.who,
+
+      senderAddress: {
+        ...sender,
+      },
+      clientAddress: {
+        ...client.where,
+      },
+      items: [...items],
+      total: totalItems,
+      status: "draft",
+    };
+    // await axios.put(`/api/feedbacks/${id}`, data);
+  };
+  const handleDeleteInvoice = async () => {
+    // await axios.delete(`/api/feedbacks/${id}`);
+  };
+  const addItem = () => {
+    updateItems([
+      ...items,
+      {
+        id: getId(),
+        name: "",
+        quantity: "",
+        price: "",
+        total: "",
+      },
+    ]);
+  };
+  const deleteItem = (id) => {
+    const newListItems = items.filter((i) => i.id !== id);
+    updateItems(newListItems);
   };
 
   function closeModal() {
@@ -159,12 +214,16 @@ const AppProvider = ({ children }) => {
         updateClient,
         sender,
         updateSender,
-        // invoiceInfo,
-        // updateInvoiceInfo,
+        invoiceInfo,
+        updateInvoiceInfo,
         items,
         updateItems,
+        paymentTerms,
+        updatePaymentTerms,
         test,
         setTest,
+        addItem,
+        deleteItem,
       }}
     >
       {children}
