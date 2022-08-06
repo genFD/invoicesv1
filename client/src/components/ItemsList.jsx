@@ -6,7 +6,7 @@ import { useGlobalContext } from "../context/context";
 const inputfields = [
   {
     id: 1,
-    name: "itemName",
+    name: "name",
     type: "text",
     required: true,
     label: "Item Name",
@@ -35,30 +35,41 @@ const inputfields = [
 ];
 const ItemsList = () => {
   const { items, updateItems } = useGlobalContext();
-  const handleChange = (e) => {
-    e.preventDefault();
-    // console.log(e.target.value);
-    // updateItems([...items, { [e.target.name]: e.target.value }]);
+  const handleChange = (index) => (e) => {
+    const newItems = items.map((item, i) => {
+      if (index === i) {
+        return { ...item, [e.target.name]: e.target.value };
+      } else {
+        return item;
+      }
+    });
+    updateItems(newItems);
   };
+
   return (
     <div className="flex flex-col">
       <div className="mt-6 tablet:flex tablet:flex-col tablet:gap-y-4">
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className={`${item.name} tablet:flex tablet:gap-x-4`}
-          >
-            {inputfields.map((field) => (
-              <Input
-                key={field.id}
-                {...field}
-                value={item[field.name]}
-                handleChange={handleChange}
-              />
-            ))}
-            <Trash id={item.id} />
-          </div>
-        ))}
+        {items.map((item, i) => {
+          return (
+            <div
+              key={item.id}
+              className={`${item.name} tablet:flex tablet:gap-x-4`}
+            >
+              {inputfields.map((field) => {
+                // console.log(item[field.name]);
+                return (
+                  <Input
+                    key={field.id}
+                    {...field}
+                    value={item[field.name]}
+                    handleChange={handleChange(i)}
+                  />
+                );
+              })}
+              <Trash id={item.id} />
+            </div>
+          );
+        })}
         <AddItem />
       </div>
     </div>
