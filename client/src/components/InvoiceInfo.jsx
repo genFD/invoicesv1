@@ -18,10 +18,8 @@ const inputfields = [
   },
 ];
 const InvoiceInfo = () => {
-  const { invoiceInfo, updateInvoiceInfo } = useGlobalContext();
-  const handleChange = (e) => {
-    updateInvoiceInfo({ ...invoiceInfo, [e.target.name]: e.target.value });
-  };
+  const { invoiceInfo, handleChange } = useGlobalContext();
+
   return (
     <section className="mt-10">
       <div className="flex flex-col mb-6">
@@ -32,7 +30,7 @@ const InvoiceInfo = () => {
                 key={field.id}
                 {...field}
                 value={invoiceInfo[field.name]}
-                handleChange={handleChange}
+                handleChange={(e) => handleChange(e, "invoiceInfo")}
               />
             );
           })}

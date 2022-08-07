@@ -31,17 +31,21 @@ const selectClasses = [
 const labelStyles = labelClasses.join(" ");
 const selectedStyles = selectClasses.join(" ");
 const Terms = () => {
-  const { updatePaymentTerms } = useGlobalContext();
-  const handleChange = (e) => {
-    updatePaymentTerms(getNum(e.target.value));
-  };
+  const { updatePaymentTerms, handleChange } = useGlobalContext();
+  // const handleChange = (e) => {
+  //   updatePaymentTerms(getNum(e.target.value));
+  // };
   return (
     <div className="term">
       <label htmlFor="paymentTerms" className={labelStyles}>
         Payment Terms
       </label>
       <div className="mt-1">
-        <select onChange={handleChange} className={selectedStyles}>
+        <select
+          name="paymentTerms"
+          onChange={(e) => handleChange(e, "invoiceInfo")}
+          className={selectedStyles}
+        >
           {terms.map((term, i) => {
             return (
               <option value={term} key={i}>

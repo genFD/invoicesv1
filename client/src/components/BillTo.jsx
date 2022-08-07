@@ -48,10 +48,8 @@ const inputfields = [
 ];
 
 const BillTo = () => {
-  const { client, updateClient } = useGlobalContext();
-  const handleChange = (e) => {
-    updateClient({ ...client, [e.target.name]: e.target.value });
-  };
+  const { client, handleChange } = useGlobalContext();
+
   return (
     <section className="mt-10">
       <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">Bill to</h4>
@@ -62,7 +60,7 @@ const BillTo = () => {
               key={field.id}
               {...field}
               value={client[field.name]}
-              handleChange={handleChange}
+              handleChange={(e) => handleChange(e, "client")}
             />
           );
         })}

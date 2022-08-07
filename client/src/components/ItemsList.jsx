@@ -56,7 +56,6 @@ const ItemsList = () => {
               className={`${item.name} tablet:flex tablet:gap-x-4`}
             >
               {inputfields.map((field) => {
-                // console.log(item[field.name]);
                 return (
                   <Input
                     key={field.id}
@@ -66,6 +65,7 @@ const ItemsList = () => {
                   />
                 );
               })}
+
               <Trash id={item.id} />
             </div>
           );

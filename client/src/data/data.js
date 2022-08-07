@@ -1,16 +1,14 @@
+import { getId, getNum } from "../utils/utils";
+
 export const terms = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
 export const formData = {
   client: {
-    where: {
-      city: "",
-      country: "",
-      postCode: "",
-      street: "",
-    },
-    who: {
-      email: "",
-      name: "",
-    },
+    city: "",
+    country: "",
+    postCode: "",
+    street: "",
+    email: "",
+    name: "",
   },
 
   sender: {
@@ -19,22 +17,24 @@ export const formData = {
     postCode: "",
     street: "",
   },
-  items: [
-    {
-      name: "",
-      price: "",
-      quantity: "",
-      total: "",
-    },
-  ],
+
   invoiceInfo: {
     createdAt: "",
     description: "",
+    paymentTerms: 1,
   },
-  paymentTerms: 1,
   paymentDue: "",
   total: "",
 };
+export const itemsData = [
+  {
+    id: getId(),
+    name: "",
+    price: "",
+    quantity: "",
+    total: "",
+  },
+];
 export const formValues = {
   createdAt: "",
   paymentDue: "",

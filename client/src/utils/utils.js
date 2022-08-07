@@ -26,6 +26,9 @@ export const format = (date) => {
 export const getNum = (value) => {
   return parseInt(value.slice(3, 6).replace(/\s/g, ""));
 };
+export const convNum = (value) => {
+  return parseInt(value);
+};
 export const getId = () => {
   let ID = "";
   let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

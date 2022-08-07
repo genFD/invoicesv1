@@ -1,7 +1,13 @@
-import React, { useState, useContext, useEffect, createContext } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  createContext,
+  useReducer,
+} from "react";
 
-import { formData } from "../data/data";
-import { addDays, format, getId } from "../utils/utils";
+import { formData, itemsData } from "../data/data";
+import { addDays, format, getId, convNum, getNum } from "../utils/utils";
 
 const AppContext = createContext();
 
@@ -13,150 +19,127 @@ const AppProvider = ({ children }) => {
   const [isEditInvoiceOpen, setIsEditInvoiceOpen] = useState(false);
 
   /* Form State Variables */
-  // const [client, updateClient] = useState(formData.client);
-  const [client, updateClient] = useState({
-    city: "",
-    country: "",
-    postCode: "",
-    street: "",
-    email: "",
-    name: "",
-  });
-  // const [sender, updateSender] = useState(formData.sender);
-  const [sender, updateSender] = useState({
-    city: "",
-    country: "",
-    postCode: "",
-    street: "",
-  });
-  // const [items, updateItems] = useState(formData.items);
-  const [items, updateItems] = useState([
-    {
-      id: getId(),
-      name: "",
-      quantity: "",
-      price: "",
-      total: "",
-    },
-  ]);
+  const [form, updateForm] = useState(formData);
+  const [items, updateItems] = useState(itemsData);
 
-  // const [invoiceInfo, updateInvoiceInfo] = useState(formData.invoiceInfo);
-  const [invoiceInfo, updateInvoiceInfo] = useState({
-    createdAt: "",
-    description: "",
-  });
-  // const [paymentTerms, updatePaymentTerms] = useState(formData.paymentTerms);
-  const [paymentTerms, updatePaymentTerms] = useState("");
-
-  // const [total, updateTotal] = useState(formData.total);
-  const [total, updateTotal] = useState(556.0);
-  const [test, setTest] = useState({
-    date: "",
-    country: "",
-  });
-
-  const paymentDue = `"${format(addDays(`"${test.date}"`, paymentTerms))}"`;
+  /*  */
+  const paymentDue = `"${format(
+    addDays(`"${form.invoiceInfo.createdAt}"`, form.paymentTerms)
+  )}"`;
   const totalItems = items.reduce((total, item) => {
-    total += item.total;
+    total += convNum(item.total);
     return total;
   }, 0);
-  // console.log(paymentDue);
-  // console.log(totalItems);
-  // console.log([...items]);
 
-  const handleSaveAsDraft = async (e) => {
-    const data = {
-      ...invoiceInfo,
-      paymentDue,
-      ...client.who,
+  // const handleSaveAsDraft = async (e) => {
+  //   const data = {
+  //     ...invoiceInfo,
+  //     paymentDue,
+  //     ...client.who,
 
-      senderAddress: {
-        ...sender,
-      },
-      clientAddress: {
-        ...client.where,
-      },
-      items: [...items],
-      total: totalItems,
-      status: "draft",
-    };
+  //     senderAddress: {
+  //       // ...sender,
+  //     },
+  //     clientAddress: {
+  //       ...client.where,
+  //     },
+  //     items: [...items],
+  //     total: totalItems,
+  //     status: "draft",
+  //   };
 
-    // await axios.post("/api/feedbacks", data);
-    // updateClient(formData.client);
-    // updateSender(formData.client);
-    // updateInvoiceInfo(formData.invoiceInfo);
-    // updateItems(formData.items);
-  };
-  const handleSaveAndSend = async (e) => {
-    const who = {
-      clientName: client.name,
-      clientEmail: client.email,
-    };
-    const where = {
-      street: client.street,
-      city: client.city,
-      country: client.country,
-      postCode: client.postCode,
-    };
-    const data = {
-      ...invoiceInfo,
-      paymentDue,
-      ...who,
+  //   // await axios.post("/api/feedbacks", data);
+  //   // updateClient(formData.client);
+  //   // updateSender(formData.client);
+  //   // updateInvoiceInfo(formData.invoiceInfo);
+  //   // updateItems(formData.items);
+  // };
 
-      senderAddress: {
-        ...sender,
-      },
-      clientAddress: {
-        ...where,
-      },
-      items: [...items],
-      total: totalItems,
-      status: "pending",
-    };
+  // const handleSaveAndSend = async (e) => {
+  //   const who = {
+  //     clientName: client.name,
+  //     clientEmail: client.email,
+  //   };
+  //   const where = {
+  //     street: client.street,
+  //     city: client.city,
+  //     country: client.country,
+  //     postCode: client.postCode,
+  //   };
+  //   const data = {
+  //     ...invoiceInfo,
+  //     paymentDue,
+  //     ...who,
 
-    // await axios.post("/api/feedbacks", data);
-    // updateClient(formData.client);
-    // updateSender(formData.client);
-    // updateInvoiceInfo(formData.invoiceInfo);
-    // updateItems(formData.items);
-  };
-  const handleEditInvoice = async (e) => {
-    const data = {
-      ...invoiceInfo,
-      paymentDue,
-      ...client.who,
+  //     senderAddress: {
+  //       // ...sender,
+  //     },
+  //     clientAddress: {
+  //       ...where,
+  //     },
+  //     items: [...items],
+  //     total: totalItems,
+  //     status: "pending",
+  // paymentTerms: getNum(form.paymentTerms),
+  //   };
 
-      senderAddress: {
-        ...sender,
-      },
-      clientAddress: {
-        ...client.where,
-      },
-      items: [...items],
-      total: totalItems,
-      status: "draft",
-    };
-    // await axios.put(`/api/feedbacks/${id}`, data);
-  };
-  const handleDeleteInvoice = async () => {
-    // await axios.delete(`/api/feedbacks/${id}`);
-  };
+  //   // await axios.post("/api/feedbacks", data);
+  //   // updateClient(formData.client);
+  //   // updateSender(formData.client);
+  //   // updateInvoiceInfo(formData.invoiceInfo);
+  //   // updateItems(formData.items);
+  // };
+  // const handleChange = (e) => {
+  //   dispatch({
+  //     type: "HANDLE_INPUT",
+  //     field: e.target.name,
+  //     payload: e.target.value,
+  //   });
+  // };
+  // const handleEditInvoice = async (e) => {
+  //   const data = {
+  //     ...invoiceInfo,
+  //     paymentDue,
+  //     ...client.who,
+
+  //     senderAddress: {
+  //       // ...sender,
+  //     },
+  //     clientAddress: {
+  //       ...client.where,
+  //     },
+  //     items: [...items],
+  //     total: totalItems,
+  //     status: "draft",
+  //   };
+  //   // await axios.put(`/api/feedbacks/${id}`, data);
+  // };
+  // const handleDeleteInvoice = async () => {
+  //   // await axios.delete(`/api/feedbacks/${id}`);
+  // };
+
   const addItem = () => {
     updateItems([
       ...items,
       {
         id: getId(),
         name: "",
-        quantity: "",
-        price: "",
-        total: "",
+        quantity: 0,
+        price: 0,
+        total: 0,
       },
     ]);
   };
+
   const deleteItem = (id) => {
     const newListItems = items.filter((i) => i.id !== id);
     updateItems(newListItems);
   };
+
+  // console.log(typeof items[0].price);
+  // console.log(typeof items[0].quantity);
+  // console.log(typeof items[0].total);
+  // console.log(typeof paymentTerms);
 
   function closeModal() {
     setIsModalOpen(false);
@@ -194,10 +177,17 @@ const AppProvider = ({ children }) => {
       });
   }, []);
 
+  const handleChange = (e, key) => {
+    updateForm({
+      ...form,
+      [key]: { ...form[key], [e.target.name]: e.target.value },
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
-        handleSaveAndSend,
+        handleChange,
         isModalOpen,
         setIsModalOpen,
         closeModal,
@@ -210,18 +200,10 @@ const AppProvider = ({ children }) => {
         isEditInvoiceOpen,
         isList,
         setIsList,
-        client,
-        updateClient,
-        sender,
-        updateSender,
-        invoiceInfo,
-        updateInvoiceInfo,
+        ...form,
+        updateForm,
         items,
         updateItems,
-        paymentTerms,
-        updatePaymentTerms,
-        test,
-        setTest,
         addItem,
         deleteItem,
       }}
