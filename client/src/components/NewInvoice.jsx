@@ -12,8 +12,10 @@ import {
   ItemsList,
   NewFormFooter,
   InvoiceInfo,
+  ClientInfo,
 } from "../components";
 import { terms, formData, errorData } from "../data/data";
+
 const backdroptransitionChildProps = {
   as: "div",
   enter: "ease-out duration-300",
@@ -148,7 +150,7 @@ const NewInvoice = () => {
 
                 <form
                   action=""
-                  noValidate
+                  // noValidate
                   onSubmit={handleSubmit}
                   className="tablet:w-[504px]"
                 >

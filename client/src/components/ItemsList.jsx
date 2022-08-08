@@ -51,10 +51,7 @@ const ItemsList = () => {
       <div className="mt-6 tablet:flex tablet:flex-col tablet:gap-y-4">
         {items.map((item, i) => {
           return (
-            <div
-              key={item.id}
-              className={`${item.name} tablet:flex tablet:gap-x-4`}
-            >
+            <div key={i} className={`${item.name} tablet:flex tablet:gap-x-4`}>
               {inputfields.map((field) => {
                 return (
                   <Input

@@ -2,16 +2,18 @@ import { getId, getNum } from "../utils/utils";
 
 export const terms = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
 export const formData = {
-  client: {
+  clientAddress: {
     city: "",
     country: "",
     postCode: "",
     street: "",
+  },
+  clientInfo: {
     email: "",
     name: "",
   },
 
-  sender: {
+  senderAddress: {
     city: "",
     country: "",
     postCode: "",
@@ -21,7 +23,7 @@ export const formData = {
   invoiceInfo: {
     createdAt: "",
     description: "",
-    paymentTerms: 1,
+    paymentTerms: "Net 1 day",
   },
   paymentDue: "",
   total: "",

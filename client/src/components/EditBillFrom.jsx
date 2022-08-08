@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Input } from "../components";
-
 import { useGlobalContext } from "../context/context";
-import { addDays } from "../utils/utils";
+import Tester from "./Tester";
 
 const inputfields = [
   {
@@ -11,7 +10,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Street Address",
-    errorMessage: "can't be empty",
+    // errorMessage: "can't be empty",
   },
   {
     id: 2,
@@ -19,7 +18,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "City",
-    errorMessage: "can't be empty",
+    // errorMessage: "can't be empty",
   },
   {
     id: 3,
@@ -27,7 +26,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Post Code",
-    errorMessage: "can't be empty",
+    // errorMessage: "can't be empty",
   },
   {
     id: 4,
@@ -35,12 +34,13 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Country",
-    errorMessage: "can't be empty",
+    // errorMessage: "can't be empty",
   },
 ];
-
-const BillFrom = () => {
+// const functionCounter = new Set();
+const EditBillFrom = () => {
   const { senderAddress, handleChange } = useGlobalContext();
+  console.log(senderAddress);
 
   return (
     <div>
@@ -50,7 +50,6 @@ const BillFrom = () => {
           return (
             <Input
               key={field.id}
-              errorMessage={field.errorMessage}
               {...field}
               value={senderAddress[field.name]}
               handleChange={(e) => handleChange(e, "senderAddress")}
@@ -62,4 +61,4 @@ const BillFrom = () => {
   );
 };
 
-export default BillFrom;
+export default EditBillFrom;

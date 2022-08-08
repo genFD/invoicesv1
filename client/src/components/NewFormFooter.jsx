@@ -2,7 +2,7 @@ import React from "react";
 import { useGlobalContext } from "../context/context";
 
 const NewFormFooter = () => {
-  const { closeNewInvoice } = useGlobalContext();
+  const { closeNewInvoice, handleSaveAndSend } = useGlobalContext();
 
   return (
     <footer className="tablet:mt-12 flex items-center gap-x-2 h-91 tablet:h-fit tablet:pb-8 box-shadow-footer-invoice justify-center tablet:justify-start tablet:gap-x-32 w-full">
@@ -19,6 +19,7 @@ const NewFormFooter = () => {
           Save As Draft
         </button>
         <button
+          onClick={handleSaveAndSend}
           type="submit"
           className={`w-112 h-48 bg-7C5DFA rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold `}
         >

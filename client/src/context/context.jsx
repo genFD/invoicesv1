@@ -3,7 +3,7 @@ import React, {
   useContext,
   useEffect,
   createContext,
-  useReducer,
+  useCallback,
 } from "react";
 
 import { formData, itemsData } from "../data/data";
@@ -23,14 +23,38 @@ const AppProvider = ({ children }) => {
   const [items, updateItems] = useState(itemsData);
 
   /*  */
-  const paymentDue = `"${format(
-    addDays(`"${form.invoiceInfo.createdAt}"`, form.paymentTerms)
-  )}"`;
+  // const paymentDue = `${format(
+  //   addDays(
+  //     `"${form.invoiceInfo.createdAt}"`,
+  //     getNum(form.invoiceInfo.paymentTerms)
+  //   )
+  // )}`;
+
   const totalItems = items.reduce((total, item) => {
     total += convNum(item.total);
     return total;
   }, 0);
 
+  const handleChange = (e, key) => {
+    updateForm({
+      ...form,
+      [key]: { ...form[key], [e.target.name]: e.target.value },
+    });
+  };
+
+  const populateClientInfo = (invoice) => {
+    updateForm({
+      ...form,
+      clientInfo: {
+        name: invoice[0].content.clientName,
+        email: invoice[0].content.clientEmail,
+      },
+    });
+  };
+
+  const populate = (invoice, formkey, invoiceKey) => {
+    updateForm({ ...form, [formkey]: invoice[0].content[invoiceKey] });
+  };
   // const handleSaveAsDraft = async (e) => {
   //   const data = {
   //     ...invoiceInfo,
@@ -55,47 +79,43 @@ const AppProvider = ({ children }) => {
   //   // updateItems(formData.items);
   // };
 
-  // const handleSaveAndSend = async (e) => {
-  //   const who = {
-  //     clientName: client.name,
-  //     clientEmail: client.email,
-  //   };
-  //   const where = {
-  //     street: client.street,
-  //     city: client.city,
-  //     country: client.country,
-  //     postCode: client.postCode,
-  //   };
-  //   const data = {
-  //     ...invoiceInfo,
-  //     paymentDue,
-  //     ...who,
+  const handleSaveAndSend = async (e) => {
+    e.preventDefault();
+    const who = {
+      clientName: form.client.name,
+      clientEmail: form.client.email,
+    };
+    const where = {
+      street: form.client.street,
+      city: form.client.city,
+      country: form.client.country,
+      postCode: form.client.postCode,
+    };
+    const { paymentTerms, createdAt, description } = form.invoiceInfo;
 
-  //     senderAddress: {
-  //       // ...sender,
-  //     },
-  //     clientAddress: {
-  //       ...where,
-  //     },
-  //     items: [...items],
-  //     total: totalItems,
-  //     status: "pending",
-  // paymentTerms: getNum(form.paymentTerms),
-  //   };
+    const data = {
+      createdAt,
+      description,
+      paymentTerms: getNum(paymentTerms),
+      // paymentDue,
+      ...who,
 
-  //   // await axios.post("/api/feedbacks", data);
-  //   // updateClient(formData.client);
-  //   // updateSender(formData.client);
-  //   // updateInvoiceInfo(formData.invoiceInfo);
-  //   // updateItems(formData.items);
-  // };
-  // const handleChange = (e) => {
-  //   dispatch({
-  //     type: "HANDLE_INPUT",
-  //     field: e.target.name,
-  //     payload: e.target.value,
-  //   });
-  // };
+      senderAddress: {
+        ...form.sender,
+      },
+      clientAddress: {
+        ...where,
+      },
+      items: [...items],
+      total: totalItems,
+      status: "pending",
+    };
+
+    console.log(data);
+
+    // await axios.post("/api/feedbacks", data);
+  };
+
   // const handleEditInvoice = async (e) => {
   //   const data = {
   //     ...invoiceInfo,
@@ -114,9 +134,10 @@ const AppProvider = ({ children }) => {
   //   };
   //   // await axios.put(`/api/feedbacks/${id}`, data);
   // };
-  // const handleDeleteInvoice = async () => {
-  //   // await axios.delete(`/api/feedbacks/${id}`);
-  // };
+
+  const handleDeleteInvoice = async () => {
+    // await axios.delete(`/api/feedbacks/${id}`);
+  };
 
   const addItem = () => {
     updateItems([
@@ -177,17 +198,15 @@ const AppProvider = ({ children }) => {
       });
   }, []);
 
-  const handleChange = (e, key) => {
-    updateForm({
-      ...form,
-      [key]: { ...form[key], [e.target.name]: e.target.value },
-    });
-  };
-
   return (
     <AppContext.Provider
       value={{
+        populate,
+        populateClientInfo,
+        form,
+        updateForm,
         handleChange,
+        handleSaveAndSend,
         isModalOpen,
         setIsModalOpen,
         closeModal,
@@ -201,7 +220,6 @@ const AppProvider = ({ children }) => {
         isList,
         setIsList,
         ...form,
-        updateForm,
         items,
         updateItems,
         addItem,

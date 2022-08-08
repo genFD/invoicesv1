@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import { Error } from "../components";
 
 const Input = (props) => {
-  const { label, handleChange, name, ...inputProps } = props;
-
+  const [focused, setFocused] = useState(false);
+  const { label, errorMessage, handleChange, pattern, name, ...inputProps } =
+    props;
+  const handleFocus = (e) => {
+    setFocused(true);
+  };
   return (
     <div className={`text-141625 flex flex-col ${name}`}>
       <label className="text-body-1 pb-2 font-bold flex items-center justify-between text-7E88C3 dark:text-888EB0">
         {label}
       </label>
-      <input onChange={handleChange} name={name} {...inputProps} />
+      <input
+        className="main-input"
+        onChange={handleChange}
+        name={name}
+        {...inputProps}
+      />
     </div>
     // <div className="flex flex-col mb-6">
     //   <label

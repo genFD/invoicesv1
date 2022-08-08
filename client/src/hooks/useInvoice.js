@@ -23,7 +23,7 @@ function useInvoice() {
     getInvoice(id);
   }, [getInvoice, id]);
 
-  return { invoice, loading };
+  return { invoice, loading, id };
 }
 
 export default useInvoice;

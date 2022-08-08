@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Input } from "../components";
-
+import React, { useEffect } from "react";
+import { Input, EditClientInfo } from "../components";
 import { useGlobalContext } from "../context/context";
-import { addDays } from "../utils/utils";
 
 const inputfields = [
   {
@@ -39,27 +37,27 @@ const inputfields = [
   },
 ];
 
-const BillFrom = () => {
-  const { senderAddress, handleChange } = useGlobalContext();
+const EditBillTo = () => {
+  const { clientAddress, handleChange } = useGlobalContext();
 
   return (
-    <div>
-      <h4 className="text-7C5DFA text-body-1 font-bold mb-6">Bill from</h4>
-      <div className="bill-from-input-container grid grid-cols-3 grid-rows-2 gap-6">
+    <section className="mt-10">
+      <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">Bill to</h4>
+      <div className="bill-to-input-container grid grid-cols-3 grid-rows-4 gap-6">
+        <EditClientInfo />
         {inputfields.map((field) => {
           return (
             <Input
               key={field.id}
-              errorMessage={field.errorMessage}
               {...field}
-              value={senderAddress[field.name]}
-              handleChange={(e) => handleChange(e, "senderAddress")}
+              value={clientAddress[field.name]}
+              handleChange={(e) => handleChange(e, "clientAddress")}
             />
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 
-export default BillFrom;
+export default EditBillTo;

@@ -24,7 +24,7 @@ import Delete from "./Delete";
 import MarkAsPaid from "./MarkAsPaid";
 import Item from "./Item";
 import EditTitle from "./EditTitle";
-import ItemList from "./ItemList";
+
 import AddItem from "./AddItem";
 import FooterNewInvoice from "./FooterNewInvoice";
 import NewForm from "./Form";
@@ -56,9 +56,17 @@ import ItemsList from "./ItemsList";
 import InvoiceInfo from "./InvoiceInfo";
 import Terms from "./Terms";
 import Trash from "./Trash";
+import ClientInfo from "./ClientInfo";
+import EditClientInfo from "./EditClientInfo";
+import EditBillTo from "./EditBillTo";
+import EditBillFrom from "./EditBillFrom";
 
 export {
   NewInvoice,
+  EditClientInfo,
+  EditBillFrom,
+  EditBillTo,
+  ClientInfo,
   Trash,
   Terms,
   InvoiceInfo,
@@ -90,7 +98,6 @@ export {
   FooterNewInvoice,
   EditTitle,
   AddItem,
-  ItemList,
   Delete,
   MarkAsPaid,
   Edit,

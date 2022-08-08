@@ -177,7 +177,9 @@ input[type="number"] {
 .errorLabel {
   color: #ec5757;
 }
-
+input:invalid[focused="true"] ~ span {
+  display: block;
+}
 .alert-success {
   color: #155724;
   background: #d4edda;
@@ -186,9 +188,7 @@ input[type="number"] {
   color: #d73737;
   background: #f7bdbd;
 }
-input:invalid ~ span {
-  display: block;
-}
+
 .bill-from-input-container {
   grid-template-areas:
     "street street street"
