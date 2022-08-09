@@ -1,5 +1,5 @@
 import { Dialog, Transition, Listbox } from "@headlessui/react";
-import React, { useRef, Fragment, useState } from "react";
+import React, { useRef, Fragment, useState, useEffect } from "react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useGlobalContext } from "../context/context";
 import {
@@ -85,44 +85,19 @@ const NewInvoice = () => {
   const [selected, setSelected] = useState(terms[0]);
   const [error, updateError] = useState(errorData);
 
-  const { isNewInvoiceOpen, closeNewInvoice, handleSubmit } =
-    useGlobalContext();
+  const {
+    isNewInvoiceOpen,
+    closeNewInvoice,
+    handleSubmit,
+    resetForm,
+    resetItems,
+  } = useGlobalContext();
   const backdrop = useRef(null);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!formInput.clientAddress.street) {
-  //     updateError((prev) => ({
-  //       ...prev,
-  //       error: true,
-  //       clientAddress: {
-  //         ...prev.clientAddress,
-  //         street: true,
-  //       },
-  //     }));
-  //   }
-  //   if (formInput.clientAddress.street) return;
-  //   updateError((prev) => ({
-  //     ...prev,
-  //     error: true,
-  //     clientAddress: {
-  //       ...prev.clientAddress,
-  //       street: true,
-  //     },
-  //   }));
-  //   if (!formInput.clientAddress.city) {
-  //     updateError((prev) => ({
-  //       ...prev,
-  //       error: true,
-  //       clientAddress: {
-  //         ...prev.clientAddress,
-  //         city: true,
-  //       },
-  //     }));
-  //   }
-  //   console.log('submitted');
-  // };
-
+  useEffect(() => {
+    resetForm();
+    resetItems();
+  });
   return (
     <Transition appear show={isNewInvoiceOpen} as="div">
       <Dialog

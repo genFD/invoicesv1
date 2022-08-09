@@ -30,6 +30,13 @@ const AppProvider = ({ children }) => {
   //   )
   // )}`;
 
+  const resetForm = () => {
+    updateForm(formData);
+  };
+  const resetItems = () => {
+    updateItems(itemsData);
+  };
+
   const totalItems = items.reduce((total, item) => {
     total += convNum(item.total);
     return total;
@@ -202,6 +209,8 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         populate,
+        resetForm,
+        resetItems,
         populateClientInfo,
         form,
         updateForm,
