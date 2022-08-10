@@ -5,19 +5,16 @@ import {
   InvoiceInfo,
   ItemsList,
   NewFormFooter,
+  EditFormFooter,
 } from "../components";
 import { getId } from "../utils/utils";
 
 import { useGlobalContext } from "../context/context";
 
 const EditForm = ({ invoice }) => {
-  const {
-    closeEditInvoice,
-    updateForm,
-    updateItems,
-    items,
-    handleSaveAndSend,
-  } = useGlobalContext();
+  const { closeEditInvoice, updateForm, form, updateItems, handleSaveChanges } =
+    useGlobalContext();
+  console.log(form.status);
 
   const populateForm = () => {
     updateForm({
@@ -35,8 +32,9 @@ const EditForm = ({ invoice }) => {
       invoiceInfo: {
         createdAt: invoice[0].content.createdAt,
         description: invoice[0].content.description,
-        // paymentTerms: invoice[0].content.paymentTerms,
+        paymentTerms: invoice[0].content.paymentTerms,
       },
+      status: invoice[0].content.status,
     });
   };
   //  addIdToItems();
@@ -79,12 +77,12 @@ const EditForm = ({ invoice }) => {
           </svg>
         </button>
       </div>
-      <form action="" className="tablet:w-[504px]" onSubmit={handleSaveAndSend}>
+      <form action="" className="tablet:w-[504px]" onSubmit={handleSaveChanges}>
         <BillFrom />
         <BillTo />
         <InvoiceInfo />
         <ItemsList />
-        <NewFormFooter />
+        <EditFormFooter />
       </form>
     </div>
   );

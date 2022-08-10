@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Trash, AddItem } from "../components";
 
 import { useGlobalContext } from "../context/context";
+import { convNum } from "../utils/utils";
 
 const inputfields = [
   {

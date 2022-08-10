@@ -27,6 +27,7 @@ export const formData = {
   },
   paymentDue: "",
   total: "",
+  status: "pending",
 };
 export const itemsData = [
   {

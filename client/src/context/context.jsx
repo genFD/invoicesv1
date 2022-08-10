@@ -1,10 +1,6 @@
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  createContext,
-  useCallback,
-} from "react";
+import axios from "axios";
+import React, { useState, useContext, useEffect, createContext } from "react";
+import { API_URL } from "../api/requests";
 
 import { formData, itemsData } from "../data/data";
 import { addDays, format, getId, convNum, getNum } from "../utils/utils";
@@ -23,12 +19,6 @@ const AppProvider = ({ children }) => {
   const [items, updateItems] = useState(itemsData);
 
   /*  */
-  // const paymentDue = `${format(
-  //   addDays(
-  //     `"${form.invoiceInfo.createdAt}"`,
-  //     getNum(form.invoiceInfo.paymentTerms)
-  //   )
-  // )}`;
 
   const resetForm = () => {
     updateForm(formData);
@@ -62,85 +52,106 @@ const AppProvider = ({ children }) => {
   const populate = (invoice, formkey, invoiceKey) => {
     updateForm({ ...form, [formkey]: invoice[0].content[invoiceKey] });
   };
-  // const handleSaveAsDraft = async (e) => {
-  //   const data = {
-  //     ...invoiceInfo,
-  //     paymentDue,
-  //     ...client.who,
-
-  //     senderAddress: {
-  //       // ...sender,
-  //     },
-  //     clientAddress: {
-  //       ...client.where,
-  //     },
-  //     items: [...items],
-  //     total: totalItems,
-  //     status: "draft",
-  //   };
-
-  //   // await axios.post("/api/feedbacks", data);
-  //   // updateClient(formData.client);
-  //   // updateSender(formData.client);
-  //   // updateInvoiceInfo(formData.invoiceInfo);
-  //   // updateItems(formData.items);
-  // };
-
-  const handleSaveAndSend = async (e) => {
+  const handleSaveAsDraft = async (e) => {
     e.preventDefault();
-    const who = {
-      clientName: form.client.name,
-      clientEmail: form.client.email,
-    };
-    const where = {
-      street: form.client.street,
-      city: form.client.city,
-      country: form.client.country,
-      postCode: form.client.postCode,
-    };
-    const { paymentTerms, createdAt, description } = form.invoiceInfo;
 
+    const { paymentTerms, createdAt, description } = form.invoiceInfo;
+    let term =
+      typeof paymentTerms === "number" ? paymentTerms : getNum(paymentTerms);
+    const paymentDue = `${format(addDays(`"${createdAt}"`, term))}`;
+    const { email, name } = form.clientInfo;
     const data = {
       createdAt,
+      paymentDue,
       description,
-      paymentTerms: getNum(paymentTerms),
-      // paymentDue,
-      ...who,
-
+      paymentTerms: term,
+      clientName: name,
+      clientEmail: email,
+      status: "draft",
       senderAddress: {
-        ...form.sender,
+        ...form.senderAddress,
       },
       clientAddress: {
-        ...where,
+        ...form.clientAddress,
       },
       items: [...items],
       total: totalItems,
-      status: "pending",
     };
 
     console.log(data);
-
-    // await axios.post("/api/feedbacks", data);
+    await axios.post("/api/feedbacks", data);
+    resetItems();
+    resetForm();
   };
 
-  // const handleEditInvoice = async (e) => {
-  //   const data = {
-  //     ...invoiceInfo,
-  //     paymentDue,
-  //     ...client.who,
+  const handleSaveAndSend = async (e) => {
+    e.preventDefault();
+    const { paymentTerms, createdAt, description } = form.invoiceInfo;
+    let term =
+      typeof paymentTerms === "number" ? paymentTerms : getNum(paymentTerms);
 
-  //     senderAddress: {
-  //       // ...sender,
-  //     },
-  //     clientAddress: {
-  //       ...client.where,
-  //     },
-  //     items: [...items],
-  //     total: totalItems,
-  //     status: "draft",
-  //   };
-  //   // await axios.put(`/api/feedbacks/${id}`, data);
-  // };
+    const paymentDue = `${format(addDays(`"${createdAt}"`, term))}`;
+
+    const newItems = items.map((item) => {
+      return {
+        ...item,
+        quantity: convNum(item.quantity),
+        price: convNum(item.price),
+        total: convNum(item.price),
+      };
+    });
+
+    const { email, name } = form.clientInfo;
+    const data = {
+      createdAt,
+      paymentDue,
+      description,
+      paymentTerms: term,
+      clientName: name,
+      clientEmail: email,
+      status: form.status,
+      senderAddress: {
+        ...form.senderAddress,
+      },
+      clientAddress: {
+        ...form.clientAddress,
+      },
+      items: [...newItems],
+      total: totalItems,
+    };
+
+    // console.log(data);
+
+    await axios.post(API_URL, data);
+  };
+
+  const handleSaveChanges = async (e) => {
+    e.preventDefault();
+    const { paymentTerms, createdAt, description } = form.invoiceInfo;
+    const { email, name } = form.clientInfo;
+    let term =
+      typeof paymentTerms === "number" ? paymentTerms : getNum(paymentTerms);
+    const paymentDue = `${format(addDays(`"${createdAt}"`, term))}`;
+
+    const data = {
+      createdAt,
+      paymentDue,
+      description,
+      paymentTerms: term,
+      clientName: name,
+      clientEmail: email,
+      status: form.status,
+      senderAddress: {
+        ...form.senderAddress,
+      },
+      clientAddress: {
+        ...form.clientAddress,
+      },
+      items: [...items],
+      total: totalItems,
+    };
+    console.log(data);
+  };
 
   const handleDeleteInvoice = async () => {
     // await axios.delete(`/api/feedbacks/${id}`);
@@ -176,7 +187,8 @@ const AppProvider = ({ children }) => {
   function openModal() {
     setIsModalOpen(true);
   }
-  function closeNewInvoice() {
+  function closeNewInvoice(e) {
+    e.preventDefault();
     setIsNewInvoiceOpen(false);
   }
   function openNewInvoice() {
@@ -185,7 +197,8 @@ const AppProvider = ({ children }) => {
   function openEditInvoice() {
     setIsEditInvoiceOpen(true);
   }
-  function closeEditInvoice() {
+  function closeEditInvoice(e) {
+    e.preventDefault();
     setIsEditInvoiceOpen(false);
   }
   const sideFixer = () => {
@@ -212,7 +225,9 @@ const AppProvider = ({ children }) => {
         resetForm,
         resetItems,
         populateClientInfo,
+        handleSaveChanges,
         form,
+        handleSaveAsDraft,
         updateForm,
         handleChange,
         handleSaveAndSend,

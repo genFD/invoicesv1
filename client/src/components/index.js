@@ -60,9 +60,13 @@ import ClientInfo from "./ClientInfo";
 import EditClientInfo from "./EditClientInfo";
 import EditBillTo from "./EditBillTo";
 import EditBillFrom from "./EditBillFrom";
+import EditFormFooter from "./EditFormFooter";
+import AddForm from "./AddForm";
 
 export {
   NewInvoice,
+  AddForm,
+  EditFormFooter,
   EditClientInfo,
   EditBillFrom,
   EditBillTo,
