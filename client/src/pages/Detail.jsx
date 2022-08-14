@@ -10,10 +10,16 @@ import { transitionProps } from "../data/data";
 import { useGlobalContext } from "../context/context";
 
 import useInvoice from "../hooks/useInvoice";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function Detail() {
-  const { invoice, loading } = useInvoice();
-
+  // const { invoice, loading } = useInvoice();
+  const { invoice, loading, getInvoice } = useGlobalContext();
+  const { id } = useParams();
+  // useEffect(() => {
+  //   getInvoice(id);
+  // }, []);
   if (loading) {
     return <Loading />;
   }

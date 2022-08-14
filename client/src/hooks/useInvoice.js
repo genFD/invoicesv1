@@ -11,7 +11,6 @@ function useInvoice() {
     setLoading(true);
     const fetchedInvoice = await httpGetInvoice(id);
     if (fetchedInvoice) {
-      // const { content } = fetchedInvoice[0];
       updateInvoice(fetchedInvoice);
     } else {
       updateInvoice({});
@@ -23,7 +22,7 @@ function useInvoice() {
     getInvoice(id);
   }, [getInvoice, id]);
 
-  return { invoice, loading, id };
+  return { invoice, loading, getInvoice };
 }
 
 export default useInvoice;

@@ -1,41 +1,41 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { AddItem, Divider, Cancel, SaveChanges } from '../components';
-const terms = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
+import React, { Fragment, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { AddItemButton, Divider, Cancel, SaveChanges } from "../components";
+const terms = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
 
 const EditFormMobile = ({ invoice }) => {
   const [selected, setSelected] = useState(terms[0]);
   const [formdata, updateFormData] = useState({
     clientAddress: {
-      city: '',
-      country: '',
-      postCode: '',
-      street: '',
+      city: "",
+      country: "",
+      postCode: "",
+      street: "",
     },
     senderAddress: {
-      city: '',
-      country: '',
-      postCode: '',
-      street: '',
+      city: "",
+      country: "",
+      postCode: "",
+      street: "",
     },
-    clientEmail: '',
-    clientName: '',
-    createdAt: '',
-    description: '',
-    invoiceId: '',
+    clientEmail: "",
+    clientName: "",
+    createdAt: "",
+    description: "",
+    invoiceId: "",
     items: [
       {
-        name: '',
-        price: '',
-        quantity: '',
-        total: '',
+        name: "",
+        price: "",
+        quantity: "",
+        total: "",
       },
     ],
-    paymentDue: '',
-    paymentTerms: '',
-    total: '',
+    paymentDue: "",
+    paymentTerms: "",
+    total: "",
   });
 
   const populate = () => {
@@ -366,8 +366,8 @@ const EditFormMobile = ({ invoice }) => {
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
                               active
-                                ? 'bg-9277FF dark:text-FFFF text-0C0E16'
-                                : 'dark:text-FFFF text-0C0E16'
+                                ? "bg-9277FF dark:text-FFFF text-0C0E16"
+                                : "dark:text-FFFF text-0C0E16"
                             }`
                           }
                           value={term}
@@ -376,7 +376,7 @@ const EditFormMobile = ({ invoice }) => {
                             <>
                               <span
                                 className={`block truncate ${
-                                  selected ? 'font-medium' : 'font-normal'
+                                  selected ? "font-medium" : "font-normal"
                                 }`}
                               >
                                 {term}
@@ -538,7 +538,7 @@ const EditFormMobile = ({ invoice }) => {
               </div>
             </div>
           </div>
-          <AddItem />
+          <AddItemButton />
         </div>
         <Divider />
         <footer className="flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-end px-6 w-full">

@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { AddItem, Divider } from '../components';
-import { terms, formData } from '../data/data';
-import { Discard, SaveAsDraft, SaveAndSend } from '../components';
+import React, { Fragment, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { AddItem, Divider, AddItemButton } from "../components";
+import { terms, formData } from "../data/data";
+import { Discard, SaveAsDraft, SaveAndSend } from "../components";
 
 const Form = () => {
   const [selected, setSelected] = useState(terms[0]);
@@ -340,8 +340,8 @@ const Form = () => {
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
                               active
-                                ? 'bg-7C5DFA text-FFFF'
-                                : 'text-0C0E16 dark:text-FFFF'
+                                ? "bg-7C5DFA text-FFFF"
+                                : "text-0C0E16 dark:text-FFFF"
                             }`
                           }
                           value={term}
@@ -350,7 +350,7 @@ const Form = () => {
                             <>
                               <span
                                 className={`block truncate ${
-                                  selected ? 'font-medium' : 'font-normal'
+                                  selected ? "font-medium" : "font-normal"
                                 }`}
                               >
                                 {term}
@@ -513,7 +513,7 @@ const Form = () => {
               </div>
             </div>
           </div>
-          <AddItem />
+          <AddItemButton />
         </div>
         <Divider />
 

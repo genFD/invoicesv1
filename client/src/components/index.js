@@ -19,13 +19,12 @@ import Status from "./Status";
 import Invoice from "./Invoice";
 import FooterInvoice from "./FooterInvoice";
 import Info from "./Info";
-import Edit from "./Edit";
-import Delete from "./Delete";
+import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
 import MarkAsPaid from "./MarkAsPaid";
 import Item from "./Item";
 import EditTitle from "./EditTitle";
-
-import AddItem from "./AddItem";
+import AddItemButton from "./AddItemButton";
 import FooterNewInvoice from "./FooterNewInvoice";
 import NewForm from "./Form";
 import NewTitle from "./NewTitle";
@@ -37,20 +36,16 @@ import Form from "./Form";
 import Cancel from "./Cancel";
 import SaveChanges from "./SaveChanges";
 import FooterEditInvoice from "./FooterEditInvoice";
-import DeletePrompt from "./DeletePrompt";
 import NewInvoice from "./NewInvoice";
 import EditInvoice from "./EditInvoice";
 import Content from "./Content";
 import EditForm from "./EditForm";
-import EditFormMobile from "./EditFormMobile";
-import Error from "./Error";
+
 import Input from "./Input";
 import BillFrom from "./BillFrom";
 import CloseIcon from "./CloseIcon";
 import NewFormFooter from "./NewFormFooter";
-import InvoiceDate from "./InvoiceDate";
-import PaymentTerms from "./PaymentTerms";
-import ProjectDescription from "./ProjectDescription";
+
 import BillTo from "./BillTo";
 import ItemsList from "./ItemsList";
 import InvoiceInfo from "./InvoiceInfo";
@@ -62,9 +57,25 @@ import EditBillTo from "./EditBillTo";
 import EditBillFrom from "./EditBillFrom";
 import EditFormFooter from "./EditFormFooter";
 import AddForm from "./AddForm";
+import ArrowUp from "./ArrowUp";
+import Checkbox from "./Checkbox";
+import Check from "./Check";
+import LoadingPost from "./LoadingPost";
+import PlusIcon from "./PlusIcon";
+import CardSmall from "./CardSmall";
+import CardLarge from "./CardLarge";
+import DeleteModal from "./DeleteModal";
 
 export {
+  PlusIcon,
+  DeleteModal,
+  CardSmall,
+  CardLarge,
   NewInvoice,
+  LoadingPost,
+  Check,
+  Checkbox,
+  ArrowUp,
   AddForm,
   EditFormFooter,
   EditClientInfo,
@@ -76,18 +87,12 @@ export {
   InvoiceInfo,
   ItemsList,
   BillTo,
-  ProjectDescription,
-  PaymentTerms,
-  InvoiceDate,
   NewFormFooter,
   CloseIcon,
   BillFrom,
   Input,
-  Error,
-  EditFormMobile,
   EditForm,
   EditInvoice,
-  DeletePrompt,
   Content,
   SaveChanges,
   FooterEditInvoice,
@@ -101,10 +106,10 @@ export {
   NewForm,
   FooterNewInvoice,
   EditTitle,
-  AddItem,
-  Delete,
+  AddItemButton,
+  DeleteButton,
   MarkAsPaid,
-  Edit,
+  EditButton,
   Item,
   Info,
   FooterInvoice,

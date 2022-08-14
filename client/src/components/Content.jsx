@@ -1,15 +1,15 @@
-import React from 'react';
-import { useGlobalContext } from '../context/context';
-import { Header, Cards, NewInvoice } from '../components';
+import React from "react";
+import { Header, Cards, NewInvoice } from "../components";
+import { useModalContext } from "../context/modalcontext";
 
 const Content = () => {
-  const { isNewInvoiceOpen } = useGlobalContext();
+  const { newInvoiceForm } = useModalContext();
   return (
-    <div className="desktop:my-0 desktop:mx-auto">
+    <section className="desktop:my-0 desktop:mx-auto">
       <Header />
-      {isNewInvoiceOpen && <NewInvoice />}
+      {newInvoiceForm && <NewInvoice />}
       <Cards />
-    </div>
+    </section>
   );
 };
 

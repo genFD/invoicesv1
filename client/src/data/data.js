@@ -29,6 +29,7 @@ export const formData = {
   total: "",
   status: "pending",
 };
+
 export const itemsData = [
   {
     id: getId(),
@@ -84,6 +85,14 @@ export const errorData = {
   },
 };
 
+export const modalState = {
+  deleteModal: false,
+  newInvoiceForm: false,
+  editInvoiceForm: false,
+  deleteConfirmation: false,
+  createConfirmation: false,
+};
+
 export const transitionProps = {
   appear: true,
   as: "div",
@@ -91,6 +100,25 @@ export const transitionProps = {
   enterFrom: "opacity-0 scale-95",
   enterTo: "opacity-100 scale-100",
   leave: "ease-in duration-500",
+  leaveFrom: "opacity-100 scale-100",
+  leaveTo: "opacity-0 scale-95",
+};
+
+export const backdroptransitionChildProps = {
+  as: "div",
+  enter: "ease-out duration-300",
+  enterFrom: "opacity-0",
+  enterTo: "opacity-100",
+  leave: "ease-in duration-200",
+  leaveFrom: "opacity-100",
+  leaveTo: "opacity-0",
+};
+export const drawerTransitionProps = {
+  as: "div",
+  enter: "ease-out duration-300",
+  enterFrom: "opacity-0 scale-95",
+  enterTo: "opacity-100 scale-100",
+  leave: "ease-in duration-200",
   leaveFrom: "opacity-100 scale-100",
   leaveTo: "opacity-0 scale-95",
 };

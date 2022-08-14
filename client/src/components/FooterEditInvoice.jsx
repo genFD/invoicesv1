@@ -1,9 +1,9 @@
-import React from 'react';
-import { Cancel, SaveChanges } from '../components';
+import React from "react";
+import { Cancel, SaveChanges } from "../components";
 
 const FooterEditInvoice = () => {
   return (
-    <footer className=" flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-center w-full">
+    <footer className={footerStyles}>
       <Cancel />
       <SaveChanges />
     </footer>
@@ -11,3 +11,6 @@ const FooterEditInvoice = () => {
 };
 
 export default FooterEditInvoice;
+
+const footerStyles =
+  "flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-center w-full";

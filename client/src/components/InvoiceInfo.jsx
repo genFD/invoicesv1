@@ -1,22 +1,7 @@
 import React from "react";
 import { Input, Terms } from "../components";
 import { useGlobalContext } from "../context/context";
-const inputfields = [
-  {
-    id: 1,
-    name: "createdAt",
-    type: "date",
-    required: true,
-    label: "Invoice Date",
-  },
-  {
-    id: 2,
-    name: "description",
-    type: "text",
-    required: true,
-    label: "Project Description",
-  },
-];
+
 const InvoiceInfo = () => {
   const { invoiceInfo, handleChange } = useGlobalContext();
 
@@ -42,3 +27,22 @@ const InvoiceInfo = () => {
 };
 
 export default InvoiceInfo;
+
+/* ------data -----*/
+
+const inputfields = [
+  {
+    id: 1,
+    name: "createdAt",
+    type: "date",
+    required: true,
+    label: "Invoice Date",
+  },
+  {
+    id: 2,
+    name: "description",
+    type: "text",
+    required: true,
+    label: "Project Description",
+  },
+];

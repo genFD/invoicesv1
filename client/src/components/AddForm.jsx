@@ -8,41 +8,24 @@ import {
   NewFormFooter,
 } from "../components";
 import { useGlobalContext } from "../context/context";
-
-const titleClasses = [
-  "NewTitle",
-  "mt-6",
-  "tablet:w-[504px]",
-  "tablet:mt-14",
-  "tablet:mb-12",
-  "flex",
-  "items-center",
-  "justify-between",
-];
-
-let titleStyles = titleClasses.join(" ");
+import { useModalContext } from "../context/modalcontext";
 
 const AddForm = () => {
-  const { closeNewInvoice, handleSubmit, handleSaveAndSend } =
-    useGlobalContext();
-
+  const { handleSaveAndSend, getInvoices } = useGlobalContext();
+  const { close } = useModalContext();
+  const closeForm = () => {
+    close("newInvoiceForm");
+    getInvoices();
+  };
   return (
-    <div className="h-full flex flex-col items-center">
-      <div className={titleStyles}>
-        <h2 className="text-0C0E16 dark:text-FFFF text-heading-2">
-          New Invoice
-        </h2>
-        <button onClick={closeNewInvoice}>
+    <div className={containerStyles}>
+      <div className={headerStyles}>
+        <h2 className={h2Styles}>New Invoice</h2>
+        <span onClick={closeForm}>
           <CloseIcon />
-        </button>
+        </span>
       </div>
-
-      <form
-        action=""
-        // noValidate
-        onSubmit={handleSaveAndSend}
-        className="tablet:w-[504px]"
-      >
+      <form onSubmit={handleSaveAndSend} className="tablet:w-[504px]">
         <BillFrom />
         <BillTo />
         <InvoiceInfo />
@@ -54,3 +37,11 @@ const AddForm = () => {
 };
 
 export default AddForm;
+
+/* ------styles-----*/
+
+const containerStyles = "h-full flex flex-col items-center";
+const headerStyles =
+  "mt-6 tablet:w-[504px] tablet:mt-14 tablet:mb-12 flex items-center  justify-between";
+
+const h2Styles = "text-0C0E16 dark:text-FFFF text-heading-2";

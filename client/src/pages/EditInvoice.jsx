@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Navbar,
   GoBack,
@@ -9,25 +9,25 @@ import {
   Loading,
   NoResults,
   EditFormMobile,
-} from '../components';
-import useInvoice from '../hooks/useInvoice';
+} from "../components";
+import useInvoice from "../hooks/useInvoice";
 
 function EditInvoice() {
   const { invoice, loading } = useInvoice();
   const { invoiceId } = invoice;
   const editReroute = () => {
     if (window.innerWidth >= 768) {
-      navigate('/');
+      navigate("/");
     }
   };
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       editReroute();
     });
     return () =>
-      window.removeEventListener('resize', () => {
+      window.removeEventListener("resize", () => {
         editReroute();
       });
   }, []);
@@ -45,7 +45,7 @@ function EditInvoice() {
       <div className="flex flex-col">
         <GoBack />
         <EditTitle invoiceId={invoiceId} />
-        <EditFormMobile invoice={invoice} />
+        {/* <EditFormMobile invoice={invoice} /> */}
       </div>
     </>
   );

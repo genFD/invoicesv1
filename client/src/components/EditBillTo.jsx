@@ -1,6 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Input, EditClientInfo } from "../components";
 import { useGlobalContext } from "../context/context";
+
+const EditBillTo = () => {
+  const { clientAddress, handleChange } = useGlobalContext();
+
+  return (
+    <section className="mt-10">
+      <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">Bill to</h4>
+      <div className={inputStylesContainer}>
+        <EditClientInfo />
+        {inputfields.map((field) => {
+          return (
+            <Input
+              key={field.id}
+              {...field}
+              value={clientAddress[field.name]}
+              handleChange={(e) => handleChange(e, "clientAddress")}
+            />
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+export default EditBillTo;
+
+/* ------data -----*/
 
 const inputfields = [
   {
@@ -37,27 +64,6 @@ const inputfields = [
   },
 ];
 
-const EditBillTo = () => {
-  const { clientAddress, handleChange } = useGlobalContext();
-
-  return (
-    <section className="mt-10">
-      <h4 className="text-7C5DFA text-body-1 font-bold mb-6 ">Bill to</h4>
-      <div className="bill-to-input-container grid grid-cols-3 grid-rows-4 gap-6">
-        <EditClientInfo />
-        {inputfields.map((field) => {
-          return (
-            <Input
-              key={field.id}
-              {...field}
-              value={clientAddress[field.name]}
-              handleChange={(e) => handleChange(e, "clientAddress")}
-            />
-          );
-        })}
-      </div>
-    </section>
-  );
-};
-
-export default EditBillTo;
+/* ------styles -----*/
+const inputStylesContainer =
+  "bill-to-input-container grid grid-cols-3 grid-rows-4 gap-6";

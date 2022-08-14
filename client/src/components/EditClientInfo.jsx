@@ -1,25 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Input } from "../components";
 import { useGlobalContext } from "../context/context";
-
-const inputfields = [
-  {
-    id: 1,
-    name: "name",
-    type: "text",
-    required: true,
-    label: "Client’s Name",
-    errorMessage: "can't be empty",
-  },
-  {
-    id: 2,
-    name: "email",
-    type: "text",
-    required: true,
-    label: "Client’s Email",
-    errorMessage: "can't be empty",
-  },
-];
 
 const EditClientInfo = () => {
   const { clientInfo, handleChange } = useGlobalContext();
@@ -41,3 +22,24 @@ const EditClientInfo = () => {
 };
 
 export default EditClientInfo;
+
+/* ------data -----*/
+
+const inputfields = [
+  {
+    id: 1,
+    name: "name",
+    type: "text",
+    required: true,
+    label: "Client’s Name",
+    errorMessage: "can't be empty",
+  },
+  {
+    id: 2,
+    name: "email",
+    type: "text",
+    required: true,
+    label: "Client’s Email",
+    errorMessage: "can't be empty",
+  },
+];

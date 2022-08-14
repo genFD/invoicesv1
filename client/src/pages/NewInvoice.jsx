@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Navbar, GoBack, Form, NewTitle } from '../components';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Navbar, GoBack, Form, NewTitle } from "../components";
 
 function NewInvoice() {
   const navigate = useNavigate();
 
   const newInvoiceReroute = () => {
     if (window.innerWidth >= 768) {
-      navigate('/');
+      navigate("/");
     }
   };
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       newInvoiceReroute();
     });
     return () =>
-      window.removeEventListener('resize', () => {
+      window.removeEventListener("resize", () => {
         newInvoiceReroute();
       });
   }, []);
@@ -26,7 +26,7 @@ function NewInvoice() {
       <div className="flex flex-col">
         <GoBack />
         <NewTitle />
-        <Form />
+        {/* <Form /> */}
       </div>
     </>
   );

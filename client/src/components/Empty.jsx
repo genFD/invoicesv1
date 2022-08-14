@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Empty = () => {
   return (
@@ -293,7 +293,7 @@ const Empty = () => {
         There is nothing here
       </h2>
       <p className="text-888EB0 dark:text-DFE3FA font-medium text-heading-4 max-w-[178px] text-center mt-6">
-        Create an invoice by clicking the <span className="font-bold">New</span>{' '}
+        Create an invoice by clicking the <span className="font-bold">New</span>{" "}
         button and get started
       </p>
     </>

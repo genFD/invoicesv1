@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Detail, EditInvoice, NewInvoice } from './pages';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home, Detail, EditInvoice, NewInvoice } from "./pages";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (

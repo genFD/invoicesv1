@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 export const convertTime = (time) => {
   return new Date(time).toLocaleDateString("en-GB", {
     year: "numeric",
@@ -37,3 +38,14 @@ export const getId = () => {
   }
   return ID;
 };
+
+export const notify = (message) =>
+  toast.success(message, {
+    icon: "🎉",
+    style: {
+      borderRadius: "9999px",
+      background: "#33D69F",
+      color: "#141625",
+      width: "300px",
+    },
+  });

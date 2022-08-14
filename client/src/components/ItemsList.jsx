@@ -1,39 +1,7 @@
 import React from "react";
-import { Input, Trash, AddItem } from "../components";
-
+import { Input, Trash, AddItemButton } from "../components";
 import { useGlobalContext } from "../context/context";
-import { convNum } from "../utils/utils";
 
-const inputfields = [
-  {
-    id: 1,
-    name: "name",
-    type: "text",
-    required: true,
-    label: "Item Name",
-  },
-  {
-    id: 2,
-    name: "quantity",
-    type: "number",
-    required: true,
-    label: "Qty.",
-  },
-  {
-    id: 3,
-    name: "price",
-    type: "number",
-    required: true,
-    label: "Price",
-  },
-  {
-    id: 4,
-    name: "total",
-    type: "number",
-    required: true,
-    label: "Total",
-  },
-];
 const ItemsList = () => {
   const { items, updateItems } = useGlobalContext();
   const handleChange = (index) => (e) => {
@@ -68,10 +36,43 @@ const ItemsList = () => {
             </div>
           );
         })}
-        <AddItem />
+        <AddItemButton />
       </div>
     </div>
   );
 };
 
 export default ItemsList;
+
+/* ------data -----*/
+
+const inputfields = [
+  {
+    id: 1,
+    name: "name",
+    type: "text",
+    required: true,
+    label: "Item Name",
+  },
+  {
+    id: 2,
+    name: "quantity",
+    type: "number",
+    required: true,
+    label: "Qty.",
+  },
+  {
+    id: 3,
+    name: "price",
+    type: "number",
+    required: true,
+    label: "Price",
+  },
+  {
+    id: 4,
+    name: "total",
+    type: "number",
+    required: true,
+    label: "Total",
+  },
+];

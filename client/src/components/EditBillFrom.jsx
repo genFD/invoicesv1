@@ -1,7 +1,33 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { Input } from "../components";
 import { useGlobalContext } from "../context/context";
-import Tester from "./Tester";
+
+const EditBillFrom = () => {
+  const { senderAddress, handleChange } = useGlobalContext();
+  console.log(senderAddress);
+
+  return (
+    <div>
+      <h4 className="text-7C5DFA text-body-1 font-bold mb-6">Bill from</h4>
+      <div className={inputContainerStyles}>
+        {inputfields.map((field) => {
+          return (
+            <Input
+              key={field.id}
+              {...field}
+              value={senderAddress[field.name]}
+              handleChange={(e) => handleChange(e, "senderAddress")}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default EditBillFrom;
+
+/* ------data -----*/
 
 const inputfields = [
   {
@@ -37,28 +63,8 @@ const inputfields = [
     // errorMessage: "can't be empty",
   },
 ];
-// const functionCounter = new Set();
-const EditBillFrom = () => {
-  const { senderAddress, handleChange } = useGlobalContext();
-  console.log(senderAddress);
 
-  return (
-    <div>
-      <h4 className="text-7C5DFA text-body-1 font-bold mb-6">Bill from</h4>
-      <div className="bill-from-input-container grid grid-cols-3 grid-rows-2 gap-6">
-        {inputfields.map((field) => {
-          return (
-            <Input
-              key={field.id}
-              {...field}
-              value={senderAddress[field.name]}
-              handleChange={(e) => handleChange(e, "senderAddress")}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+/* ------styles -----*/
 
-export default EditBillFrom;
+const inputContainerStyles =
+  "bill-from-input-container grid grid-cols-3 grid-rows-2 gap-6";
