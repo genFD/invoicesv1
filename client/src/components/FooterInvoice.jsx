@@ -1,12 +1,12 @@
 import React from "react";
 import { EditButton, DeleteButton, MarkAsPaid } from "../components";
 
-const FooterInvoice = () => {
+const FooterInvoice = ({ status }) => {
   return (
     <footer className={footerStyles}>
       <EditButton />
       <DeleteButton />
-      <MarkAsPaid />
+      {status !== "paid" && <MarkAsPaid />}
     </footer>
   );
 };

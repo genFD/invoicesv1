@@ -1,12 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
 
 const Discard = () => {
   const { close } = useModalContext();
+  const { getInvoices } = useGlobalContext();
+  const navigate = useNavigate();
+
   return (
     <button
       type="button"
-      onClick={() => close("newInvoiceForm")}
+      onClick={() => {
+        close("newInvoiceForm");
+        getInvoices();
+        navigate("/");
+      }}
       className={discardButtonStyles}
     >
       Discard

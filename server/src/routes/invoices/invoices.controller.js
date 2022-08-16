@@ -17,7 +17,9 @@ const createInvoice = async (req, res) => {
 
 //read invoices
 const getAllInvoices = async (req, res) => {
-  const { rows } = await db.query("SELECT * FROM invoices");
+  const { rows } = await db.query(
+    "SELECT * FROM invoices ORDER BY created_at ASC"
+  );
   console.log(`${rows.length} invoices found!!!`);
   return res.status(200).json(rows);
 };

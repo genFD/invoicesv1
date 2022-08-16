@@ -33,7 +33,7 @@ const Info = (props) => {
           <div className="flex flex-col gap-y-1 address">
             {Object.values(senderAddress).map((item, i) => {
               return (
-                <span key={i} className="inline-block">
+                <span key={i} className="inline-block tablet:text-right">
                   {item}
                 </span>
               );
@@ -99,7 +99,7 @@ const Info = (props) => {
         {/* items */}
         <div className="flex justify-center mt-4">
           <div className="w-full">
-            <div className="bg-F9FAFE dark:bg-252945 p-4">
+            <div className="bg-DFE3FA dark:bg-252945 p-4">
               <ul className=" flex flex-col gap-y-3">
                 {items.map((item, index) => {
                   return <Item key={index} item={item} />;
@@ -134,7 +134,7 @@ const descriptionContainerStyles =
   "p-4 w-1/2 flex flex-col tablet:flex-row tablet:w-full tablet:justify-between gap-y-7 bg-F9FAFE dark:bg-252945";
 
 const mainContentStyles =
-  "flex items-center justify-center mt-8 text-7E88C3 bg-F9FAFE dark:bg-252945";
+  "flex items-center justify-center mt-8 text-7E88C3 dark:bg-252945";
 
 const idStyles = "font-bold text-0C0E16 dark:text-FFFF";
 

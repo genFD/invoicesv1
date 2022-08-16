@@ -1,13 +1,17 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useModalContext } from "../context/modalcontext";
 
 const Cancel = () => {
   const { close } = useModalContext();
+  const navigate = useNavigate();
+  const { id } = useParams();
   return (
     <button
       onClick={(e) => {
         e.preventDefault();
         close("editInvoiceForm");
+        navigate(`/detail/${id}`);
       }}
       className={buttonStyles}
     >

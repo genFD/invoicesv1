@@ -4,6 +4,7 @@ export const loadingState = {
   loadingCards: false,
   loadingCard: false,
   loadingPost: false,
+  loadingDelete: false,
   loadingPaid: false,
   loadingUpdate: false,
   loadingDraft: false,

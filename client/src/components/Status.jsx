@@ -43,7 +43,9 @@ const Status = ({ status, invoice }) => {
         <div className="hidden tablet:flex gap-x-2">
           <EditButton />
           <DeleteButton />
-          <MarkAsPaid status={status} invoice={invoice} />
+          {status !== "paid" && (
+            <MarkAsPaid status={status} invoice={invoice} />
+          )}
         </div>
       </div>
     </article>

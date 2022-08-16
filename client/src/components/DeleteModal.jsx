@@ -4,21 +4,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
 import { notify } from "../utils/utils";
-
+import { LoadingPost } from "../components";
 const DeleteModal = () => {
-  const { handleDelete, getInvoices } = useGlobalContext();
+  const { deleteInvoice, loadingDelete } = useGlobalContext();
   const { close, deleteModal } = useModalContext();
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const deleteInvoice = () => {
-    handleDelete(id);
-    navigate("/");
-    getInvoices();
-    close("deleteModal");
-    notify("Invoice deleted");
+  const afterDelete = () => {
+    setTimeout(() => {
+      navigate("/");
+      close("deleteModal");
+    }, 3000);
   };
-
   return (
     <Modal
       isOpen={deleteModal}
@@ -40,8 +37,14 @@ const DeleteModal = () => {
           >
             Cancel
           </button>
-          <button onClick={deleteInvoice} className={deleteButtonStyles}>
-            Delete
+          <button
+            onClick={() => {
+              deleteInvoice(id);
+              afterDelete();
+            }}
+            className={deleteButtonStyles}
+          >
+            {loadingDelete ? <LoadingPost /> : "Delete"}
           </button>
         </div>
       </div>
@@ -76,4 +79,4 @@ const h3Styles = "text-heading-2 leading-6  dark:text-FFFF text-0C0E16";
 const cancelButtonStyles =
   "w-96 h-48 bg-opacity-30 text-7E88C3 bg-252945 rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold";
 const deleteButtonStyles =
-  "w-96 h-48 text-7E88C3 bg-EC5757 rounded-3xl grid place-content-center text-body-1 text-FFFF font-bold";
+  "w-96 h-48 text-7E88C3 bg-EC5757 rounded-3xl flex flex-col items-center justify-center text-body-1 text-FFFF font-bold ";

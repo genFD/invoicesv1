@@ -1,7 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { EditForm } from "../components";
-import useInvoice from "../hooks/useInvoice";
 import { useModalContext } from "../context/modalcontext";
 import {
   backdroptransitionChildProps,
@@ -12,7 +11,6 @@ import { useGlobalContext } from "../context/context";
 const EditInvoice = () => {
   const { editInvoiceForm, close } = useModalContext();
   const { invoice } = useGlobalContext();
-  // const { invoice } = useInvoice();
 
   const backdrop = useRef(null);
 
@@ -44,11 +42,11 @@ export default EditInvoice;
 
 /* ------styles -----*/
 
-const backdropstyles =
+let backdropstyles =
   "fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70";
 
-const drawerContainerStyles =
+let drawerContainerStyles =
   "fixed inset-0 top-[72px] desktop:top-0 desktop:left-[103px] overflow-y-auto";
 
-const drawerStyles =
-  "bg-FFFF dark:bg-141625 min-h-screen tablet:w-[616px] desktop:w-[719px]tablet:rounded-tr-20px tablet:rounded-br-20px items-center justify-center formContainer";
+let drawerStyles =
+  "bg-FFFF dark:bg-141625 min-h-screen tablet:w-[616px] desktop:w-[719px] tablet:rounded-tr-20px tablet:rounded-br-20px items-center justify-center formContainer";

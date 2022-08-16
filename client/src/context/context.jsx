@@ -30,7 +30,6 @@ import {
   getNum,
   notify,
 } from "../utils/utils";
-import { useModalContext } from "./modalcontext";
 
 const AppContext = createContext();
 
@@ -174,6 +173,15 @@ const AppProvider = ({ children }) => {
       total: totalItems,
     };
     setLoading({ ...loading, loadingPost: true });
+    // console.log(Object.values(data));
+
+    Object.values(data).map((item) => {
+      if (!item) {
+        notify("Empty field cannot submit");
+      }
+      return item;
+    });
+
     httpCreateInvoice(data);
     setTimeout(() => {
       setLoading({ ...loading, loadingPost: false });
@@ -307,6 +315,15 @@ const AppProvider = ({ children }) => {
     updateItems(newListItems);
   };
 
+  const deleteInvoice = (id) => {
+    setLoading({ ...loading, loadingDelete: true });
+    handleDelete(id);
+    setTimeout(() => {
+      getInvoices();
+      notify("Invoice deleted");
+    }, 3000);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -321,6 +338,7 @@ const AppProvider = ({ children }) => {
         getInvoice,
         query,
         loading,
+        deleteInvoice,
         // loadingPost,
         // loadingUpdate,
         // loadingPaid,

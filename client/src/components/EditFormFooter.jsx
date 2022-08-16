@@ -15,4 +15,4 @@ export default EditFormFooter;
 /* ------styles -----*/
 
 const footerStyles =
-  "bg-141625 mt-8 flex justify-end p-6 gap-2 w-full rounded-tr-[20px] rounded-br-[20px]";
+  "dark:bg-141625 mt-8 flex justify-end p-6 gap-2 w-full rounded-tr-[20px] rounded-br-[20px]";

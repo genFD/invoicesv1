@@ -4,6 +4,7 @@ import { convertTime, convertPrice } from "../utils/utils";
 const CardSmall = ({ id, clientName, paymentDue, status, total }) => {
   return (
     <div className="tablet:hidden p-6">
+      {/* id / client name */}
       <header className="flex justify-between">
         <div className="invoice-id tablet:mr-7">
           <span className="text-7E88C3">#</span>
@@ -14,6 +15,7 @@ const CardSmall = ({ id, clientName, paymentDue, status, total }) => {
         </div>
       </header>
 
+      {/* due date / price  */}
       <div className="flex justify-between mt-6">
         <div className="tablet:flex tablet:gap-x-32">
           <p className="text-7E88C3 font-medium dark:text-DFE3FA">
@@ -23,6 +25,8 @@ const CardSmall = ({ id, clientName, paymentDue, status, total }) => {
             {convertPrice(total)}
           </p>
         </div>
+
+        {/* status */}
         <div
           className={`${
             status === "paid"
