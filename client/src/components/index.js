@@ -65,10 +65,12 @@ import PlusIcon from "./PlusIcon";
 import CardSmall from "./CardSmall";
 import CardLarge from "./CardLarge";
 import DeleteModal from "./DeleteModal";
+import EditFormSmall from "./EditFormMobile";
 
 export {
   PlusIcon,
   DeleteModal,
+  EditFormSmall,
   CardSmall,
   CardLarge,
   NewInvoice,

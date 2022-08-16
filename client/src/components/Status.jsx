@@ -1,7 +1,7 @@
 import React from "react";
 import { EditButton, DeleteButton, MarkAsPaid } from "../components";
 
-const Status = ({ status }) => {
+const Status = ({ status, invoice }) => {
   return (
     <article className="mt-8 flex justify-center">
       <div className={containerStyles}>
@@ -43,7 +43,7 @@ const Status = ({ status }) => {
         <div className="hidden tablet:flex gap-x-2">
           <EditButton />
           <DeleteButton />
-          <MarkAsPaid status={status} />
+          <MarkAsPaid status={status} invoice={invoice} />
         </div>
       </div>
     </article>

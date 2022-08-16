@@ -12,8 +12,8 @@ const HeaderTitle = () => {
           {invoices.length < 1
             ? "No invoices"
             : invoices.length === 1
-            ? `There is ${invoices.length} total invoice`
-            : `There are ${invoices.length} total invoices`}
+            ? `${invoices.length} invoice`
+            : `${invoices.length} invoices`}
         </div>
         <div className="hidden tablet:block">
           {invoices.length < 1

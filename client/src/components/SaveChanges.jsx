@@ -2,27 +2,25 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
-import { notify } from "../utils/utils";
-import LoadingPost from "./LoadingPost";
+import { LoadingPost } from "../components";
 
 const SaveChanges = () => {
-  const { handleSaveChanges, setLoadingUpdate, loadingUpdate, getInvoice } =
-    useGlobalContext();
+  const { handleSaveChanges, loadingUpdate } = useGlobalContext();
   const { close } = useModalContext();
   const { id } = useParams();
-  const update = (e) => {
-    e.preventDefault();
-    setLoadingUpdate(true);
-    handleSaveChanges(id);
-    setTimeout(() => {
-      setLoadingUpdate(false);
-      close("editInvoiceForm");
-      getInvoice(id);
-      notify("Invoice updated");
-    }, 3000);
-  };
+
   return (
-    <button onClick={update} type="submit" className={buttonStyles}>
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        handleSaveChanges(id);
+        setTimeout(() => {
+          close("editInvoiceForm");
+        }, 5000);
+      }}
+      type="submit"
+      className={buttonStyles}
+    >
       {loadingUpdate ? <LoadingPost /> : "Save Changes"}
     </button>
   );

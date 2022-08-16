@@ -8,27 +8,26 @@ import {
 } from "../components";
 import { transitionProps } from "../data/data";
 import { useGlobalContext } from "../context/context";
-
-import useInvoice from "../hooks/useInvoice";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 function Detail() {
-  // const { invoice, loading } = useInvoice();
-  const { invoice, loading, getInvoice } = useGlobalContext();
+  const { invoice, loadingCard, getInvoice } = useGlobalContext();
   const { id } = useParams();
-  // useEffect(() => {
-  //   getInvoice(id);
-  // }, []);
-  if (loading) {
+
+  useEffect(() => {
+    getInvoice(id);
+  }, []);
+
+  if (loadingCard) {
     return <Loading />;
   }
-  if (Object.keys(invoice).length < 1) {
+  if (Object.keys(invoice).length === 0) {
     return <NoResults />;
   }
 
   return (
-    <div className=" flex flex-col desktop:flex-row">
+    <div className="flex flex-col desktop:flex-row">
       <Navbar />
       <EditInvoice />
       <div className="desktop:my-0 desktop:mx-auto tablet:pb-2">

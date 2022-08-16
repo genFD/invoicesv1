@@ -51,6 +51,17 @@ async function httpEditInvoice(id, invoice) {
     };
   }
 }
+// Mark as Paid
+async function httpMarkAsPaid(id) {
+  try {
+    return await axios.put(`${API_URL}/masp/${id}`);
+  } catch (error) {
+    console.log(error);
+    return {
+      ok: false,
+    };
+  }
+}
 
 //Delete invoice
 async function httpDeleteInvoice(id) {
@@ -64,10 +75,6 @@ async function httpDeleteInvoice(id) {
   }
 }
 //filterInvoice
-// ${API_URL}/search/contract?${urlQuery}
-
-// http://localhost:8000/v1/invoices/search/status?status=draft
-
 async function httpFilterInvoices(status) {
   try {
     const { data } = await axios.get(
@@ -86,6 +93,7 @@ export {
   httpGetInvoices,
   httpGetInvoice,
   httpDeleteInvoice,
+  httpMarkAsPaid,
   httpCreateInvoice,
   httpEditInvoice,
   httpFilterInvoices,

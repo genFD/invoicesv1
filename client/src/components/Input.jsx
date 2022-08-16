@@ -1,8 +1,7 @@
 import React from "react";
 
 const Input = (props) => {
-  const { label, errorMessage, handleChange, pattern, name, ...inputProps } =
-    props;
+  const { label, handleChange, pattern, name, ...inputProps } = props;
 
   return (
     <div className={`text-141625 flex flex-col ${name}`}>

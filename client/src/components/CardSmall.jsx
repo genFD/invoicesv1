@@ -1,7 +1,7 @@
 import React from "react";
 import { convertTime, convertPrice } from "../utils/utils";
 
-const CardSmall = ({ id, clientName, paymentDue, items, status }) => {
+const CardSmall = ({ id, clientName, paymentDue, status, total }) => {
   return (
     <div className="tablet:hidden p-6">
       <header className="flex justify-between">
@@ -20,7 +20,7 @@ const CardSmall = ({ id, clientName, paymentDue, items, status }) => {
             Due {convertTime(paymentDue)}
           </p>
           <p className="font-bold tablet:text-heading-2">
-            {convertPrice(items[0].price)}
+            {convertPrice(total)}
           </p>
         </div>
         <div

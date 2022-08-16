@@ -5,9 +5,9 @@ import { transitionProps } from "../data/data";
 import { useGlobalContext } from "../context/context";
 
 const Cards = () => {
-  const { invoices, loading } = useGlobalContext();
+  const { invoices, loadingCards } = useGlobalContext();
 
-  if (loading) {
+  if (loadingCards) {
     return <Loading />;
   }
   if (invoices.length < 1) {

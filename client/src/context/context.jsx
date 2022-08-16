@@ -7,7 +7,8 @@ import React, {
   useCallback,
 } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import {
   API_URL,
   httpCreateInvoice,
@@ -17,10 +18,19 @@ import {
   httpFilterInvoices,
   httpGetInvoice,
   httpGetInvoices,
+  httpMarkAsPaid,
 } from "../api/requests";
 
-import { formData, itemsData } from "../data/data";
-import { addDays, format, getId, convNum, getNum } from "../utils/utils";
+import { formData, itemsData, loadingState } from "../data/data";
+import {
+  addDays,
+  format,
+  getId,
+  convNum,
+  getNum,
+  notify,
+} from "../utils/utils";
+import { useModalContext } from "./modalcontext";
 
 const AppContext = createContext();
 
@@ -34,10 +44,7 @@ const AppProvider = ({ children }) => {
 
   const [invoices, updateInvoices] = useState([]);
   const [invoice, updateInvoice] = useState({});
-
-  const [loading, setLoading] = useState(true);
-  const [loadingPost, setLoadingPost] = useState(false);
-  const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [loading, setLoading] = useState(loadingState);
   const [query, updateQuery] = useState({
     paid: "",
     pending: "",
@@ -45,7 +52,7 @@ const AppProvider = ({ children }) => {
   });
 
   const getInvoices = useCallback(async () => {
-    setLoading(true);
+    setLoading({ ...loading, loadingCards: true });
     const fetchedInvoices =
       !query.paid && !query.pending && !query.draft
         ? await httpGetInvoices()
@@ -55,7 +62,7 @@ const AppProvider = ({ children }) => {
     } else {
       updateInvoices([]);
     }
-    setLoading(false);
+    setLoading({ ...loading, loadingCards: false });
   }, [query]);
 
   useEffect(() => {
@@ -63,20 +70,16 @@ const AppProvider = ({ children }) => {
   }, [getInvoices, query]);
 
   const getInvoice = useCallback(async (id) => {
-    setLoading(true);
+    setLoading({ ...loading, loadingCard: true });
     const fetchedInvoice = await httpGetInvoice(id);
     if (fetchedInvoice) {
-      // const { content } = fetchedInvoice[0];
       updateInvoice(fetchedInvoice);
     } else {
       updateInvoice({});
     }
-    setLoading(false);
+    setLoading({ ...loading, loadingCard: false });
   }, []);
-  // const { id } = useParams();
-  // useEffect(() => {
-  //   getInvoice(id);
-  // }, [getInvoice, id]);
+
   /* Form State Variables */
   const [form, updateForm] = useState(formData);
   const [items, updateItems] = useState(itemsData);
@@ -135,7 +138,8 @@ const AppProvider = ({ children }) => {
     await httpDeleteInvoice(id);
   }, []);
 
-  const handleSaveAndSend = async () => {
+  const handleSaveAndSend = async (e) => {
+    e.preventDefault();
     const { paymentTerms, createdAt, description } = form.invoiceInfo;
     let term =
       typeof paymentTerms === "number" ? paymentTerms : getNum(paymentTerms);
@@ -147,7 +151,7 @@ const AppProvider = ({ children }) => {
         ...item,
         quantity: convNum(item.quantity),
         price: convNum(item.price),
-        total: convNum(item.price),
+        total: convNum(item.total),
       };
     });
 
@@ -169,11 +173,13 @@ const AppProvider = ({ children }) => {
       items: [...newItems],
       total: totalItems,
     };
-
+    setLoading({ ...loading, loadingPost: true });
     httpCreateInvoice(data);
     setTimeout(() => {
+      setLoading({ ...loading, loadingPost: false });
       resetForm();
       resetItems();
+      notify("Invoice created!");
     }, 5000);
   };
 
@@ -183,6 +189,16 @@ const AppProvider = ({ children }) => {
     let term =
       typeof paymentTerms === "number" ? paymentTerms : getNum(paymentTerms);
     const paymentDue = `${format(addDays(`"${createdAt}"`, term))}`;
+
+    const newItems = items.map((item) => {
+      return {
+        ...item,
+        quantity: convNum(item.quantity),
+        price: convNum(item.price),
+        total: convNum(item.total),
+      };
+    });
+
     const { email, name } = form.clientInfo;
     const data = {
       createdAt,
@@ -198,14 +214,17 @@ const AppProvider = ({ children }) => {
       clientAddress: {
         ...form.clientAddress,
       },
-      items: [...items],
+      items: [...newItems],
       total: totalItems,
     };
-
-    console.log(data);
-    await axios.post("/api/feedbacks", data);
-    resetItems();
-    resetForm();
+    setLoading({ ...loading, loadingDraft: true });
+    httpCreateInvoice(data);
+    setTimeout(() => {
+      setLoading({ ...loading, loadingDraft: false });
+      resetForm();
+      resetItems();
+      notify("Save as draft!");
+    }, 5000);
   };
 
   const handleSaveChanges = async (id) => {
@@ -220,7 +239,7 @@ const AppProvider = ({ children }) => {
         ...item,
         quantity: convNum(item.quantity),
         price: convNum(item.price),
-        total: convNum(item.price),
+        total: convNum(item.total),
       };
     });
     const { email, name } = form.clientInfo;
@@ -241,8 +260,26 @@ const AppProvider = ({ children }) => {
       items: [...newItems],
       total: totalItems,
     };
+    setLoading({ ...loading, loadingUpdate: true });
     httpEditInvoice(id, data);
+    setTimeout(() => {
+      setLoading({ ...loading, loadingUpdate: false });
+      getInvoice(id);
+      notify("Invoice updated");
+    }, 5000);
   };
+
+  const handleMarkAsPaid = (id) => {
+    setLoading({ ...loading, loadingPaid: true });
+    httpMarkAsPaid(id);
+
+    setTimeout(() => {
+      setLoading({ ...loading, loadingPaid: false });
+      getInvoice(id);
+      notify("status paid!");
+    }, 5000);
+  };
+
   const handleCheckbox = (e) => {
     if (e.target.checked) {
       updateQuery({ ...query, [e.target.name]: e.target.value });
@@ -273,18 +310,23 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        ...loading,
         invoices,
         invoice,
+        updateInvoice,
+        handleMarkAsPaid,
         populateForm,
         handleCheckbox,
         getInvoices,
         getInvoice,
         query,
         loading,
-        loadingPost,
-        loadingUpdate,
-        setLoadingUpdate,
-        setLoadingPost,
+        // loadingPost,
+        // loadingUpdate,
+        // loadingPaid,
+        // loadingDraft,
+        // setLoadingUpdate,
+        // setLoadingPost,
         // populate,
         populateItems,
         resetForm,

@@ -15,9 +15,8 @@
   input[type="time"],
   input[type="search"],
   input[type="tel"],
-  /* input[type="radio"], */
   select {
-    @apply py-4 px-3 rounded text-body-1 text-FFFF font-bold dark:text-FFFF focus:outline-none dark:bg-252945 dark:border-252945  focus:dark:border-9277FF focus:dark:ring-9277FF caret-9277FF cursor-pointer;
+    @apply py-4 px-3 rounded text-body-1 bg-F0F7FA border border-858BB2 text-5F6FAB dark:text-FFFF font-bold focus:outline-none dark:bg-252945 dark:border-252945 focus:border-9277FF focus:ring-9277FF caret-9277FF cursor-pointer;
   }
 }
 
@@ -130,15 +129,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-/* select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: transparent;
-  background-image: url("../public/down-arrow-v2.svg");
-  background-repeat: no-repeat;
-  background-position-x: 95%;
-  background-position-y: center;
-} */
 
 /* navbar */
 
@@ -190,24 +180,74 @@ input:invalid[focused="true"] ~ span {
 
 .bill-from-input-container {
   grid-template-areas:
-    "street street street"
-    "city postCode country";
+    "street street"
+    "city  postCode"
+    "country country";
 }
 .bill-to-input-container {
   grid-template-areas:
-    "name name name"
-    "email email email"
-    "street street street"
-    "city postCode country";
+    "name name"
+    "email email"
+    "street street"
+    "city postCode"
+    "country country";
 }
 .invoice-info-input-container {
   grid-template-areas:
-    "date date term term"
-    "description description description description";
+    "date "
+    "term"
+    "description";
 }
 .itemsList-input-container {
-  grid-template-areas: "itemName itemName itemName quantity price price total total deleteIcon";
+  grid-template-areas:
+    "name name name name "
+    "quantity price total deleteIcon";
 }
+/* .quantity {
+  width: 84px;
+}
+.price {
+  width: 100px;
+}
+.total {
+  width: 80px;
+} */
+
+@media (min-width: 768px) {
+  .bill-from-input-container {
+    grid-template-areas:
+      "street street street"
+      "city postCode country";
+  }
+  .bill-to-input-container {
+    grid-template-areas:
+      "name name name"
+      "email email email"
+      "street street street"
+      "city postCode country";
+  }
+  .invoice-info-input-container {
+    grid-template-areas:
+      "date date term term"
+      "description description description description";
+  }
+  .itemsList-input-container {
+    grid-template-areas: "itemName itemName itemName quantity price price total total deleteIcon";
+  }
+  .ItemName {
+    width: 214px;
+  }
+  .quantity {
+    width: 46px;
+  }
+  .price {
+    width: 100px;
+  }
+  .total {
+    width: 80px;
+  }
+}
+
 .createdAt {
   grid-area: date;
 }
@@ -234,17 +274,4 @@ input:invalid[focused="true"] ~ span {
 }
 .country {
   grid-area: country;
-}
-
-.itemName {
-  width: 214px;
-}
-.quantity {
-  width: 46px;
-}
-.price {
-  width: 100px;
-}
-.total {
-  width: 80px;
 }

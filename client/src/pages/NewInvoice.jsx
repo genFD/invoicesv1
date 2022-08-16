@@ -26,7 +26,7 @@ function NewInvoice() {
       <div className="flex flex-col">
         <GoBack />
         <NewTitle />
-        {/* <Form /> */}
+        <Form />
       </div>
     </>
   );

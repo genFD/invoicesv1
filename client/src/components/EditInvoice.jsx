@@ -45,7 +45,7 @@ export default EditInvoice;
 /* ------styles -----*/
 
 const backdropstyles =
-  "fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(103px+715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70 ";
+  "fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70";
 
 const drawerContainerStyles =
   "fixed inset-0 top-[72px] desktop:top-0 desktop:left-[103px] overflow-y-auto";

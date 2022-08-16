@@ -1,27 +1,25 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Navbar,
   GoBack,
-  Form,
-  EditForm,
   EditTitle,
   Loading,
   NoResults,
-  EditFormMobile,
+  EditFormSmall,
 } from "../components";
-import useInvoice from "../hooks/useInvoice";
+import { useGlobalContext } from "../context/context";
 
 function EditInvoice() {
-  const { invoice, loading } = useInvoice();
-  const { invoiceId } = invoice;
+  const { invoice, loadingCard, getInvoice } = useGlobalContext();
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const editReroute = () => {
     if (window.innerWidth >= 768) {
       navigate("/");
     }
   };
-  const navigate = useNavigate();
-
   useEffect(() => {
     window.addEventListener("resize", () => {
       editReroute();
@@ -32,20 +30,23 @@ function EditInvoice() {
       });
   }, []);
 
-  if (loading) {
+  useEffect(() => {
+    getInvoice(id);
+  }, []);
+
+  if (loadingCard) {
     return <Loading />;
   }
   if (Object.keys(invoice).length < 1) {
     return <NoResults />;
   }
-
   return (
     <>
       <Navbar />
       <div className="flex flex-col">
         <GoBack />
-        <EditTitle invoiceId={invoiceId} />
-        {/* <EditFormMobile invoice={invoice} /> */}
+        <EditTitle invoiceId={invoice[0].id} />
+        <EditFormSmall invoice={invoice} />
       </div>
     </>
   );

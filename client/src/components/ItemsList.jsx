@@ -17,10 +17,14 @@ const ItemsList = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="mt-6 tablet:flex tablet:flex-col tablet:gap-y-4">
+      <h3 className="text-777F98 text-heading-7">Item List</h3>
+      <div className="tablet:flex tablet:flex-col tablet:gap-y-4">
         {items.map((item, i) => {
           return (
-            <div key={i} className={`${item.name} tablet:flex tablet:gap-x-4`}>
+            <div
+              key={i}
+              className={`${item.name} ${inputContainerStyles} mt-3`}
+            >
               {inputfields.map((field) => {
                 return (
                   <Input
@@ -31,7 +35,6 @@ const ItemsList = () => {
                   />
                 );
               })}
-
               <Trash id={item.id} />
             </div>
           );
@@ -76,3 +79,5 @@ const inputfields = [
     label: "Total",
   },
 ];
+const inputContainerStyles =
+  "grid grid-rows-2 grid-cols-4 itemsList-input-container gap-y-4 gap-x-4 w-327 tablet:w-full tablet:flex tablet:gap-y-0";

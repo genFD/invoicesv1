@@ -1,6 +1,15 @@
 import { getId, getNum } from "../utils/utils";
 
+export const loadingState = {
+  loadingCards: false,
+  loadingCard: false,
+  loadingPost: false,
+  loadingPaid: false,
+  loadingUpdate: false,
+  loadingDraft: false,
+};
 export const terms = ["Net 1 Day", "Net 7 Days", "Net 14 Days", "Net 30 Days"];
+
 export const formData = {
   clientAddress: {
     city: "",

@@ -1,21 +1,12 @@
 import React from "react";
 import { LoadingPost } from "../components";
 import { useGlobalContext } from "../context/context";
-import { notify } from "../utils/utils";
 
 const SaveAndSend = () => {
-  const { setLoadingPost, handleSaveAndSend, loadingPost } = useGlobalContext();
-  const save = (e) => {
-    e.preventDefault();
-    setLoadingPost(true);
-    handleSaveAndSend();
-    setTimeout(() => {
-      setLoadingPost(false);
-      notify("Invoice created");
-    }, 5000);
-  };
+  const { handleSaveAndSend, loadingPost } = useGlobalContext();
+
   return (
-    <button onClick={save} type="submit" className={buttonStyles}>
+    <button onClick={handleSaveAndSend} type="submit" className={buttonStyles}>
       {loadingPost ? <LoadingPost /> : "Save & send"}
     </button>
   );

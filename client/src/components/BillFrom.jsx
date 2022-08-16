@@ -62,4 +62,4 @@ const inputfields = [
 /* ---------styles-------*/
 const h4Styles = "text-7C5DFA text-body-1 font-bold mb-6";
 const containerStyles =
-  "bill-from-input-container grid grid-cols-3 grid-rows-2 gap-6";
+  "bill-from-input-container grid grid-cols-2 grid-rows-3 tablet:grid-cols-3 tablet:grid-rows-2 gap-6";

@@ -13,4 +13,4 @@ const FooterEditInvoice = () => {
 export default FooterEditInvoice;
 
 const footerStyles =
-  "flex items-center gap-x-2 h-91 box-shadow-footer-invoice justify-center w-full";
+  "flex items-center justify-end gap-x-2 h-91 box-shadow-footer-invoice tablet:justify-center w-full dark:bg-1E2139";

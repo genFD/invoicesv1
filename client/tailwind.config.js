@@ -26,6 +26,10 @@ module.exports = {
       "33D69F": "#33D69F",
       "858BB2": "#858BB2",
       "777F98": "#777F98",
+      F2F8F4: "#F2F8F4",
+      F0F7FA: "#F0F7FA",
+      C6C8EE: "#C6C8EE",
+      "5F6FAB": "#5F6FAB",
     },
     fontSize: {
       "heading-1": [

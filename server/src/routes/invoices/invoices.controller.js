@@ -69,7 +69,7 @@ const filterInvoices = async (req, res) => {
     text: "select * from invoices where content['status'] = $1 or content['status'] = $2 or content['status'] = $3 ;",
     values: [valuePaid, valuePending, valueDraft],
   };
-  console.log(query);
+
   try {
     const { rows } = await db.query(query);
     res.status(200).json(rows);
@@ -84,7 +84,7 @@ const markAsPaid = async (req, res) => {
   const { id } = req.params;
   const paid = '"paid"';
   const query = {
-    text: "UPDATE invoices set content['status'] = $1 where invoices.id = $2 ",
+    text: "update invoices set content['status'] = $1 where invoices.id = $2 ",
     values: [paid, id],
   };
   console.log(query);

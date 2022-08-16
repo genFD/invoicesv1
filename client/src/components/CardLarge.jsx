@@ -1,7 +1,7 @@
 import React from "react";
 import { convertTime, convertPrice } from "../utils/utils";
 
-const CardLarge = ({ id, clientName, paymentDue, items, status }) => {
+const CardLarge = ({ id, clientName, paymentDue, items, status, total }) => {
   return (
     <div className="hidden tablet:grid tablet:grid-cols-5 tablet:grid-rows-1 h-full place-items-center">
       <div className="invoice-id">
@@ -15,9 +15,7 @@ const CardLarge = ({ id, clientName, paymentDue, items, status }) => {
 
       <p className="text-858BB2 dark:text-FFFF font-medium">{clientName}</p>
 
-      <p className="font-bold tablet:text-heading-2">
-        {convertPrice(items[0].price)}
-      </p>
+      <p className="font-bold tablet:text-heading-2">{convertPrice(total)}</p>
 
       <div
         className={`${
