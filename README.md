@@ -53,6 +53,6 @@ Users should be able to:
 
 ## Author
 
-- Website - [Hermann kan](https://www.hkdev.me)
+- Website - [Hermann kan](https://hkportfolio-v2.herokuapp.com/)
 
 - Twitter - [@HermannKan1](https://www.twitter.com/hermannkan)
