@@ -1,4 +1,4 @@
-import { getId, getNum } from "../utils/utils";
+import { getId } from "../utils/utils";
 
 export const loadingState = {
   loadingCards: false,
@@ -101,6 +101,11 @@ export const modalState = {
   editInvoiceForm: false,
   deleteConfirmation: false,
   createConfirmation: false,
+};
+export const checkBoxState = {
+  paid: false,
+  pending: false,
+  draft: false,
 };
 
 export const transitionProps = {

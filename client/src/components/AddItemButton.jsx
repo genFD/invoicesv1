@@ -4,7 +4,6 @@ import { useGlobalContext } from "../context/context";
 
 const AddItemButton = () => {
   const { addItem } = useGlobalContext();
-
   return (
     <button onClick={addItem} className={buttonStyles}>
       <PlusIcon />

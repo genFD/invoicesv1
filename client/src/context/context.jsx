@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, {
   useState,
   useContext,
@@ -6,22 +5,18 @@ import React, {
   createContext,
   useCallback,
 } from "react";
-import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
 
 import {
-  API_URL,
   httpCreateInvoice,
   httpDeleteInvoice,
   httpEditInvoice,
-  httpFilterInvoice,
   httpFilterInvoices,
   httpGetInvoice,
   httpGetInvoices,
   httpMarkAsPaid,
 } from "../api/requests";
 
-import { formData, itemsData, loadingState } from "../data/data";
+import { formData, itemsData, loadingState, checkBoxState } from "../data/data";
 import {
   addDays,
   format,
@@ -34,22 +29,20 @@ import {
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  /* Filter/invoices state */
-  const [checked, setChecked] = useState({
-    paid: false,
-    pending: false,
-    draft: false,
-  });
-
+  /* invoices -- checkbox */
   const [invoices, updateInvoices] = useState([]);
   const [invoice, updateInvoice] = useState({});
   const [loading, setLoading] = useState(loadingState);
+  // const [checked, setChecked] = useState(checkBoxState);
   const [query, updateQuery] = useState({
     paid: "",
     pending: "",
     draft: "",
   });
+  const [form, updateForm] = useState(formData);
+  const [items, updateItems] = useState(itemsData);
 
+  /* ------*/
   const getInvoices = useCallback(async () => {
     setLoading({ ...loading, loadingCards: true });
     const fetchedInvoices =
@@ -68,6 +61,7 @@ const AppProvider = ({ children }) => {
     getInvoices();
   }, [getInvoices, query]);
 
+  /* ------*/
   const getInvoice = useCallback(async (id) => {
     setLoading({ ...loading, loadingCard: true });
     const fetchedInvoice = await httpGetInvoice(id);
@@ -79,9 +73,20 @@ const AppProvider = ({ children }) => {
     setLoading({ ...loading, loadingCard: false });
   }, []);
 
-  /* Form State Variables */
-  const [form, updateForm] = useState(formData);
-  const [items, updateItems] = useState(itemsData);
+  const handleDelete = useCallback(async (id) => {
+    await httpDeleteInvoice(id);
+  }, []);
+
+  const deleteInvoice = (id) => {
+    setLoading({ ...loading, loadingDelete: true });
+    handleDelete(id);
+    setTimeout(() => {
+      getInvoices();
+      notify("Invoice deleted");
+    }, 3000);
+  };
+
+  /* ------Form functions-----*/
 
   const resetForm = () => {
     updateForm(formData);
@@ -90,16 +95,25 @@ const AppProvider = ({ children }) => {
     updateItems(itemsData);
   };
 
+  /* ------calculate grand total ----*/
   const totalItems = items.reduce((total, item) => {
     total += convNum(item.total);
     return total;
   }, 0);
 
+  /* handle input onChange------*/
   const handleChange = (e, key) => {
     updateForm({
       ...form,
       [key]: { ...form[key], [e.target.name]: e.target.value },
     });
+  };
+  const handleCheckbox = (e) => {
+    if (e.target.checked) {
+      updateQuery({ ...query, [e.target.name]: e.target.value });
+    } else {
+      updateQuery({ ...query, [e.target.name]: "" });
+    }
   };
 
   const populateForm = (invoice) => {
@@ -133,10 +147,7 @@ const AppProvider = ({ children }) => {
     updateItems([...invoice[0].content.items]);
   };
 
-  const handleDelete = useCallback(async (id) => {
-    await httpDeleteInvoice(id);
-  }, []);
-
+  /* handle form submit ------*/
   const handleSaveAndSend = async (e) => {
     e.preventDefault();
     const { paymentTerms, createdAt, description } = form.invoiceInfo;
@@ -173,15 +184,6 @@ const AppProvider = ({ children }) => {
       total: totalItems,
     };
     setLoading({ ...loading, loadingPost: true });
-    // console.log(Object.values(data));
-
-    Object.values(data).map((item) => {
-      if (!item) {
-        notify("Empty field cannot submit");
-      }
-      return item;
-    });
-
     httpCreateInvoice(data);
     setTimeout(() => {
       setLoading({ ...loading, loadingPost: false });
@@ -277,25 +279,6 @@ const AppProvider = ({ children }) => {
     }, 5000);
   };
 
-  const handleMarkAsPaid = (id) => {
-    setLoading({ ...loading, loadingPaid: true });
-    httpMarkAsPaid(id);
-
-    setTimeout(() => {
-      setLoading({ ...loading, loadingPaid: false });
-      getInvoice(id);
-      notify("status paid!");
-    }, 5000);
-  };
-
-  const handleCheckbox = (e) => {
-    if (e.target.checked) {
-      updateQuery({ ...query, [e.target.name]: e.target.value });
-    } else {
-      updateQuery({ ...query, [e.target.name]: "" });
-    }
-  };
-
   const addItem = (e) => {
     e.preventDefault();
     updateItems([
@@ -315,13 +298,16 @@ const AppProvider = ({ children }) => {
     updateItems(newListItems);
   };
 
-  const deleteInvoice = (id) => {
-    setLoading({ ...loading, loadingDelete: true });
-    handleDelete(id);
+  /* handle mark paid ------*/
+  const handleMarkAsPaid = (id) => {
+    setLoading({ ...loading, loadingPaid: true });
+    httpMarkAsPaid(id);
+
     setTimeout(() => {
-      getInvoices();
-      notify("Invoice deleted");
-    }, 3000);
+      setLoading({ ...loading, loadingPaid: false });
+      getInvoice(id);
+      notify("status paid!");
+    }, 5000);
   };
 
   return (
@@ -337,24 +323,14 @@ const AppProvider = ({ children }) => {
         getInvoices,
         getInvoice,
         query,
-        loading,
         deleteInvoice,
-        // loadingPost,
-        // loadingUpdate,
-        // loadingPaid,
-        // loadingDraft,
-        // setLoadingUpdate,
-        // setLoadingPost,
-        // populate,
         populateItems,
         resetForm,
         handleDelete,
         updateQuery,
         resetItems,
-        checked,
-        // populateClientInfo,
         handleSaveChanges,
-        form,
+        // form,
         handleSaveAsDraft,
         updateForm,
         handleChange,

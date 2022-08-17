@@ -11,7 +11,7 @@ import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
 
 const AddForm = () => {
-  const { handleSaveAndSend, getInvoices } = useGlobalContext();
+  const { getInvoices } = useGlobalContext();
   const { close } = useModalContext();
   const closeForm = () => {
     close("newInvoiceForm");
@@ -25,7 +25,7 @@ const AddForm = () => {
           <CloseIcon />
         </span>
       </div>
-      <form onSubmit={handleSaveAndSend} className="tablet:w-[504px]">
+      <form className="tablet:w-[504px]">
         <BillFrom />
         <BillTo />
         <InvoiceInfo />

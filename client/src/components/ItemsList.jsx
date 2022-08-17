@@ -56,6 +56,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Item Name",
+    errorMessage: "can't be empty",
   },
   {
     id: 2,
@@ -63,6 +64,7 @@ const inputfields = [
     type: "number",
     required: true,
     label: "Qty.",
+    errorMessage: "can't be empty",
   },
   {
     id: 3,
@@ -70,6 +72,7 @@ const inputfields = [
     type: "number",
     required: true,
     label: "Price",
+    errorMessage: "can't be empty",
   },
   {
     id: 4,
@@ -77,6 +80,7 @@ const inputfields = [
     type: "number",
     required: true,
     label: "Total",
+    errorMessage: "can't be empty",
   },
 ];
 const inputContainerStyles =

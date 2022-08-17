@@ -11,7 +11,6 @@ import { useGlobalContext } from "../context/context";
 const EditInvoice = () => {
   const { editInvoiceForm, close } = useModalContext();
   const { invoice } = useGlobalContext();
-
   const backdrop = useRef(null);
 
   return (
@@ -43,7 +42,7 @@ export default EditInvoice;
 /* ------styles -----*/
 
 let backdropstyles =
-  "fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(715px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70";
+  "fixed desktop:z-10 inset-0 top-[72px] desktop:top-0 desktop:left-[calc(103px+717px)] bg-7C5DFA bg-opacity-50 dark:bg-0C0E16 dark:bg-opacity-70";
 
 let drawerContainerStyles =
   "fixed inset-0 top-[72px] desktop:top-0 desktop:left-[103px] overflow-y-auto";

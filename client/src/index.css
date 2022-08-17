@@ -129,7 +129,16 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+.errMessage {
+  display: none;
+}
 
+/* input:invalid[focus="true"] {
+  border: 1px solid #ec5757;
+}
+input:invalid[focus="true"] ~ .errMessage {
+  display: inline-block;
+} */
 /* navbar */
 
 .card-shadow {

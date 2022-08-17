@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Logo = () => {
   return (
-    <div className="bg-7C5DFA relative w-72 h-72 desktop:w-full desktop:h-[103px] rounded-tr-20px rounded-br-20px grid place-content-center before:block before:absolute before:w-72 before:h-8 before:-inset-1 before:bg-9277FF before:bg-opacity-20 before:top-9 logo">
+    <div className={containerStyles}>
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="26">
         <path
           fill="#FFF"
@@ -15,3 +15,8 @@ const Logo = () => {
 };
 
 export default Logo;
+
+//*----- styles*----/
+
+const containerStyles =
+  "bg-7C5DFA relative w-72 h-72 desktop:w-full desktop:h-[103px] rounded-tr-20px rounded-br-20px grid place-content-center before:block before:absolute before:w-72 before:h-8 before:-inset-1 before:bg-9277FF before:bg-opacity-20 before:top-9 logo";

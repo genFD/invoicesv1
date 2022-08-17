@@ -3,8 +3,8 @@ import Modal from "react-modal";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
-import { notify } from "../utils/utils";
 import { LoadingPost } from "../components";
+
 const DeleteModal = () => {
   const { deleteInvoice, loadingDelete } = useGlobalContext();
   const { close, deleteModal } = useModalContext();

@@ -44,6 +44,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Project Description",
+    errorMessage: "can't be empty",
   },
 ];
 const containerStyles =

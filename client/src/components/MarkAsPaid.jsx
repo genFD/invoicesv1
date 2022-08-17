@@ -2,7 +2,6 @@ import React from "react";
 import { LoadingPost } from "../components";
 import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
-import { notify } from "../utils/utils";
 
 const MarkAsPaid = ({ status }) => {
   const { handleMarkAsPaid, loadingPaid } = useGlobalContext();

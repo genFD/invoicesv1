@@ -32,6 +32,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Client’s Name",
+    errorMessage: "can't be empty",
   },
   {
     id: 2,
@@ -39,5 +40,6 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Client’s Email",
+    errorMessage: "can't be empty",
   },
 ];

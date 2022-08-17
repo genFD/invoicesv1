@@ -1,6 +1,5 @@
 import React from "react";
 import { Input } from "../components";
-
 import { useGlobalContext } from "../context/context";
 
 const BillFrom = () => {
@@ -35,6 +34,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Street Address",
+    errorMessage: "can't be empty",
   },
   {
     id: 2,
@@ -42,6 +42,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "City",
+    errorMessage: "can't be empty",
   },
   {
     id: 3,
@@ -49,6 +50,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Post Code",
+    errorMessage: "can't be empty",
   },
   {
     id: 4,
@@ -56,6 +58,7 @@ const inputfields = [
     type: "text",
     required: true,
     label: "Country",
+    errorMessage: "can't be empty",
   },
 ];
 
