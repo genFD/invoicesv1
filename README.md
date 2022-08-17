@@ -55,4 +55,4 @@ Users should be able to:
 
 - Website - [Hermann kan](https://hkportfolio-v2.herokuapp.com/)
 
-- Twitter - [@HermannKan1](https://www.twitter.com/hermannkan)
+- Twitter - [@fs_base](https://twitter.com/fs_base)
