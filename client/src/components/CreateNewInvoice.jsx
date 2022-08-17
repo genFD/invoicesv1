@@ -18,6 +18,7 @@ const AddNewButton = () => {
             </svg>
           </span>
         </span>
+
         <span className="tablet:hidden">New</span>
         <span className="hidden tablet:block">New Invoice</span>
       </button>

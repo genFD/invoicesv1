@@ -6,7 +6,7 @@ import {
   InvoiceInfo,
   ItemsList,
   NewFormFooter,
-} from "../components";
+} from ".";
 import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
 

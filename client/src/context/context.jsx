@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
   const [invoices, updateInvoices] = useState([]);
   const [invoice, updateInvoice] = useState({});
   const [loading, setLoading] = useState(loadingState);
-  // const [checked, setChecked] = useState(checkBoxState);
+  const [checked, setChecked] = useState(checkBoxState);
   const [query, updateQuery] = useState({
     paid: "",
     pending: "",
@@ -331,6 +331,7 @@ const AppProvider = ({ children }) => {
         resetItems,
         handleSaveChanges,
         // form,
+        ...checked,
         handleSaveAsDraft,
         updateForm,
         handleChange,
