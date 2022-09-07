@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CardSmall, CardLarge } from "../components";
 
 const Card = ({ id, clientName, paymentDue, items, status, total }) => {
+  console.log("card");
   return (
     <Link to={`/detail/${id}`}>
       <article className={articleStyles}>

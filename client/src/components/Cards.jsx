@@ -6,7 +6,7 @@ import { useGlobalContext } from "../context/context";
 
 const Cards = () => {
   const { invoices, loadingCards } = useGlobalContext();
-
+  console.log("all cards");
   if (loadingCards) {
     return <Loading />;
   }

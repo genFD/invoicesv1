@@ -185,12 +185,10 @@ const AppProvider = ({ children }) => {
     };
     setLoading({ ...loading, loadingPost: true });
     httpCreateInvoice(data);
-    setTimeout(() => {
-      setLoading({ ...loading, loadingPost: false });
-      resetForm();
-      resetItems();
-      notify("Invoice created!");
-    }, 5000);
+    setLoading({ ...loading, loadingPost: false });
+    resetForm();
+    resetItems();
+    notify("Invoice created!");
   };
 
   const handleSaveAsDraft = async (e) => {
@@ -273,10 +271,10 @@ const AppProvider = ({ children }) => {
     setLoading({ ...loading, loadingUpdate: true });
     httpEditInvoice(id, data);
     setTimeout(() => {
+      // notify("Invoice updated");
       setLoading({ ...loading, loadingUpdate: false });
       getInvoice(id);
-      notify("Invoice updated");
-    }, 5000);
+    }, 3000);
   };
 
   const addItem = (e) => {

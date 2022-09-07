@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../context/context";
 import { useModalContext } from "../context/modalcontext";
 import { LoadingPost } from "../components";
-
+import { notify } from "../utils/utils";
 const SaveChanges = () => {
   const { handleSaveChanges, loadingUpdate } = useGlobalContext();
   const { close } = useModalContext();
@@ -16,7 +16,8 @@ const SaveChanges = () => {
         handleSaveChanges(id);
         setTimeout(() => {
           close("editInvoiceForm");
-        }, 5000);
+          // notify("Invoice updated");
+        }, 3000);
       }}
       type="submit"
       className={buttonStyles}
