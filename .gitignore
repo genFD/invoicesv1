@@ -4,6 +4,7 @@
 #####################################################
 *.sketch
 *.fig
+*.sql
 
 # Avoid accidental XD upload if you convert the design file
 ###############################################
@@ -21,3 +22,4 @@ node_modules
 coverage/
 .vscode/
 node_modules
+.sql
