@@ -20,7 +20,7 @@ async function httpGetInvoices() {
 // Load invoice
 async function httpGetInvoice(id) {
   try {
-    const { data } = await axios.get(`/${id}`);
+    const { data } = await axios.get(`v1/invoices/${id}`);
     return data;
   } catch (error) {
     console.log(error);
