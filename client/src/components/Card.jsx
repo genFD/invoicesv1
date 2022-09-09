@@ -4,7 +4,7 @@ import { CardSmall, CardLarge } from "../components";
 
 const Card = ({ id, clientName, paymentDue, items, status, total }) => {
   return (
-    <Link to={`/detail/${id}`}>
+    <Link to={`/${id}`}>
       <article className={articleStyles}>
         <CardLarge
           id={id}
