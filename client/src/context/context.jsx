@@ -182,10 +182,12 @@ const AppProvider = ({ children }) => {
     };
     setLoading({ ...loading, loadingPost: true });
     httpCreateInvoice(data);
-    setLoading({ ...loading, loadingPost: false });
-    resetForm();
-    resetItems();
-    notify("Invoice created!");
+    setTimeout(() => {
+      setLoading({ ...loading, loadingPost: false });
+      resetForm();
+      resetItems();
+      notify("Invoice created!");
+    }, 2000);
   };
 
   const handleSaveAsDraft = async (e) => {
