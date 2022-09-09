@@ -77,9 +77,6 @@ async function httpDeleteInvoice(id) {
 //filterInvoice
 async function httpFilterInvoices(status) {
   try {
-    // const { data } = await axios.get(
-    //   `${API_URL}/search/status?paid=${status.paid}&pending=${status.pending}&draft=${status.draft}`
-    // );
     const { data } = await axios.get(
       `${API_URL}/search/status?status=${status}`
     );

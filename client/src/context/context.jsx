@@ -296,12 +296,11 @@ const AppProvider = ({ children }) => {
   const handleMarkAsPaid = (id) => {
     setLoading({ ...loading, loadingPaid: true });
     httpMarkAsPaid(id);
-
     setTimeout(() => {
       setLoading({ ...loading, loadingPaid: false });
       getInvoice(id);
-      notify("status paid!");
-    }, 5000);
+      // notify("status paid!");
+    }, 2000);
   };
 
   return (
