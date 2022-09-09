@@ -67,7 +67,7 @@ const AppProvider = ({ children }) => {
     }
     setLoading({ ...loading, loadingCard: false });
   }, []);
-  // console.log(invoice);
+  console.log(invoice);
 
   const handleDelete = useCallback(async (id) => {
     await httpDeleteInvoice(id);

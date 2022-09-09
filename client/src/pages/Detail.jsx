@@ -14,7 +14,8 @@ import { useParams } from "react-router-dom";
 function Detail() {
   const { invoice, loadingCard, getInvoice } = useGlobalContext();
   const { id } = useParams();
-
+  console.log(typeof id);
+  console.log(id);
   useEffect(() => {
     getInvoice(id);
   }, []);
