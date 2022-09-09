@@ -3,7 +3,6 @@ import { useGlobalContext } from "../context/context";
 
 const Checkbox = ({ label, value, name }) => {
   const { handleCheckbox } = useGlobalContext();
-
   return (
     <div className={containerStyles}>
       <input

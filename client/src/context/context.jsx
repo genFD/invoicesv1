@@ -34,21 +34,16 @@ const AppProvider = ({ children }) => {
   const [invoice, updateInvoice] = useState({});
   const [loading, setLoading] = useState(loadingState);
   const [checked, setChecked] = useState(checkBoxState);
-  const [query, updateQuery] = useState({
-    paid: "",
-    pending: "",
-    draft: "",
-  });
+  const [query, updateQuery] = useState("");
   const [form, updateForm] = useState(formData);
   const [items, updateItems] = useState(itemsData);
 
   /* ------*/
   const getInvoices = useCallback(async () => {
     setLoading({ ...loading, loadingCards: true });
-    const fetchedInvoices =
-      !query.paid && !query.pending && !query.draft
-        ? await httpGetInvoices()
-        : await httpFilterInvoices(query);
+    const fetchedInvoices = !query
+      ? await httpGetInvoices()
+      : await httpFilterInvoices(query);
     if (fetchedInvoices) {
       updateInvoices(fetchedInvoices);
     } else {
@@ -110,9 +105,10 @@ const AppProvider = ({ children }) => {
   };
   const handleCheckbox = (e) => {
     if (e.target.checked) {
-      updateQuery({ ...query, [e.target.name]: e.target.value });
+      console.log(e.target.value);
+      updateQuery(e.target.value);
     } else {
-      updateQuery({ ...query, [e.target.name]: "" });
+      updateQuery("");
     }
   };
 

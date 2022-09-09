@@ -63,13 +63,19 @@ const deleteInvoice = async (req, res) => {
 
 // sort by status
 const filterInvoices = async (req, res) => {
-  const { paid, pending, draft } = req.query;
-  const valuePaid = `"${paid}"`;
-  const valuePending = `"${pending}"`;
-  const valueDraft = `"${draft}"`;
+  // const { paid, pending, draft } = req.query;
+  // const valuePaid = `"${paid}"`;
+  // const valuePending = `"${pending}"`;
+  // const valueDraft = `"${draft}"`;
+  // const query = {
+  //   text: "select * from invoices where content['status'] = $1 or content['status'] = $2 or content['status'] = $3 ;",
+  //   values: [valuePaid, valuePending, valueDraft],
+  // };
+  const value = req.query.status;
+  console.log(value);
   const query = {
-    text: "select * from invoices where content['status'] = $1 or content['status'] = $2 or content['status'] = $3 ;",
-    values: [valuePaid, valuePending, valueDraft],
+    text: "SELECT * FROM invoices WHERE content ->> 'status' = $1",
+    values: [value],
   };
 
   try {

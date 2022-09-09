@@ -234,7 +234,8 @@ VALUES
 
 SELECT * FROM invoices;
 SELECT * FROM invoices WHERE id = $1;
-
+--add auto time stamp 
+https://x-team.com/blog/automatic-timestamps-with-postgresql/
 
 CREATE TABLE invoices (
   id TEXT PRIMARY KEY DEFAULT generate_uid(10),
@@ -244,10 +245,18 @@ CREATE TABLE invoices (
 -- //prefix id
 
 CREATE TABLE invoices (
-  id TEXT PRIMARY KEY DEFAULT ('iv_' || generate_uid(10)),
-  content JSONB NOT NULL,
-
+  id TEXT PRIMARY KEY DEFAULT ('VC_' || generate_uid(8)),
+  content JSONB NOT NULL
 );
+-- WITH TIMESTAMPTZ
+CREATE TABLE invoices (
+  id TEXT PRIMARY KEY DEFAULT ('VC' || generate_uid(8)),
+  content JSONB NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  completed_at TIMESTAMPTZ
+);
+
 
 -- read invoices
 SELECT * FROM invoices;
@@ -266,3 +275,27 @@ DELETE FROM invoices WHERE id ='IVDjIBMUYuZvE'
  update invoices set content ['status'] ='"paid"' where invoices.id = 'iv_srGmRLWKwD';
 --drop table
 DROP TABLE invoices;
+
+-- check if the functions are defined using
+select pg_get_functiondef(to_regproc('gen_random_bytes'));
+select pg_get_functiondef(to_regproc('gen_random_uuid'));
+--if both functions are not defined then you probably had an error with the extension creation - just drop it and recreate
+CREATE EXTENSION pgcrypto;
+
+-- CREATE GENERATE FUNC
+CREATE OR REPLACE FUNCTION generate_uid(size INT) RETURNS TEXT AS $$
+DECLARE
+  characters TEXT := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  bytes BYTEA := gen_random_bytes(size);
+  l INT := length(characters);
+  i INT := 0;
+  output TEXT := '';
+BEGIN
+  WHILE i < size LOOP
+    output := output || substr(characters, get_byte(bytes, i) % l + 1, 1);
+    i := i + 1;
+  END LOOP;
+  RETURN output;
+END;
+$$ LANGUAGE plpgsql VOLATILE;
+
