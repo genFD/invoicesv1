@@ -13,7 +13,7 @@ const {
 const invoicesRouter = express.Router();
 
 invoicesRouter.get("/", getAllInvoices);
-invoicesRouter.get("/detail/:id", getInvoiceById);
+invoicesRouter.get("/:id", getInvoiceById);
 invoicesRouter.get("/search/status", filterInvoices);
 invoicesRouter.post("/", createInvoice);
 invoicesRouter.put("/:id", editInvoice);
