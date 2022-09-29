@@ -1,5 +1,5 @@
 {
-  "name": "invoice-api",
+  "name": "invoices-manager-api",
   "version": "1.0.0",
   "description": "invoice dashboard",
   "main": "index.js",

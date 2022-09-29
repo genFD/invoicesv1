@@ -67,7 +67,6 @@ const AppProvider = ({ children }) => {
     }
     setLoading({ ...loading, loadingCard: false });
   }, []);
-  console.log(invoice);
 
   const handleDelete = useCallback(async (id) => {
     await httpDeleteInvoice(id);
@@ -78,7 +77,7 @@ const AppProvider = ({ children }) => {
     handleDelete(id);
     setTimeout(() => {
       getInvoices();
-      notify("Invoice deleted");
+      // notify("Invoice deleted");
     }, 3000);
   };
 

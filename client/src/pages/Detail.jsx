@@ -19,7 +19,7 @@ function Detail() {
   useEffect(() => {
     getInvoice(id);
   }, []);
-  console.log(invoice);
+
   if (loadingCard) {
     return <Loading />;
   }
