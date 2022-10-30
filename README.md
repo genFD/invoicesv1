@@ -4,6 +4,7 @@
 
 - [Overview](#overview)
   - [Expected Behaviour](#Expected-Behaviour)
+  - [Solutions](#Solutions)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
@@ -25,6 +26,14 @@ Users should be able to:
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
 - Users should receive a confirmation modal when trying to delete invoices.
+
+### Solutions
+
+(read blog for answers about how overcame challenges)
+https://blog.logrocket.com/crud-rest-api-node-js-express-postgresql/#connecting-postgres-database-node-js
+
+- create a CRUD RESTful API in a Node.js environment that runs on an Express server and uses a PostgreSQL database.
+- Used node-postgres to connect the Express server with PostgreSQL
 
 ### Screenshot
 

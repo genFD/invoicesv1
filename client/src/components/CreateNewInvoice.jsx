@@ -19,7 +19,7 @@ const AddNewButton = () => {
           </span>
         </span>
 
-        <span className="tablet:hidden">New</span>
+        <span className="tablet:hidden">Neww</span>
         <span className="hidden tablet:block">New Invoice</span>
       </button>
 
